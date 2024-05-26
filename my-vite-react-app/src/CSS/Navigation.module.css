@@ -1,0 +1,43 @@
+.navbar {
+  width: 100%;
+  background-color: orange;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbarList {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbarItem {
+  margin: 0 15px;
+}
+
+.navbarLink {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbarLink:hover,
+.logoutButton:hover {
+  color: darkorange;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0;
+}
