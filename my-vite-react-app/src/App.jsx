@@ -1,24 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import axiosInstance from './axios/Axios' // 或者 import axios from 'axios';
-import { Outlet} from 'react-router-dom';
-import Navigation from './Navigation/Navigation'; // 确保你有一个 Navigation 组件
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Carousel from './components/Carousel';
+import Products from './components/Products';
+import ProductDetail from './components/ProductDetail';
 
-function App() {
-  
+const App = () => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+  };
 
-  
-
+  const handleCloseProductDetail = () => {
+    setSelectedProduct(null);
+  };
 
   return (
-    <>
     <div>
       <Navigation />
-      <Outlet /> {/* 用于渲染嵌套路由的内容 */}
+      <Carousel />
+      <Routes>
+        <Route path="/" element={<Products onProductClick={handleProductClick} />} />
+        {/* 这里可以添加更多路由 */}
+      </Routes>
+      {selectedProduct && <ProductDetail product={selectedProduct} onClose={handleCloseProductDetail} />}
     </div>
-   
-    </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

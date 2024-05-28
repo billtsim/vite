@@ -1,0 +1,47 @@
+.productsContainer {
+  padding: 20px;
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto; /* 居中显示并上下添加一些间距 */
+}
+
+.productsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.productCard {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+}
+
+.productImage {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.productPrice {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}

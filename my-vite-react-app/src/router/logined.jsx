@@ -1,8 +1,6 @@
 import React from 'react';
-import LoginedNavigation from '../Navigation/logined-navigation';
 import { Outlet} from 'react-router-dom';
-import Navigation from '../Navigation/Navigation';
-import Dashboard from '../Navigation/Dashboard';
+import Dashboard from '../components/Dashboard'
 
 function Logined() {
 
