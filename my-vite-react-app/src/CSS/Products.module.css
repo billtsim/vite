@@ -3,7 +3,7 @@
   background-color: #f9f9f9;
   width: 100%;
   max-width: 1200px;
-  margin: 20px auto; /* 居中显示并上下添加一些间距 */
+  margin: 20px auto;
 }
 
 .productsGrid {
@@ -30,6 +30,12 @@
 .productPrice {
   font-weight: bold;
   color: #007bff;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: #888;
+  margin-left: 10px;
 }
 
 .button {

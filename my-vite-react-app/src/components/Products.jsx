@@ -10,16 +10,18 @@ const Products = ({ onProductClick }) => {
       const productsData = [
         {
           id: 1,
-          name: "Product 1",
-          description: "This is the description for product 1.",
-          price: 100,
+          name: "Nike Air Force 1 '07",
+          description: "男子運動鞋",
+          price: 503,
+          originalPrice: 799,
           imageUrl: "https://via.placeholder.com/150"
         },
         {
           id: 2,
-          name: "Product 2",
-          description: "This is the description for product 2.",
-          price: 200,
+          name: "Nike Pegasus Trail 5",
+          description: "男子越野跑步鞋",
+          price: 839,
+          originalPrice: 1049,
           imageUrl: "https://via.placeholder.com/150"
         },
         // 添加更多产品数据
@@ -32,14 +34,14 @@ const Products = ({ onProductClick }) => {
 
   return (
     <div className={styles.productsContainer}>
-      <h1>Products</h1>
+      <h1>年中優惠 必買精選</h1>
       <div className={styles.productsGrid}>
         {products.map(product => (
           <div key={product.id} className={styles.productCard}>
             <img src={product.imageUrl} alt={product.name} className={styles.productImage} />
             <h2>{product.name}</h2>
             <p>{product.description}</p>
-            <p className={styles.productPrice}>${product.price}</p>
+            <p className={styles.productPrice}>HK${product.price} <span className={styles.originalPrice}>HK${product.originalPrice}</span></p>
             <button className={styles.button} onClick={() => onProductClick(product)}>View Details</button>
           </div>
         ))}

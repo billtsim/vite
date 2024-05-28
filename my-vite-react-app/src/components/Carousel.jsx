@@ -1,11 +1,10 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/swiper.min.css';
-import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import styles from '../CSS/Carousel.module.css';
-
-SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 const Carousel = () => {
   const slides = [
@@ -33,6 +32,7 @@ const Carousel = () => {
   return (
     <div className={styles.carouselContainer}>
       <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
