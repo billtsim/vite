@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from '../CSS/Dashboard.module.css'; // 引入 CSS Module 文件
 import Employees from './Employees';
 
 const Dashboard = () => {
   const [selectedComponent, setSelectedComponent] = useState('home');
+  const navigate = useNavigate(); // 使用 useNavigate 钩子
+
 
   const renderContent = () => {
     switch (selectedComponent) {
@@ -18,6 +20,12 @@ const Dashboard = () => {
       default:
         return <div>Home Component</div>;
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // 清除 token  
+    navigate('/'); // 重定向到主頁
+     window.location.reload();
   };
 
   return (
@@ -49,8 +57,8 @@ const Dashboard = () => {
           </div>
           <div className={styles.userInfo}>
             <img src="/path/to/user-avatar.jpg" alt="User Avatar" className={styles.avatar} />
-            <span>王 明</span>
-            <button className={styles.logoutButton}>登出</button>
+            <span>Elliotboy</span>
+            <button onClick={handleLogout} className={styles.logoutButton}>登出</button>
           </div>
         </header>
         <main className={styles.content}>

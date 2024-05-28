@@ -4,8 +4,8 @@ import styles from '../CSS/Navigation.module.css'
 
 const handleLogout = () => {
   localStorage.removeItem('token'); // 清除 token
+  // navigate('/'); // 重定向到登录页
   window.location.reload();
-  navigate('/login'); // 重定向到登录页
 };
 
 
@@ -28,6 +28,9 @@ const Navigation = () => (
         </li>
         <li className={styles.navbarItem}>
           <Link to="/contact" className={styles.navbarLink}>Contact us</Link>
+        </li>
+        <li className={styles.navbarItem}>
+          <Link to="/logined" className={styles.navbarLink}>Management</Link>
         </li>
         {!token ? (
           <li className={styles.navbarItem}>

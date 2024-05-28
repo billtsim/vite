@@ -19,8 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={ <App /> } /> {/* 主页显示 App 组件 */}
         <Route path="about" element={ <About /> } />
-        <Route path="login" element={!token ? <Login /> : <Navigate to="logined" />} />
-        <Route path="logined" element={ <Logined/> } />
+        <Route path="login" element={!token ? <Login /> : <Navigate to="/logined" />} />
+        <Route path="logined" element={token ?<Logined/>: <Navigate to="/login"/> } />
       </Routes>
     </Router>
   </React.StrictMode>

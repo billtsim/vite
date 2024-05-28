@@ -1,26 +1,80 @@
 .employeesContainer {
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .employeesTable {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .employeesTable th,
-  .employeesTable td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .employeesTable th {
-    background-color: #f4f4f4;
-  }
-  
-  .employeesTable tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employeesTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.employeesTable th, .employeesTable td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.employeesTable th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.employeesTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.employeesTable tr:hover {
+  background-color: #ddd;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button.edit {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pageButton {
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.pageButton:hover {
+  background-color: #0056b3;
+}

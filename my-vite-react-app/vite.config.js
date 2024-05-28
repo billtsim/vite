@@ -10,4 +10,7 @@ export default defineConfig({
       localsConvention: 'camelCase', // 使用 camelCase 格式的类名
     },
   },
+  server: {
+    host: true, // 允许通过 IP 地址访问
+  },
 });
