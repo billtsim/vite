@@ -22,12 +22,13 @@ const App = () => {
   };
 
   return (
-    <div style={{ backgroundColor: 'black', color: 'white'}}>
+    <div style={{ backgroundColor: 'black', color: 'white', width: 'auto'}}>
       <Navigation />
       <div style={{ paddingTop: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Carousel />
+        <FeaturedGames />
         <UpcomingDiscount /> {/* 添加即将优惠组件 */}
-        <FeaturedGames /> {/* 添加 FeaturedGames 组件 */}
+         {/* 添加 FeaturedGames 组件 */}
         <HotSales onProductClick={handleProductClick} /> {/* 添加热卖产品组件 */}
         <Products onProductClick={handleProductClick} /> {/* 使用更新后的产品展示组件 */}
         <FeaturedFirstRun onProductClick={handleProductClick} /> {/* 添加 FeaturedFirstRun 组件 */}

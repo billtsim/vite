@@ -3,27 +3,32 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
-  width: 90%;
-  max-width: 1200px; /* 增加最大宽度 */
-  margin: 40px auto;
+  max-width: 1200px;
+  margin: 100px auto 40px auto; /* 添加顶部内边距 */
   color: white;
   padding: 20px;
   border-radius: 10px;
+  overflow: hidden; /* 确保拖动时内容不溢出 */
 }
 
 .carouselMain {
   position: relative;
-   /* 增加左侧图片区域的大小 */
+  flex-basis: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 15px;
+}
+
+.carouselContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease; /* 添加平滑过渡效果 */
 }
 
 .carouselImage {
   width: 100%;
-  height: auto; /* 确保图片保持比例 */
+  height: auto;
   border-radius: 10px;
 }
 
@@ -31,6 +36,7 @@
   position: absolute;
   bottom: 20px;
   left: 20px;
+  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
 }
@@ -76,42 +82,46 @@
 }
 
 .carouselSidebar {
-  flex: 1 1 60%;/* 增加侧边栏的大小 */
+  flex-basis: 20%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
+  margin-left: 15px;
 }
 
 .sidebarItem {
   display: flex;
-  flex-direction: row; /* 改为行方向 */
-  align-items: center; /* 居中对齐 */
+  flex-direction: row;
+  align-items: center;
   cursor: pointer;
   padding: 10px;
   border-radius: 5px;
   transition: background-color 0.2s;
-  position: relative; /* 为了包含绝对定位的进度条 */
-  overflow: hidden; /* 隐藏溢出的进度条 */
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebarItem:hover {
+  background-color: #333;
 }
 
 .sidebarImage {
-  width: 80px; /* 更宽的图片 */
-  height: 80px; /* 更高的图片 */
+  width: 80px;
+  height: 80px;
   border-radius: 5px;
-  margin-right: 10px; /* 增加右边距 */
+  margin-right: 10px;
 }
 
 .sidebarInfo {
   display: flex;
-  flex-direction: column; /* 改为列方向 */
-  align-items: flex-start; /* 左对齐 */
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
 }
 
 .sidebarName {
   font-size: 16px;
-  margin-bottom: 10px; /* 增加底部外边距 */
+  margin-bottom: 10px;
 }
 
 .progressOverlay {
@@ -120,11 +130,45 @@
   bottom: 0;
   height: 100%;
   background-color: #333;
-  animation: progressBar 3s linear forwards; /* 改为 forwards */
+  animation: progressBar 3s linear forwards;
   opacity: 0.35;
 }
 
 @keyframes progressBar {
   0% { width: 0; }
   100% { width: 100%; }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .carouselContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .carouselMain, .carouselSidebar {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .carouselSidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sidebarItem {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .sidebarImage {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+
+  .sidebarInfo {
+    align-items: center;
+  }
 }

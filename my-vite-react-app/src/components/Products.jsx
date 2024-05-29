@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from '../CSS/Products.module.css';
 
 const Products = () => {
@@ -57,11 +57,48 @@ const Products = () => {
       discount: "-33%",
       imageUrl: "https://via.placeholder.com/200x300"
     },
+    {
+      id: 7,
+      name: "Cyberpunk 2077: Ultimate Edition",
+      category: "EDITION",
+      oldPrice: 529,
+      price: 354.43,
+      discount: "-33%",
+      imageUrl: "https://via.placeholder.com/200x300"
+    },
+    {
+      id: 8,
+      name: "Cyberpunk 2077: Ultimate Edition",
+      category: "EDITION",
+      oldPrice: 529,
+      price: 354.43,
+      discount: "-33%",
+      imageUrl: "https://via.placeholder.com/200x300"
+    },
+    {
+      id: 9,
+      name: "Cyberpunk 2077: Ultimate Edition",
+      category: "EDITION",
+      oldPrice: 529,
+      price: 354.43,
+      discount: "-33%",
+      imageUrl: "https://via.placeholder.com/200x300"
+    },
+    {
+      id: 10,
+      name: "Cyberpunk 2077: Ultimate Edition",
+      category: "EDITION",
+      oldPrice: 529,
+      price: 354.43,
+      discount: "-33%",
+      imageUrl: "https://via.placeholder.com/200x300"
+    },
     // 添加更多产品数据
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 5;
+  const productsGridRef = useRef(null);
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - itemsPerPage, 0));
@@ -69,6 +106,24 @@ const Products = () => {
 
   const handleNextClick = () => {
     setCurrentIndex((prevIndex) => Math.min(prevIndex + itemsPerPage, products.length - itemsPerPage));
+  };
+
+  const handleMouseDown = (e) => {
+    const startX = e.pageX;
+    const scrollLeft = productsGridRef.current.scrollLeft;
+
+    const handleMouseMove = (e) => {
+      const walk = (e.pageX - startX) * 2; // 滚动速度
+      productsGridRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
   };
 
   return (
@@ -80,7 +135,11 @@ const Products = () => {
           <button onClick={handleNextClick} disabled={currentIndex >= products.length - itemsPerPage}>&gt;</button>
         </div>
       </div>
-      <div className={styles.productsGrid}>
+      <div
+        className={styles.productsGrid}
+        ref={productsGridRef}
+        onMouseDown={handleMouseDown}
+      >
         {products.slice(currentIndex, currentIndex + itemsPerPage).map((product) => (
           <div key={product.id} className={styles.productCard}>
             <img src={product.imageUrl} alt={product.name} className={styles.productImage} />

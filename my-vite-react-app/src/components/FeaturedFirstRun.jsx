@@ -28,14 +28,14 @@ const  featuredProducts = [
       "name": "Nike Air Max 97",
       "description": "男子運動鞋",
       "price": 1199,
-      "imageUrl": "https://via.placeholder.com/300x300"
+      "imageUrl": "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       "id": 2,
       "name": "Nike Air Force 1 '07",
       "description": "女子運動鞋",
       "price": 799,
-      "imageUrl": "https://via.placeholder.com/300x300"
+      "imageUrl": "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       "id": 3,
@@ -43,14 +43,14 @@ const  featuredProducts = [
       "description": "男子長褲",
       "price": 319,
       "originalPrice": 399,
-      "imageUrl": "https://via.placeholder.com/300x300"
+      "imageUrl": "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       "id": 4,
       "name": "Nike Air Max 270",
       "description": "男子運動鞋",
       "price": 999,
-      "imageUrl": "https://via.placeholder.com/300x300"
+      "imageUrl": "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       "id": 5,

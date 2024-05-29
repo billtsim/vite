@@ -1,66 +1,70 @@
 .subscriptionContainer {
   width: 100%;
-  background-color: #1e1e1e; /* 更深的背景色 */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e;
   color: white;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.subscriptionContent {
   text-align: center;
+  box-sizing: border-box; /* 确保内边距包含在总宽度内 */
 }
 
-.icon {
-  font-size: 48px;
-  margin-bottom: 20px;
-  color: #1e90ff; /* 图标颜色 */
-}
-
-.subscriptionContent h2 {
+.subscriptionHeader {
   font-size: 24px;
   margin-bottom: 10px;
-  color: #1e90ff; /* 标题颜色 */
 }
 
-.subscriptionContent p {
+.subscriptionText {
   font-size: 16px;
   margin-bottom: 20px;
-  color: #aaa; /* 灰色文字 */
 }
 
 .subscriptionForm {
   display: flex;
+  flex-wrap: wrap; /* 在小屏幕上换行 */
   justify-content: center;
+  gap: 10px; /* 添加间距 */
 }
 
-.emailInput {
+.subscriptionForm input[type="email"] {
   padding: 10px;
   font-size: 16px;
-  width: 300px;
-  border: 1px solid #444; /* 深色边框 */
+  border: 1px solid #ccc;
   border-radius: 4px;
-  margin-right: 10px;
-  background-color: #333; /* 深色背景 */
-  color: white; /* 白色文字 */
+  flex: 1 1 200px; /* 确保输入框在小屏幕上自适应 */
+  box-sizing: border-box;
 }
 
-.emailInput::placeholder {
-  color: #888; /* 占位符颜色 */
-}
-
-.subscribeButton {
+.subscriptionForm button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #1e90ff; /* 按钮背景色 */
+  background-color: #1e90ff;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  transition: background-color 0.2s;
 }
 
-.subscribeButton:hover {
-  background-color: #1c7ed6; /* 按钮悬停颜色 */
+.subscriptionForm button:hover {
+  background-color: #1c7ed6;
+}
+
+/* 响应式设计 */
+@media (max-width: 576px) {
+  .subscriptionHeader {
+    font-size: 20px;
+  }
+
+  .subscriptionText {
+    font-size: 14px;
+  }
+
+  .subscriptionForm {
+    flex-direction: column; /* 在小屏幕上垂直排列 */
+    align-items: stretch;
+  }
+
+  .subscriptionForm input[type="email"], .subscriptionForm button {
+    width: 100%; /* 确保输入框和按钮占满宽度 */
+  }
 }

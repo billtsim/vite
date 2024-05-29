@@ -1,14 +1,21 @@
 .featuredFirstRunContainer {
   width: 100%;
   max-width: 1200px;
-  background-color: #121212;
   color: white;
+  box-sizing: border-box; /* 确保内边距包含在总宽度内 */
+  margin: 0 auto; /* 居中容器 */
+  padding: 20px; /* 添加内边距 */
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px; /* 添加底部间距 */
+}
+
+.navigationButtons {
+  display: none; /* 默认隐藏导航按钮 */
 }
 
 .navigationButtons button {
@@ -27,8 +34,9 @@
 
 .productsGrid {
   display: flex;
-  justify-content: space-between;
   gap: 20px;
+  overflow: hidden;
+  width: 100%; /* 确保多余的内容被隐藏 */
 }
 
 .productCard {
@@ -37,7 +45,7 @@
   text-align: left;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  flex: 1;
+  flex: 0 0 200px; /* 确保每个产品卡片的宽度一致 */
 }
 
 .productCard:hover {
@@ -47,9 +55,12 @@
 .productImage {
   width: 100%;
   height: auto;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .productInfo {
+  padding: 10px;
   margin-top: 10px;
 }
 
@@ -75,7 +86,7 @@
 }
 
 .discountBadge {
-  background-color: #1e90ff;
+  background-color: #ff4c4c;
   color: white;
   padding: 2px 5px;
   border-radius: 3px;
@@ -109,4 +120,41 @@
   border-radius: 3px;
   font-size: 12px;
   margin-top: 10px;
+}
+
+/* 响应式设计 */
+@media (min-width: 768px) {
+  .productsGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 设置5列的网格布局 */
+  }
+
+  .navigationButtons {
+    display: flex; /* 大屏幕上显示导航按钮 */
+  }
+
+  .productCard {
+    flex: 1; /* 重置flex属性 */
+  }
+}
+
+@media (max-width: 768px) {
+  .productsGrid {
+    display: flex;
+    overflow-x: auto; /* 小屏幕上允许水平滚动 */
+    scroll-snap-type: x mandatory; /* 启用滚动捕捉 */
+  }
+
+  .productCard {
+    flex: 0 0 auto; /* 确保卡片不会伸展 */
+    scroll-snap-align: start; /* 启用滚动捕捉对齐 */
+    width: 100%;
+  }
+
+  .productImage {
+    max-width: 100%; /* 确保图片不会超出容器宽度 */
+    max-height: 300px; /* 设置图片的最大高度 */
+    object-fit: cover; /* 确保图片按比例缩放 */
+    overflow: hidden;
+  }
 }

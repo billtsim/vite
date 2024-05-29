@@ -2,14 +2,17 @@
   position: fixed;
   top: 0;
   left: 0;
+  padding: 0;
+  margin: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #121212;
-  
+  background-color: black;
+  padding: 10px 20px;
   border-bottom: 1px solid #333;
   z-index: 1000;
+  max-width: 1200px;
 }
 
 .logo {
@@ -26,7 +29,7 @@
 }
 
 .navbarItem {
-  
+  margin-left: 20px;
 }
 
 .navbarLink {
@@ -47,7 +50,7 @@
 .searchInput {
   padding: 5px;
   font-size: 16px;
-  margin-right: 20px;
+  
   background-color: #333;
   border: 1px solid #444;
   color: white;
@@ -80,7 +83,7 @@
 
   .navbarList {
     flex-direction: column;
-    width: 100%;
+    
   }
 
   .navbarItem {
@@ -89,14 +92,14 @@
   }
 
   .searchAndAuth {
-    width: 100%;
+    
     margin-top: 10px;
     justify-content: space-between;
   }
 
   .searchInput {
     flex-grow: 1;
-    margin-right: 10px;
+    margin-right: 0px;
   }
 
   .authButton {

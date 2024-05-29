@@ -1,44 +1,74 @@
 .featuredGamesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-    background-color: #121212; /* 背景颜色为黑色 */
-    color: white; /* 字体颜色为白色 */
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  color: white; /* 字体颜色为白色 */
+}
+
+.gameCard {
+  overflow: hidden;
+  width: 30%;
+  min-width: 300px;
+  max-width: 400px;
+  flex-grow: 1;
+  background-color: #1e1e1e; /* 添加背景颜色 */
+  border-radius: 8px; /* 添加圆角 */
+  box-sizing: border-box; /* 确保内边距包含在总宽度内 */
+}
+
+.gameImage {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 8px; /* 确保图片的圆角与卡片一致 */
+  border-top-right-radius: 8px;
+}
+
+.gameInfo {
+  padding: 20px;
+  box-sizing: border-box; /* 确保内边距包含在总宽度内 */
+}
+
+.gameInfo h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  word-wrap: break-word; /* 确保长单词在小屏幕上换行 */
+}
+
+.gameInfo p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #888;
+  word-wrap: break-word; /* 确保长单词在小屏幕上换行 */
+}
+
+.actionText {
+  color: #1e90ff;
+  font-size: 14px;
+  margin-top: 10px;
+  word-wrap: break-word; /* 确保长单词在小屏幕上换行 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
   .gameCard {
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 30%;
-    min-width: 300px;
-    max-width: 400px;
-    flex-grow: 1;
+    width: 100%; /* 在小屏幕上每行显示一个卡片 */
+    min-width: 100%; /* 确保卡片占满宽度 */
   }
-  
-  .gameImage {
-    width: 100%;
-    height: auto;
-  }
-  
+
   .gameInfo {
-    padding: 20px;
+    padding: 10px; /* 减小内边距以适应小屏幕 */
   }
-  
+
   .gameInfo h3 {
-    margin: 0 0 10px 0;
-    font-size: 18px;
+    font-size: 16px; /* 调整标题字体大小 */
   }
-  
+
   .gameInfo p {
-    margin: 0 0 10px 0;
-    font-size: 14px;
-    color: #888;
+    font-size: 12px; /* 调整描述文本字体大小 */
   }
-  
+
   .actionText {
-    color: #1e90ff;
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 12px; /* 调整动作文本字体大小 */
   }
+}
