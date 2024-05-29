@@ -1,55 +1,66 @@
 .subscriptionContainer {
-    width: 100%;
-    background-color: #f9f9f9;
-    padding: 40px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .subscriptionContent {
-    text-align: center;
-  }
-  
-  .icon {
-    font-size: 48px;
-    margin-bottom: 20px;
-  }
-  
-  .subscriptionContent h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .subscriptionContent p {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  .subscriptionForm {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .emailInput {
-    padding: 10px;
-    font-size: 16px;
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
-  }
-  
-  .subscribeButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #ff6600;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .subscribeButton:hover {
-    background-color: #cc5200;
-  }
+  width: 100%;
+  background-color: #1e1e1e; /* 更深的背景色 */
+  color: white;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subscriptionContent {
+  text-align: center;
+}
+
+.icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #1e90ff; /* 图标颜色 */
+}
+
+.subscriptionContent h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1e90ff; /* 标题颜色 */
+}
+
+.subscriptionContent p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #aaa; /* 灰色文字 */
+}
+
+.subscriptionForm {
+  display: flex;
+  justify-content: center;
+}
+
+.emailInput {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  border: 1px solid #444; /* 深色边框 */
+  border-radius: 4px;
+  margin-right: 10px;
+  background-color: #333; /* 深色背景 */
+  color: white; /* 白色文字 */
+}
+
+.emailInput::placeholder {
+  color: #888; /* 占位符颜色 */
+}
+
+.subscribeButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1e90ff; /* 按钮背景色 */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.subscribeButton:hover {
+  background-color: #1c7ed6; /* 按钮悬停颜色 */
+}

@@ -1,27 +1,46 @@
 .productsContainer {
   background-color: #121212;
   color: white;
-  padding: 20px;
-  margin: 20px 0;
+  width: 100%;
+ 
+  box-sizing: border-box; /* 确保内边距包含在总宽度内 */
 }
 
-.productsContainer h2 {
-  margin-bottom: 20px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigationButtons button {
+  background-color: #1e1e1e;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.navigationButtons button:disabled {
+  color: #555;
+  cursor: not-allowed;
 }
 
 .productsGrid {
   display: flex;
-  overflow-x: auto;
-  padding-bottom: 10px;
+  justify-content: space-between;
+  gap: 20px;
+  overflow: hidden; /* 确保多余的内容被隐藏 */
 }
 
 .productCard {
-  background-color: #1e1e1e;
-  border-radius: 10px;
-  margin-right: 20px;
-  width: 200px;
-  flex-shrink: 0;
-  transition: transform 0.2s;
+  background: none; /* 移除背景 */
+  padding: 0; /* 移除内边距 */
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex: 1;
+  max-width: 20%; /* 确保每行最多显示5个产品 */
 }
 
 .productCard:hover {
@@ -30,45 +49,81 @@
 
 .productImage {
   width: 100%;
+  height: auto;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 .productInfo {
   padding: 10px;
+  margin-top: 10px;
 }
 
-.productInfo h3 {
-  margin: 10px 0;
-  font-size: 16px;
-}
-
-.productInfo p {
-  margin: 5px 0;
+.productCategory {
+  font-size: 12px;
   color: #888;
-  font-size: 14px;
 }
 
-.pricing {
+.productName {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.priceSection {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  margin-top: 10px;
 }
 
-.discount {
+.discountBadge {
   background-color: #ff4c4c;
   color: white;
   padding: 2px 5px;
   border-radius: 3px;
   margin-right: 10px;
+  font-size: 12px;
 }
 
-.oldPrice {
+.productPrice {
+  font-weight: bold;
+  color: white;
+}
+
+.originalPrice {
   text-decoration: line-through;
   color: #888;
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
-.price {
+.freeBadge {
+  background-color: #1e90ff;
   color: white;
-  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .productCard {
+    max-width: 180px; /* 调整宽度 */
+  }
+}
+
+@media (max-width: 992px) {
+  .productCard {
+    max-width: 160px; /* 调整宽度 */
+  }
+}
+
+@media (max-width: 768px) {
+  .productCard {
+    max-width: 140px; /* 调整宽度 */
+  }
+}
+
+@media (max-width: 576px) {
+  .productCard {
+    max-width: 120px; /* 调整宽度 */
+  }
 }

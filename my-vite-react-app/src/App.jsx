@@ -22,7 +22,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#121212', color: 'white', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'black', color: 'white'}}>
       <Navigation />
       <div style={{ paddingTop: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Carousel />

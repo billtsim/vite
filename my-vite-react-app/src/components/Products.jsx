@@ -1,61 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import styles from '../CSS/Products.module.css';
-
-// const Products = ({ onProductClick }) => {
-//   const [products, setProducts] = useState([]);
-
-//   useEffect(() => {
-//     // 模拟从服务器获取产品数据
-//     const fetchProducts = () => {
-//       const productsData = [
-//         {
-//           id: 1,
-//           name: "Nike Air Force 1 '07",
-//           description: "男子運動鞋",
-//           price: 503,
-//           originalPrice: 799,
-//           imageUrl: "https://via.placeholder.com/150"
-//         },
-//         {
-//           id: 2,
-//           name: "Nike Pegasus Trail 5",
-//           description: "男子越野跑步鞋",
-//           price: 839,
-//           originalPrice: 1049,
-//           imageUrl: "https://via.placeholder.com/150"
-//         },
-//         // 添加更多产品数据
-//       ];
-//       setProducts(productsData);
-//     };
-
-//     fetchProducts();
-//   }, []);
-
-//   return (
-//     <div className={styles.productsContainer}>
-//       <h1>年中優惠 必買精選</h1>
-//       <div className={styles.productsGrid}>
-//         {products.map(product => (
-//           <div key={product.id} className={styles.productCard}>
-//             <img src={product.imageUrl} alt={product.name} className={styles.productImage} />
-//             <h2>{product.name}</h2>
-//             <p>{product.description}</p>
-//             <p className={styles.productPrice}>HK${product.price} <span className={styles.originalPrice}>HK${product.originalPrice}</span></p>
-//             <button className={styles.button} onClick={() => onProductClick(product)}>View Details</button>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Products;
-
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../CSS/Products.module.css';
 
-const Products = ({ onProductClick }) => {
+const Products = () => {
   const products = [
     {
       id: 1,
@@ -114,20 +60,41 @@ const Products = ({ onProductClick }) => {
     // 添加更多产品数据
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerPage = 5;
+
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - itemsPerPage, 0));
+  };
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + itemsPerPage, products.length - itemsPerPage));
+  };
+
   return (
     <div className={styles.productsContainer}>
-      <h2>MEGA Sale Spotlight</h2>
+      <div className={styles.header}>
+        <h2>Our Products</h2>
+        <div className={styles.navigationButtons}>
+          <button onClick={handlePrevClick} disabled={currentIndex === 0}>&lt;</button>
+          <button onClick={handleNextClick} disabled={currentIndex >= products.length - itemsPerPage}>&gt;</button>
+        </div>
+      </div>
       <div className={styles.productsGrid}>
-        {products.map(product => (
-          <div key={product.id} className={styles.productCard} onClick={() => onProductClick(product)}>
+        {products.slice(currentIndex, currentIndex + itemsPerPage).map((product) => (
+          <div key={product.id} className={styles.productCard}>
             <img src={product.imageUrl} alt={product.name} className={styles.productImage} />
             <div className={styles.productInfo}>
-              <h3>{product.name}</h3>
-              <p>{product.category}</p>
-              <div className={styles.pricing}>
-                {product.discount && <span className={styles.discount}>{product.discount}</span>}
-                <span className={product.discount ? styles.oldPrice : styles.price}>HK${product.oldPrice}</span>
-                {product.discount && <span className={styles.price}>HK${product.price}</span>}
+              <div className={styles.productCategory}>{product.category}</div>
+              <div className={styles.productName}>{product.name}</div>
+              <div className={styles.priceSection}>
+                {product.discount && (
+                  <div className={styles.discountBadge}>{product.discount}</div>
+                )}
+                <div className={styles.productPrice}>{product.price}</div>
+                {product.oldPrice && (
+                  <div className={styles.originalPrice}>{product.oldPrice}</div>
+                )}
               </div>
             </div>
           </div>

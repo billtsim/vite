@@ -1,42 +1,130 @@
 .carouselContainer {
-  width: 100%;
-  background-color: #121212; /* 背景颜色为黑色 */
-}
-
-.swiperContainer {
-  width: 100%;
-  height: 400px;
-}
-
-.swiperSlide {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  height: 100%;
+  width: 90%;
+  max-width: 1200px; /* 增加最大宽度 */
+  margin: 40px auto;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.carouselMain {
   position: relative;
+   /* 增加左侧图片区域的大小 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
 }
 
-.image {
+.carouselImage {
   width: 100%;
-  height: auto;
-  opacity: 0.8;
+  height: auto; /* 确保图片保持比例 */
+  border-radius: 10px;
 }
 
-.caption {
+.carouselInfo {
   position: absolute;
   bottom: 20px;
   left: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.carouselInfo h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.carouselInfo p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.playButton, .wishlistButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.playButton {
+  background-color: #1e90ff;
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.playButton:hover {
+  background-color: #1c7ed6;
+}
+
+.wishlistButton {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #1e90ff;
+}
+
+.wishlistButton:hover {
+  background-color: #1e90ff;
+  color: white;
+}
+
+.carouselSidebar {
+  flex: 1 1 60%;/* 增加侧边栏的大小 */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.sidebarItem {
+  display: flex;
+  flex-direction: row; /* 改为行方向 */
+  align-items: center; /* 居中对齐 */
+  cursor: pointer;
   padding: 10px;
   border-radius: 5px;
+  transition: background-color 0.2s;
+  position: relative; /* 为了包含绝对定位的进度条 */
+  overflow: hidden; /* 隐藏溢出的进度条 */
 }
 
-.caption h2 {
-  margin: 0;
-  font-size: 24px;
+.sidebarImage {
+  width: 80px; /* 更宽的图片 */
+  height: 80px; /* 更高的图片 */
+  border-radius: 5px;
+  margin-right: 10px; /* 增加右边距 */
 }
 
-.caption p {
-  margin: 5px 0 0;
+.sidebarInfo {
+  display: flex;
+  flex-direction: column; /* 改为列方向 */
+  align-items: flex-start; /* 左对齐 */
+  width: 100%;
+}
+
+.sidebarName {
   font-size: 16px;
+  margin-bottom: 10px; /* 增加底部外边距 */
+}
+
+.progressOverlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: #333;
+  animation: progressBar 3s linear forwards; /* 改为 forwards */
+  opacity: 0.35;
+}
+
+@keyframes progressBar {
+  0% { width: 0; }
+  100% { width: 100%; }
 }

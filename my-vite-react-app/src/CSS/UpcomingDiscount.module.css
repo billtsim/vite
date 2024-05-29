@@ -1,8 +1,6 @@
 .upcomingDiscountContainer {
   width: 100%;
   max-width: 1200px;
-  margin: 40px auto;
-  padding: 20px;
   background-color: #1e1e1e; /* 背景颜色为深色 */
   color: white; /* 字体颜色为白色 */
 }

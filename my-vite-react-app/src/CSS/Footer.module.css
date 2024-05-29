@@ -1,43 +1,71 @@
 .footerContainer {
-    width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 40px 20px;
-  }
-  
-  .footerContent {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .footerSection {
-    flex: 1;
-  }
-  
-  .footerSection h3 {
-    margin-bottom: 10px;
-  }
-  
-  .footerSection ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .footerSection ul li {
-    margin-bottom: 5px;
-  }
-  
-  .footerBottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #444;
-    padding-top: 20px;
-  }
-  
-  .socialMedia a {
-    color: white;
-    margin-right: 10px;
-    font-size: 20px;
-  }
+  width: 100%;
+  background-color: #1e1e1e; /* 更深的背景色 */
+  color: white;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 20px;
+}
+
+.footerSection {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.footerSection h3 {
+  margin-bottom: 10px;
+  color: #1e90ff; /* 蓝色标题 */
+}
+
+.footerSection ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footerSection ul li {
+  margin-bottom: 5px;
+  color: #aaa; /* 灰色文字 */
+}
+
+.footerSection ul li:hover {
+  color: #1e90ff; /* 悬停效果 */
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #444;
+  padding-top: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.footerBottom p {
+  margin: 0;
+  color: #aaa; /* 灰色文字 */
+}
+
+.socialMedia {
+  display: flex;
+}
+
+.socialMedia a {
+  color: white;
+  margin-right: 10px;
+  font-size: 20px;
+  transition: color 0.2s;
+}
+
+.socialMedia a:hover {
+  color: #1e90ff; /* 悬停效果 */
+}

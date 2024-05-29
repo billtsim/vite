@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: #121212;
-  padding: 10px 20px;
+  
   border-bottom: 1px solid #333;
   z-index: 1000;
 }
@@ -26,7 +26,7 @@
 }
 
 .navbarItem {
-  margin-left: 20px;
+  
 }
 
 .navbarLink {
@@ -64,4 +64,61 @@
 
 .authButton:hover {
   color: #1e90ff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  .navbarList {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbarItem {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .searchAndAuth {
+    width: 100%;
+    margin-top: 10px;
+    justify-content: space-between;
+  }
+
+  .searchInput {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+
+  .authButton {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  .navbarLink {
+    font-size: 14px;
+  }
+
+  .searchInput {
+    font-size: 14px;
+    padding: 3px;
+  }
+
+  .authButton {
+    font-size: 14px;
+  }
 }

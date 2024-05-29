@@ -3,7 +3,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
-    margin: 40px auto;
     background-color: #121212; /* 背景颜色为黑色 */
     color: white; /* 字体颜色为白色 */
   }

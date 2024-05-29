@@ -1,8 +1,6 @@
 .featuredFirstRunContainer {
   width: 100%;
   max-width: 1200px;
-  margin: 40px auto;
-  padding: 20px;
   background-color: #121212;
   color: white;
 }
