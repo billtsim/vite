@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axiosInstance from './axios/Axios';
+import axiosInstance from '../axios/Axios';
 import { useNavigate } from 'react-router-dom';
-import styles from './CSS/login.module.css';
+import styles from '../CSS/login.module.css';
 
 
 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Navigation from './components/Navigation';
 import Carousel from './components/Carousel';
+import FeaturedGames from './components/FeaturedGames'; /* 引入 FeaturedGames 组件 */
 import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import UpcomingDiscount from './components/UpcomingDiscount';
 import HotSales from './components/HotSales';
+import FeaturedFirstRun from './components/FeaturedFirstRun'; /* 引入 FeaturedFirstRun 组件 */
 import Subscription from './components/Subscription';
 import Footer from './components/Footer';
 
@@ -20,13 +22,15 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#121212', color: 'white', minHeight: '100vh' }}>
       <Navigation />
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ paddingTop: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Carousel />
         <UpcomingDiscount /> {/* 添加即将优惠组件 */}
+        <FeaturedGames /> {/* 添加 FeaturedGames 组件 */}
         <HotSales onProductClick={handleProductClick} /> {/* 添加热卖产品组件 */}
-        <Products onProductClick={handleProductClick} /> {/* 产品展示组件 */}
+        <Products onProductClick={handleProductClick} /> {/* 使用更新后的产品展示组件 */}
+        <FeaturedFirstRun onProductClick={handleProductClick} /> {/* 添加 FeaturedFirstRun 组件 */}
       </div>
       {selectedProduct && <ProductDetail product={selectedProduct} onClose={handleCloseProductDetail} />}
       <Subscription /> {/* 添加订阅组件 */}

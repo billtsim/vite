@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import About from './router/About.jsx';
-import Login from './Login.jsx';
+import Login from './components/Login.jsx';
 import App from './App.jsx';
 import { Navigate } from 'react-router-dom';
 import GlobalStyle from './globalStyles.js';

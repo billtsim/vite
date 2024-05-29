@@ -1,0 +1,45 @@
+.featuredGamesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 40px auto;
+    background-color: #121212; /* 背景颜色为黑色 */
+    color: white; /* 字体颜色为白色 */
+  }
+  
+  .gameCard {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 30%;
+    min-width: 300px;
+    max-width: 400px;
+    flex-grow: 1;
+  }
+  
+  .gameImage {
+    width: 100%;
+    height: auto;
+  }
+  
+  .gameInfo {
+    padding: 20px;
+  }
+  
+  .gameInfo h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+  }
+  
+  .gameInfo p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .actionText {
+    color: #1e90ff;
+    font-size: 14px;
+    margin-top: 10px;
+  }

@@ -1,39 +1,54 @@
-.hotSalesContainer {
+.featuredFirstRunContainer {
   width: 100%;
   max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
   background-color: #121212;
   color: white;
-  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigationButtons button {
+  background-color: #1e1e1e;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.navigationButtons button:disabled {
+  color: #555;
+  cursor: not-allowed;
 }
 
 .productsGrid {
   display: flex;
-  overflow-x: auto;
+  justify-content: space-between;
   gap: 20px;
 }
 
 .productCard {
-  background: #1e1e1e;
-  padding: 20px;
-  border-radius: 8px;
-  min-width: 200px;
-  max-width: 300px;
+  background: none; /* 移除背景 */
+  padding: 0; /* 移除内边距 */
   text-align: left;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  flex: 1;
 }
 
 .productCard:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .productImage {
   width: 100%;
   height: auto;
-  border-radius: 4px;
 }
 
 .productInfo {
@@ -89,18 +104,11 @@
   margin-top: 10px;
 }
 
-.viewMoreButton {
-  background-color: transparent;
-  color: #1e90ff;
-  border: 1px solid #1e90ff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin-top: 20px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.viewMoreButton:hover {
-  background-color: #1e90ff;
-  color: white;
+.firstRunBadge {
+  background-color: #ffd700;
+  color: black;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-top: 10px;
 }

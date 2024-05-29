@@ -1,15 +1,21 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
+body {
+  background-color: white;
+  color: black;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
-  #root {
-    height: 100%;
-  }
+a {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
 `;
 
 export default GlobalStyle;

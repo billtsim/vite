@@ -1,15 +1,21 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: #121212;
   padding: 10px 20px;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #333;
+  z-index: 1000;
 }
 
 .logo {
   font-size: 24px;
   font-weight: bold;
+  color: white;
 }
 
 .navbarList {
@@ -25,12 +31,12 @@
 
 .navbarLink {
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: 16px;
 }
 
 .navbarLink:hover {
-  color: red;
+  color: #1e90ff;
 }
 
 .searchAndAuth {
@@ -42,22 +48,20 @@
   padding: 5px;
   font-size: 16px;
   margin-right: 20px;
+  background-color: #333;
+  border: 1px solid #444;
+  color: white;
 }
 
-.authLink {
-  text-decoration: none;
-  color: black;
-  font-size: 16px;
-}
-
-.logoutButton {
+.authButton {
   background: none;
   border: none;
-  color: black;
+  color: white;
   font-size: 16px;
   cursor: pointer;
+  padding-right: 20px;
 }
 
-.logoutButton:hover {
-  color: red;
+.authButton:hover {
+  color: #1e90ff;
 }

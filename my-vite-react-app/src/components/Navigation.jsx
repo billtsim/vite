@@ -1,51 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from '../CSS/Navigation.module.css';
 
-const handleLogout = () => {
-  localStorage.removeItem('token'); // 清除 token
-  window.location.reload();
+const Navigation = () => {
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const navigate = useNavigate();
+
+  const handleAuthClick = () => {
+    if (token) {
+      // Perform logout operation
+      localStorage.removeItem('token');
+      setToken(null);
+      navigate('/');
+      window.location.reload();
+    } else {
+      // Navigate to login page
+      navigate('/login');
+    }
+  };
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, []);
+
+  return (
+    <nav className={styles.navbar}>
+      <div className={styles.logo}>
+        <Link to="/">LOGO</Link>
+      </div>
+      <ul className={styles.navbarList}>
+        <li className={styles.navbarItem}><Link to="/" className={styles.navbarLink}>Discover</Link></li>
+        <li className={styles.navbarItem}><Link to="/browse" className={styles.navbarLink}>Browse</Link></li>
+        <li className={styles.navbarItem}><Link to="/news" className={styles.navbarLink}>News</Link></li>
+      </ul>
+      <div className={styles.searchAndAuth}>
+        <input type="text" className={styles.searchInput} placeholder="Search store" />
+        <button onClick={handleAuthClick} className={styles.authButton}>
+          {token ? 'Logout' : 'Login'}
+        </button>
+      </div>
+    </nav>
+  );
 };
-
-let token = localStorage.getItem('token');
-
-const Navigation = () => (
-  <nav className={styles.navbar}>
-    <div className={styles.logo}>
-      <Link to="/">LOGO</Link>
-    </div>
-    <ul className={styles.navbarList}>
-      <li className={styles.navbarItem}>
-        <Link to="/" className={styles.navbarLink}>主頁</Link>
-      </li>
-      <li className={styles.navbarItem}>
-        <Link to="/summer" className={styles.navbarLink}>夏日必備</Link>
-      </li>
-      <li className={styles.navbarItem}>
-        <Link to="/special" className={styles.navbarLink}>特別版產品</Link>
-      </li>
-      <li className={styles.navbarItem}>
-        <Link to="/men" className={styles.navbarLink}>男子</Link>
-      </li>
-      <li className={styles.navbarItem}>
-        <Link to="/women" className={styles.navbarLink}>女子</Link>
-      </li>
-      <li className={styles.navbarItem}>
-        <Link to="/kids" className={styles.navbarLink}>兒童</Link>
-      </li>
-      <li className={styles.navbarItem}>
-        <Link to="/logined" className={styles.navbarLink}>會員專頁</Link>
-      </li>
-    </ul>
-    <div className={styles.searchAndAuth}>
-      <input type="text" placeholder="搜索 年中優惠" className={styles.searchInput} />
-      {!token ? (
-        <Link to="/login" className={styles.authLink}>Login</Link>
-      ) : (
-        <button onClick={handleLogout} className={styles.logoutButton}>Logout</button>
-      )}
-    </div>
-  </nav>
-);
 
 export default Navigation;

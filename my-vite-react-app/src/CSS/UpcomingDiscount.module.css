@@ -1,66 +1,69 @@
 .upcomingDiscountContainer {
-    width: 100%;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .discountContent {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .dateSection {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .dateSection p {
-    margin: 0;
-  }
-  
-  .date {
-    font-size: 48px;
-    font-weight: bold;
-  }
-  
-  .month {
-    font-size: 24px;
-  }
-  
-  .imageSection img {
-    width: 100%;
-    height: auto;
-    max-width: 600px;
-  }
-  
-  .textSection {
-    text-align: right;
-    padding: 20px;
-  }
-  
-  .textSection h3 {
-    font-size: 24px;
-    margin: 0 0 10px 0;
-  }
-  
-  .textSection p {
-    font-size: 16px;
-    margin: 0 0 20px 0;
-  }
-  
-  .subscribeButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .subscribeButton:hover {
-    background-color: #444;
-  }
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #1e1e1e; /* 背景颜色为深色 */
+  color: white; /* 字体颜色为白色 */
+}
+
+.discountContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dateSection {
+  text-align: center;
+  padding: 20px;
+}
+
+.dateSection p {
+  margin: 0;
+}
+
+.date {
+  font-size: 48px;
+  font-weight: bold;
+  color: #ff4c4c; /* 日期颜色为红色 */
+}
+
+.month {
+  font-size: 24px;
+  color: #888; /* 月份颜色为灰色 */
+}
+
+.imageSection img {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+}
+
+.textSection {
+  text-align: right;
+  padding: 20px;
+}
+
+.textSection h3 {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+}
+
+.textSection p {
+  font-size: 16px;
+  margin: 0 0 20px 0;
+}
+
+.subscribeButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff4c4c; /* 按钮颜色为红色 */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.subscribeButton:hover {
+  background-color: #ff7878; /* 按钮悬停颜色 */
+}
