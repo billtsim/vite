@@ -18,9 +18,15 @@ function Login() {
        const response = await axiosInstance.post('/login', { username, password });
        // 假设响应中包含 token
        const token = response.data.data;
-       localStorage.setItem('token', token);
+       if(token) {
+        localStorage.setItem('token', token);
        navigate('/logined');
        window.location.reload(); // 自动刷新页面
+       }
+       else{
+        alert('your username or password is not correct')
+       }
+       
         // 登录成功后导航到主页
     } catch (err) {
       setError(err.response?.data?.msg || 'Login failed');
