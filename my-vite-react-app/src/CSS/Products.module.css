@@ -1,11 +1,12 @@
 .productsContainer {
   color: white;
   width: 100%;
-  max-width: 1200px;
-  height: 100%;
+  max-width: 80%;
   box-sizing: border-box; /* 确保内边距包含在总宽度内 */
   margin: 0 auto; /* 居中容器 */
   padding: 20px; /* 添加内边距 */
+  height: 100%;
+  
 }
 
 .header {
@@ -37,17 +38,17 @@
   display: flex;
   gap: 20px;
   overflow: hidden; /* 确保多余的内容被隐藏 */
-  
+  height: 100%;
+  width: 100%; 
 }
 
-.productCard {
-  display: 1; 
-  
-  padding: 20px; /* 移除内边距 */
+.productCard { 
+  height: 100%;
+  padding: 0px; /* 移除内边距 */
   text-align: left;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-   flex: 1 0%; /*确保每个产品卡片的宽度一致 */
+  flex: 0 0 200px; /*确保每个产品卡片的宽度一致 */
 }
 
 .productCard:hover {
@@ -56,12 +57,13 @@
 
 .productImage {
   width: 100%;
-  height: 50%;
+  height: 65%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 .productInfo {
+  height: 35%;
   padding: 10px;
   margin-top: 10px;
 }
@@ -114,7 +116,7 @@
 @media (min-width: 768px) {
   .productsGrid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 设置5列的网格布局 */
+    grid-template-columns: repeat(4, 1fr); /* 设置5列的网格布局 */
   }
 
   .navigationButtons {
@@ -134,7 +136,16 @@
   }
 
   .productCard {
+    width: 50%;
     flex: 0 0 auto; /* 确保卡片不会伸展 */
     scroll-snap-align: start; /* 启用滚动捕捉对齐 */
+  }
+
+  .productImage {
+    width: 100%;
+    max-width: 100%; /* 确保图片不会超出容器宽度 */
+    max-height: 300px; /* 设置图片的最大高度 */
+    object-fit: cover; /* 确保图片按比例缩放 */
+    overflow: hidden;
   }
 }

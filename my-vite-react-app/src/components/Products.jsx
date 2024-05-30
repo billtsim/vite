@@ -10,7 +10,7 @@ const Products = () => {
       oldPrice: 469,
       price: 93.8,
       discount: "-80%",
-      imageUrl: "https://via.placeholder.com/200x300"
+      imageUrl: "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ const Products = () => {
       oldPrice: 350,
       price: 280,
       discount: "-20%",
-      imageUrl: "https://via.placeholder.com/200x300"
+      imageUrl: "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       id: 3,
@@ -28,7 +28,7 @@ const Products = () => {
       oldPrice: 468,
       price: 187.2,
       discount: "-60%",
-      imageUrl: "https://via.placeholder.com/200x300"
+      imageUrl: "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       id: 4,
@@ -37,7 +37,7 @@ const Products = () => {
       oldPrice: 246,
       price: 123,
       discount: "-50%",
-      imageUrl: "https://via.placeholder.com/200x300"
+      imageUrl: "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       id: 5,
@@ -46,7 +46,7 @@ const Products = () => {
       oldPrice: 448.99,
       price: 224.49,
       discount: "-50%",
-      imageUrl: "https://via.placeholder.com/200x300"
+      imageUrl: "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854"
     },
     {
       id: 6,
@@ -92,12 +92,11 @@ const Products = () => {
       price: 354.43,
       discount: "-33%",
       imageUrl: "https://via.placeholder.com/200x300"
-    },
-    // 添加更多产品数据
+    }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 5;
+  const itemsPerPage = 4;
   const productsGridRef = useRef(null);
 
   const handlePrevClick = () => {
@@ -105,7 +104,10 @@ const Products = () => {
   };
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + itemsPerPage, products.length - itemsPerPage));
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex + itemsPerPage;
+      return newIndex >= products.length ? prevIndex : newIndex;
+    });
   };
 
   const handleMouseDown = (e) => {
@@ -132,7 +134,7 @@ const Products = () => {
         <h2>Our Products</h2>
         <div className={styles.navigationButtons}>
           <button onClick={handlePrevClick} disabled={currentIndex === 0}>&lt;</button>
-          <button onClick={handleNextClick} disabled={currentIndex >= products.length - itemsPerPage}>&gt;</button>
+          <button onClick={handleNextClick} disabled={currentIndex + itemsPerPage >= products.length}>&gt;</button>
         </div>
       </div>
       <div

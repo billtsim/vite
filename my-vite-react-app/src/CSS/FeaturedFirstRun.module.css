@@ -1,6 +1,7 @@
 .featuredFirstRunContainer {
+  min-height: 300px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 80%;
   color: white;
   box-sizing: border-box; /* 确保内边距包含在总宽度内 */
   margin: 0 auto; /* 居中容器 */
@@ -29,10 +30,12 @@
 
 .navigationButtons button:disabled {
   color: #555;
-  cursor: not-allowed;
+  cursor: not-allowed; 
 }
 
 .productsGrid {
+  width: 100%;
+  height: 100%;
   display: flex;
   gap: 20px;
   overflow: hidden;
@@ -55,6 +58,8 @@
 .productImage {
   width: 100%;
   height: auto;
+  min-height: 230px; /* 调整图片高度 */
+  object-fit: cover; /* 确保图片按比例缩放 */
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -148,12 +153,12 @@
   .productCard {
     flex: 0 0 auto; /* 确保卡片不会伸展 */
     scroll-snap-align: start; /* 启用滚动捕捉对齐 */
-    width: 100%;
+    width: 50%; /*show2 piece */
   }
 
   .productImage {
     max-width: 100%; /* 确保图片不会超出容器宽度 */
-    max-height: 300px; /* 设置图片的最大高度 */
+    height: 200px; /* 调整图片的最大高度 */
     object-fit: cover; /* 确保图片按比例缩放 */
     overflow: hidden;
   }
