@@ -1,18 +1,17 @@
 .featuredGamesContainer {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
+  max-width: 80%;
   color: white; /* 字体颜色为白色 */
 }
 
 .gameCard {
   overflow: hidden;
-  width: 30%;
-  min-width: 300px;
-  max-width: 400px;
-  flex-grow: 1;
-  background-color: #1e1e1e; /* 添加背景颜色 */
+  width: 100%; /* 调整最小宽度以适应小屏幕 */
+  flex: 1;
   border-radius: 8px; /* 添加圆角 */
   box-sizing: border-box; /* 确保内边距包含在总宽度内 */
 }
@@ -50,10 +49,17 @@
 }
 
 /* 响应式设计 */
+@media (max-width: 1024px) {
+  .gameCard {
+    width: 30%; /* 在中等屏幕上每行显示三个卡片 */
+    min-width: 30%; /* 确保卡片占满宽度 */
+  }
+}
+
 @media (max-width: 768px) {
   .gameCard {
-    width: 100%; /* 在小屏幕上每行显示一个卡片 */
-    min-width: 100%; /* 确保卡片占满宽度 */
+    width: 30%; /* 在小屏幕上每行显示三个卡片 */
+    min-width: 30%; /* 确保卡片占满宽度 */
   }
 
   .gameInfo {
@@ -70,5 +76,12 @@
 
   .actionText {
     font-size: 12px; /* 调整动作文本字体大小 */
+  }
+}
+
+@media (max-width: 480px) {
+  .gameCard {
+    width: 100%; /* 在超小屏幕上每行显示一个卡片 */
+    min-width: 100%; /* 确保卡片占满宽度 */
   }
 }

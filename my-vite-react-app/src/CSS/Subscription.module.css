@@ -1,6 +1,5 @@
 .subscriptionContainer {
-  width: 100%;
-  max-width: 800px;
+  width: 35%;
   margin: 0 auto;
   padding: 20px;
   color: white;
@@ -23,6 +22,8 @@
   flex-wrap: wrap; /* 在小屏幕上换行 */
   justify-content: center;
   gap: 10px; /* 添加间距 */
+  align-items: center; /* 垂直居中对齐 */
+  margin-top: 20px; /* 添加额外的上边距 */
 }
 
 .subscriptionForm input[type="email"] {
@@ -32,6 +33,7 @@
   border-radius: 4px;
   flex: 1 1 200px; /* 确保输入框在小屏幕上自适应 */
   box-sizing: border-box;
+  height: 40px; /* 调整输入框的高度 */
 }
 
 .subscriptionForm button {
@@ -42,6 +44,7 @@
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  height: 40px; /* 调整按钮的高度 */
 }
 
 .subscriptionForm button:hover {
@@ -50,6 +53,10 @@
 
 /* 响应式设计 */
 @media (max-width: 576px) {
+  .subscriptionContainer {
+    width: 90%; /* 在小屏幕上增加容器宽度 */
+  }
+
   .subscriptionHeader {
     font-size: 20px;
   }
@@ -63,7 +70,13 @@
     align-items: stretch;
   }
 
+  .subscriptionForm input[type="email"] {
+    height: 10px;
+    flex: 1 1 20px;
+  }
+
   .subscriptionForm input[type="email"], .subscriptionForm button {
     width: 100%; /* 确保输入框和按钮占满宽度 */
+    height: 36px; /* 调整输入框和按钮的高度 */
   }
 }

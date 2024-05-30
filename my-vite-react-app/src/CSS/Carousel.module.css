@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  max-width: 1500px;
+  max-width: 80%;
   width: 100%;
   margin: 100px 0 40px 0; /* 添加顶部内边距 */
   color: white;
@@ -14,8 +14,7 @@
 
 .carouselMain {
   position: relative;
-  flex:4;
-  display: flex;
+  flex: 4;
   justify-content: center;
   align-items: center;
 }
@@ -29,17 +28,21 @@
 
 .carouselImage {
   width: 100%;
-  height: auto;
+  height: 100%; /* 调整高度以填充容器 */
+  object-fit: cover; /* 确保图片按比例缩放并填充容器 */
   border-radius: 10px;
 }
 
 .carouselInfo {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* 确保宽度不超过图片宽度 */
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-sizing: border-box; /* 确保内边距包含在总宽度内 */
 }
 
 .carouselInfo h2 {
