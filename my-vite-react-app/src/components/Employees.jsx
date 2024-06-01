@@ -19,7 +19,7 @@ const Employees = () => {
         setEmployees(response.data.data.rows); // 假设服务器返回的员工数据是一个数组
         setLoading(false);
       })
-      .catch(err => {
+      .catch(err => {0
         setError(err);
         setLoading(false);
       });
@@ -133,9 +133,11 @@ const Employees = () => {
               <td>{formatDate(employee.createTime)}</td>
               <td>{formatDate(employee.updateTime)}</td>
               <td>{departmentMapping[employee.department]}</td>
-              <td className={styles.actions}>
+              <td >
+                <div className={styles.actions}>
                 <button onClick={() => handleEdit(employee)} className="edit">Edit</button>
                 <button onClick={() => handleDelete(employee.id)} className="delete">Delete</button>
+                </div>
               </td>
             </tr>
           ))}

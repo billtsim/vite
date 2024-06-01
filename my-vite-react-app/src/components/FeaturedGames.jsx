@@ -5,20 +5,20 @@ const FeaturedGames = () => {
   const games = [
     {
       id: 1,
-      imageUrl: 'https://via.placeholder.com/400x200?text=Game+1',
+      imageUrl: 'https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854',
       title: 'Find it in Fortnite',
       description: "A new way to discover what's happening in Fortnite."
     },
     {
       id: 2,
-      imageUrl: 'https://via.placeholder.com/400x200?text=Game+2',
+      imageUrl: 'https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854',
       title: 'LEGO Fortnite',
       description: 'Mello out! Marshmello, Marsha, and MASHINOBI have returned!',
       actionText: 'Play For Free'
     },
     {
       id: 3,
-      imageUrl: 'https://via.placeholder.com/400x200?text=Game+3',
+      imageUrl: 'https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854',
       title: 'Fortnite x Eminem',
       description: 'Eminem has returned to the Fortnite Item Shop!',
       actionText: 'Play For Free'

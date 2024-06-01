@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from '../CSS/Dashboard.module.css'; // 引入 CSS Module 文件
 import Employees from './Employees';
+import { retry } from '@reduxjs/toolkit/query';
+import Games from './Games';
 
 const Dashboard = () => {
   const [selectedComponent, setSelectedComponent] = useState('home');
@@ -16,6 +18,8 @@ const Dashboard = () => {
         return <div>Activities Component</div>;
       case 'projects':
         return <div>Projects Component</div>;
+      case 'gameManagement':
+        return <Games />
       // 其他组件根据需要添加
       default:
         return <div>Home Component</div>;
@@ -44,7 +48,7 @@ const Dashboard = () => {
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('work-management')}>工作管理</Link></li>
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('crm')}>CRM</Link></li>
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('website')}>網站</Link></li>
-          <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('mail')}>郵件</Link></li>
+          <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('gameManagement')}>Game</Link></li>
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('calendar')}>行事曆</Link></li>
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('reports')}>時間和報告</Link></li>
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('employees')}>員工</Link></li>

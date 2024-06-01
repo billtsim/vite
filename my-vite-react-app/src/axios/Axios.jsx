@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    if (response.data.code === 0) {
+    if (response.data.msg === "not_login") {
       // code 为 0 表示未登录或登录已失效
       localStorage.removeItem('token'); // 清除失效的 token
       // 使用 window.location.href 重定向到登录页
