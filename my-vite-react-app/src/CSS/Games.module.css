@@ -1,92 +1,144 @@
 /* Games.module.css */
 
 .gamesContainer {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* 防止内容溢出 */
+}
+
+.TopButton {
+  display: flex;
+  flex-wrap: wrap; /* 使按钮在小屏幕上换行 */
+  justify-content: space-between;
+  width: 100%;
+}
+
+.TopButton button {
+  height: 60%;
+  margin: 10px;
+}
+
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap; /* 在小屏幕上换行 */
+  justify-content: space-between;
+  gap: 10px; /* 添加间距 */
+  width: 100%;
+}
+
+.filterContainer label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1; /* 使标签占据可用空间 */
+  min-width: 150px; /* 设置最小宽度 */
+}
+
+.gamesContainer button {
+  align-items: center;
+  text-align: center;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  width: 100%;
 }
 
 .gamesTable {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
 }
 
 .gamesTable th, .gamesTable td {
+  vertical-align: middle;
   border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
-  vertical-align: middle; /* 确保单元格内容垂直居中 */
+  padding: 8px;
+  text-align: center; /* 确保单元格居中对齐 */
 }
 
 .gamesTable th {
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
-}
-
-.gamesTable tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.gamesTable tr:hover {
-  background-color: #ddd;
+.gameImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
-.gamesTable img {
-  max-width: 100%;  /* 限制图片宽度 */
-  height: auto;
-  display: block;
-  margin: 0 auto;  /* 图片居中 */
+.descriptionContainer {
+  max-height: 100px; /* 限制描述字段的最大高度 */
+  overflow-y: auto; /* 添加垂直滚动条 */
+}
+
+.editButton, .deleteButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.editButton:hover, .deleteButton:hover {
+  background-color: #0056b3;
 }
 
 .actions {
   display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */ /* 确保 actions 栏与其他栏高度一致 */
-  gap: 10px;
-}
-
-button {
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-button.edit {
-  background-color: #4CAF50;
-  color: white;
-}
-
-button.delete {
-  background-color: #f44336;
-  color: white;
+  gap: 5px;
 }
 
 .pagination {
-  display: flex;
-  justify-content: center;
+  text-align: center;
   margin-top: 20px;
 }
 
 .pageButton {
-  border: none;
-  padding: 10px 15px;
-  margin: 0 5px;
-  cursor: pointer;
   background-color: #007bff;
   color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+  cursor: pointer;
   border-radius: 4px;
-  font-size: 14px;
 }
 
 .pageButton:hover {
   background-color: #0056b3;
+}
+
+.filterContainer input,
+.filterContainer select {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.filterContainer button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filterContainer button:hover {
+  background-color: #0056b3;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .filterContainer {
+    flex-direction: column; /* 在小屏幕上垂直排列 */
+    align-items: stretch; /* 让标签宽度适应容器 */
+  }
+
+  .TopButton {
+    flex-direction: column; /* 在小屏幕上垂直排列 */
+    align-items: stretch; /* 让按钮宽度适应容器 */
+  }
 }

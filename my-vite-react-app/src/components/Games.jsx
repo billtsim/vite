@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../axios/Axios';
 import styles from '../CSS/Games.module.css';
 import EditGames from './EditGames';
+import AddGame from './AddGame'; // 新增这个组件
+
+const allCategories = [
+  'Action Game', 'Action Role-Playing Game', 'Adventure Game', 'Action Adventure Game', 
+  'Card Game', 'Fighting Game', 'Role-Playing Game', 'Real-Time Strategy', 
+  'Turn-Based Strategy', 'Massively Multiplayer Online Role-Playing Game', 
+  'Multi-User Dungeon/Dimension/Domain', 'Simulation Game', 'Simulation Role-Playing Game', 
+  'Shooting Game', 'First-Person Shooter', 'Interactive Fiction', 'Third-Person Shooter', 
+  'Sports Game', 'Tabletop Board Game', 'Puzzle Game', 'Racing Game'
+];
 
 const Games = () => {
   const [games, setGames] = useState([]);
@@ -9,7 +19,16 @@ const Games = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false); // 控制显示添加游戏的模态框
   const [selectedGame, setSelectedGame] = useState(null);
+  const [selectedGames, setSelectedGames] = useState([]); // 用于存储选中的游戏ID
+  const [filters, setFilters] = useState({
+    name: '',
+    categories: '',
+    tags: '',
+    priceMin: '',
+    priceMax: ''
+  });
   const gamesPerPage = 5;
 
   const fetchGames = async () => {
@@ -33,11 +52,27 @@ const Games = () => {
     return new Date(dateString).toLocaleString(undefined, options);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id, imageFileName) => {
     if (window.confirm('确定要删除这个游戏吗？')) {
-      axiosInstance.delete(`/product/${id}`)
+      axiosInstance.delete(`/product/${id}`, { params: { imageFileName } })
         .then(response => {
           fetchGames(); // 删除后重新获取游戏列表
+        })
+        .catch(err => {
+          setError(err);
+        });
+    }
+  };
+
+  const handleBatchDelete = () => {
+    if (window.confirm('确定要删除选中的游戏吗？')) {
+      Promise.all(selectedGames.map(gameId => {
+        const game = games.find(g => g.id === gameId);
+        return axiosInstance.delete(`/product/${gameId}`, { params: { imageFileName: game.imageUrl.split('/').pop() } });
+      }))
+        .then(() => {
+          fetchGames(); // 删除后重新获取游戏列表
+          setSelectedGames([]); // 清空已选中的游戏
         })
         .catch(err => {
           setError(err);
@@ -50,6 +85,10 @@ const Games = () => {
     setShowModal(true);
   };
 
+  const handleAdd = () => {
+    setShowAddModal(true);
+  };
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -57,6 +96,62 @@ const Games = () => {
   const handleSave = async () => {
     await fetchGames(); // 保存后重新获取游戏列表
     setShowModal(false);
+    setShowAddModal(false);
+  };
+
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      setSelectedGames(currentGames.map(game => game.id));
+    } else {
+      setSelectedGames([]);
+    }
+  };
+
+  const handleSelectGame = (id) => {
+    setSelectedGames(prevSelectedGames =>
+      prevSelectedGames.includes(id)
+        ? prevSelectedGames.filter(gameId => gameId !== id)
+        : [...prevSelectedGames, id]
+    );
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({
+      ...filters,
+      [name]: value
+    });
+  };
+
+  const applyFilters = () => {
+    // 过滤游戏数据
+    let filteredGames = games;
+
+    if (filters.name) {
+      filteredGames = filteredGames.filter(game => game.name.includes(filters.name));
+    }
+
+    if (filters.categories) {
+      filteredGames = filteredGames.filter(game => game.categories.includes(filters.categories));
+    }
+
+    if (filters.tags) {
+      if (filters.tags === 'free') {
+        filteredGames = filteredGames.filter(game => game.price === 0);
+      } else if (filters.tags === 'paid') {
+        filteredGames = filteredGames.filter(game => game.price > 0);
+      }
+    }
+
+    if (filters.priceMin) {
+      filteredGames = filteredGames.filter(game => game.price >= parseFloat(filters.priceMin));
+    }
+
+    if (filters.priceMax) {
+      filteredGames = filteredGames.filter(game => game.price <= parseFloat(filters.priceMax));
+    }
+
+    setGames(filteredGames);
   };
 
   // 分页逻辑
@@ -86,47 +181,94 @@ const Games = () => {
   return (
     <div className={styles.gamesContainer}>
       <h1>Games</h1>
-      <table className={styles.gamesTable}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Original Price</th>
-            <th>Discount</th>
-            <th>Category</th>
-            <th>Tags</th>
-            <th>Create Time</th>
-            <th>Update Time</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentGames.map(game => (
-            <tr key={game.id}>
-              <td>{game.id}</td>
-              <td><img src={game.imageUrl} alt={game.name} className={styles.gameImage} /></td>
-              <td>{game.name}</td>
-              <td>{game.description}</td>
-              <td>{game.price}</td>
-              <td>{game.originalPrice}</td>
-              <td>{`${game.discount * 100}%`}</td>
-              <td>{game.category}</td>
-              <td>{Array.isArray(game.tags) ? game.tags.join(', ') : game.tags}</td>
-              <td>{formatDate(game.createTime)}</td>
-              <td>{formatDate(game.updateTime)}</td>
-              <td >
-                <div className={styles.actions}>
-                <button onClick={() => handleEdit(game)} className="edit">Edit</button>
-                <button onClick={() => handleDelete(game.id)} className="delete">Delete</button>
-                </div>
-              </td>
+      <div className={styles.filterContainer}>
+        <label>
+          Name:
+          <input type="text" name="name" value={filters.name} onChange={handleFilterChange} />
+        </label>
+        <label>
+          Categories:
+          <select name="categories" value={filters.categories} onChange={handleFilterChange}>
+            <option value="">All</option>
+            {allCategories.map(category => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Tags:
+          <select name="tags" value={filters.tags} onChange={handleFilterChange}>
+            <option value="">All</option>
+            <option value="free">Free Game</option>
+            <option value="paid">Paid Game</option>
+          </select>
+        </label>
+        <label>
+          Price:
+          <div>
+            <input type="number" name="priceMin" placeholder="Min" value={filters.priceMin} onChange={handleFilterChange} />
+            <input type="number" name="priceMax" placeholder="Max" value={filters.priceMax} onChange={handleFilterChange} />
+          </div>
+        </label>
+        <button onClick={applyFilters}>Apply Filters</button>
+      </div>
+      <div className={styles.TopButton}>
+        <button onClick={handleAdd}>新增功能</button>
+        <button onClick={handleBatchDelete} disabled={selectedGames.length === 0}>批量删除</button>
+      </div>
+      <div className={styles.tableContainer}>
+        <table className={styles.gamesTable}>
+          <thead>
+            <tr>
+              <th><input type="checkbox" onChange={handleSelectAll} /></th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Original Price</th>
+              <th>Discount</th>
+              <th>Categories</th>
+              <th>Tags</th>
+              <th>Create Time</th>
+              <th>Update Time</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentGames.map(game => (
+              <tr key={game.id}>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedGames.includes(game.id)}
+                    onChange={() => handleSelectGame(game.id)}
+                  />
+                </td>
+                <td><img src={game.imageUrl} alt={game.name} className={styles.gameImage} /></td>
+                <td>{game.name}</td>
+                <td>
+                  <div className={styles.descriptionContainer}>
+                    {game.description}
+                  </div>
+                </td>
+                <td>{game.price}</td>
+                <td>{game.originalPrice}</td>
+                <td>{`${game.discount * 100}%`}</td>
+                <td>{game.categories}</td>
+                <td>{Array.isArray(game.tags) ? game.tags.join(', ') : game.tags}</td>
+                <td>{formatDate(game.createTime)}</td>
+                <td>{formatDate(game.updateTime)}</td>
+                <td>
+                  <div className={styles.actions}>
+                    <button onClick={() => handleEdit(game)} className={styles.editButton}>Edit</button>
+                    <button onClick={() => handleDelete(game.id, game.imageUrl.split('/').pop())} className={styles.deleteButton}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <div className={styles.pagination}>
         {renderPageNumbers()}
       </div>
@@ -135,6 +277,13 @@ const Games = () => {
           show={showModal}
           onClose={() => setShowModal(false)}
           game={selectedGame}
+          onSave={handleSave}
+        />
+      )}
+      {showAddModal && (
+        <AddGame
+          show={showAddModal}
+          onClose={() => setShowAddModal(false)}
           onSave={handleSave}
         />
       )}

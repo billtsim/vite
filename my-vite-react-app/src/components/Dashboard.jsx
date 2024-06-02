@@ -7,8 +7,9 @@ import Games from './Games';
 
 const Dashboard = () => {
   const [selectedComponent, setSelectedComponent] = useState('home');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate(); // 使用 useNavigate 钩子
-
 
   const renderContent = () => {
     switch (selectedComponent) {
@@ -19,27 +20,35 @@ const Dashboard = () => {
       case 'projects':
         return <div>Projects Component</div>;
       case 'gameManagement':
-        return <Games />
+        return <Games />;
       // 其他组件根据需要添加
       default:
         return <div>Home Component</div>;
     }
   };
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('token'); // 清除 token  
     navigate('/'); // 重定向到主頁
-     window.location.reload();
+    window.location.reload();
   };
 
   return (
     <div className={styles.dashboard}>
-      <nav className={styles.sidebar}>
+      <nav className={`${styles.sidebar} ${sidebarOpen ? styles.active : ''}`}>
         <div className={styles.logo}>
           <h2>Bitrix 24</h2>
         </div>
         <ul className={styles.navList}>
-          <li className={styles.navItem}><Link to="/" onClick={() => setSelectedComponent('home')}>主貢</Link></li>
+          <li className={styles.navItem}><Link to="/" onClick={() => setSelectedComponent('home')}>主頁</Link></li>
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('activities')}>事項動態</Link></li>
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('projects')}>任務和專案</Link></li>
           <li className={styles.navItem}><Link to="#" onClick={() => setSelectedComponent('knowledge')}>知識庫</Link></li>
@@ -56,13 +65,20 @@ const Dashboard = () => {
       </nav>
       <div className={styles.main}>
         <header className={styles.header}>
+          <div className={styles.hamburger} onClick={toggleSidebar}>
+            &#9776;
+          </div>
           <div className={styles.search}>
             <input type="text" placeholder="搜尋人員、文件和更多" />
           </div>
-          <div className={styles.userInfo}>
+          <div className={styles.userInfo} onClick={toggleDropdown}>
             <img src="/path/to/user-avatar.jpg" alt="User Avatar" className={styles.avatar} />
             <span>Elliotboy</span>
-            <button onClick={handleLogout} className={styles.logoutButton}>登出</button>
+            <div className={`${styles.dropdownMenu} ${dropdownOpen ? styles.active : ''}`}>
+              <Link to="#" onClick={() => setSelectedComponent('profile')}>個人資料</Link>
+              <Link to="#" onClick={() => setSelectedComponent('settings')}>設置</Link>
+              <button onClick={handleLogout} className={styles.logoutButton}>登出</button>
+            </div>
           </div>
         </header>
         <main className={styles.content}>

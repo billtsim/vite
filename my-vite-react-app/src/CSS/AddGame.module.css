@@ -1,4 +1,4 @@
-/* EditGames.module.css */
+/* AddGame.module.css */
 
 .modal {
   position: fixed;
@@ -53,7 +53,7 @@ label {
   margin-bottom: 10px;
 }
 
-input[type="text"],
+.name,
 input[type="number"],
 input[type="file"],
 textarea {

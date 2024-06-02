@@ -1,0 +1,61 @@
+/* TagSelector.module.css */
+
+.tagSelector {
+  margin-bottom: 20px;
+}
+
+.selectedOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.selectedOption {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+}
+
+.removeOption {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.tagName {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 5px;
+  background-color: #f9f9f9;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option {
+  padding: 5px 10px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #ddd;
+}
+
+.option.selected {
+  background-color: #007bff;
+  color: white;
+}

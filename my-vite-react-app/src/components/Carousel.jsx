@@ -20,7 +20,7 @@ const Carousel = () => {
       {
         "name": "Grand Theft Auto V",
         "description": "Experience the critically acclaimed open world game with new features and content.",
-        "imageUrl": "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854",
+        "imageUrl": "https://storage.cloud.google.com/fileupload-java/feb55d80-370c-434f-8221-f8ceb52e51e0.jpg",
         "discount": "-50%",
         "category": "Paid"
       },

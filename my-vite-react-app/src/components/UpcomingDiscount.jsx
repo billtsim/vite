@@ -10,7 +10,7 @@ const UpcomingDiscount = () => {
       try {
         const response = await axiosInstance.get('/product', {
           params: {
-            tags: 'upComingDiscount'
+            tags: 'up coming discount'
           }
         });
 

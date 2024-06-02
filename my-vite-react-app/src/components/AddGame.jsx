@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axiosInstance from '../axios/Axios';
-import styles from '../CSS/EditGames.module.css';
+import styles from '../CSS/AddGame.module.css';
 import TagSelector from './TagSelector'; // 引入 TagSelector 组件
 
-const EditGames = ({ show, onClose, game, onSave }) => {
+const AddGame = ({ show, onClose, onSave }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
@@ -11,8 +11,6 @@ const EditGames = ({ show, onClose, game, onSave }) => {
   const [tags, setTags] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [image, setImage] = useState(null);
-  const [price, setPrice] = useState('');
-  const [oldImageUrl, setOldImageUrl] = useState('');
 
   const allCategories = [
     'Action Game', 'Action Role-Playing Game', 'Adventure Game', 'Action Adventure Game', 
@@ -25,19 +23,6 @@ const EditGames = ({ show, onClose, game, onSave }) => {
 
   const allTags = ['new game', 'hot sale', 'popular game', 'up coming discount', 'recommended', 'free game'];
 
-  useEffect(() => {
-    if (game) {
-      setName(game.name || '');
-      setDescription(game.description || '');
-      setOriginalPrice(game.originalPrice || '');
-      setCategories(game.categories ? game.categories.split(',').map(cat => cat.trim()) : []);
-      setTags(game.tags ? game.tags.split(',').map(tag => tag.trim()) : []);
-      setDiscount(game.discount || 0);
-      setPrice(game.price || '');
-      setOldImageUrl(game.imageUrl ? game.imageUrl.split('/').pop() : '');
-    }
-  }, [game]);
-
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
@@ -45,27 +30,23 @@ const EditGames = ({ show, onClose, game, onSave }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('id', game.id);
     formData.append('name', name);
     formData.append('description', description);
     formData.append('originalPrice', originalPrice);
-    formData.append('categories', categories.join(', ')); // 转换为字符串
-    formData.append('tags', tags.join(', ')); // 转换为字符串
+    formData.append('categories', categories);
+    formData.append('tags', tags);
     formData.append('discount', discount);
-    if (image) {
-      formData.append('image', image);
-      formData.append('oldImageUrl', oldImageUrl); // 传递旧图片URL
-    }
+    formData.append('image', image); // 必填字段
 
     try {
-      await axiosInstance.put('/product', formData, {
+      await axiosInstance.post('/product', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
       onSave(); // 只需调用 onSave 以通知父组件
     } catch (err) {
-      console.error('Error updating game:', err);
+      console.error('Error adding game:', err);
     }
   };
 
@@ -75,11 +56,11 @@ const EditGames = ({ show, onClose, game, onSave }) => {
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h2>Edit Game</h2>
+          <h2>Add Game</h2>
           <span className={styles.close} onClick={onClose}>&times;</span>
         </div>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label className={styles.name}>
             Name:
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
           </label>
@@ -109,7 +90,7 @@ const EditGames = ({ show, onClose, game, onSave }) => {
           />
           <label>
             Image:
-            <input type="file" onChange={handleImageChange} />
+            <input type="file" onChange={handleImageChange} required />
           </label>
           <button type="submit">Save</button>
         </form>
@@ -118,4 +99,4 @@ const EditGames = ({ show, onClose, game, onSave }) => {
   );
 };
 
-export default EditGames;
+export default AddGame;
