@@ -32,6 +32,8 @@ const Navigation = () => {
         <li className={styles.navbarItem}><Link to="/" className={styles.navbarLink}>Discover</Link></li>
         <li className={styles.navbarItem}><Link to="/browse" className={styles.navbarLink}>Browse</Link></li>
         <li className={styles.navbarItem}><Link to="/news" className={styles.navbarLink}>News</Link></li>
+        <li className={styles.navbarItem}><Link to="/logined" className={styles.navbarLink}>admin</Link></li>
+
       </ul>
       <div className={styles.searchAndAuth}>
         <input type="text" className={styles.searchInput} placeholder="Search store" />

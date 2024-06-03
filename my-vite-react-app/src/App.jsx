@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import Navigation from './components/Navigation';
-import Carousel from './components/Carousel';
-import FeaturedGames from './components/FeaturedGames'; /* 引入 FeaturedGames 组件 */
-import Products from './components/Products';
+import Navigation from './components/home page/Navigation';
+import Carousel from './components/home page/Carousel';
+import FeaturedGames from './components/home page/FeaturedGames'; /* 引入 FeaturedGames 组件 */
+import Products from './components/home page/Products';
 import ProductDetail from './components/ProductDetail';
 import UpcomingDiscount from './components/UpcomingDiscount';
-import HotSales from './components/HotSales';
+import HotSales from './components/home page/HotSales';
 import FeaturedFirstRun from './components/FeaturedFirstRun'; /* 引入 FeaturedFirstRun 组件 */
-import Subscription from './components/Subscription';
-import Footer from './components/Footer';
+import Subscription from './components/home page/Subscription';
+import Footer from './components/home page/Footer';
 
 const App = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);

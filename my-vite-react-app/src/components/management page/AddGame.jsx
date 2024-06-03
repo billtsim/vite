@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axiosInstance from '../axios/Axios';
+import axiosInstance from '../../axios/Axios';
 import styles from '../CSS/AddGame.module.css';
 import TagSelector from './TagSelector'; // 引入 TagSelector 组件
 

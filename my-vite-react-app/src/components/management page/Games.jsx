@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../axios/Axios';
+import axiosInstance from '../../axios/Axios';
 import styles from '../CSS/Games.module.css';
 import EditGames from './EditGames';
 import AddGame from './AddGame'; // 新增这个组件
@@ -26,14 +26,14 @@ const Games = () => {
     name: '',
     categories: '',
     tags: '',
-    priceMin: '',
-    priceMax: ''
+    minPrice: '',
+    maxPrice: ''
   });
   const gamesPerPage = 5;
 
-  const fetchGames = async () => {
+  const fetchGames = async (queryParams = {}) => {
     try {
-      const response = await axiosInstance.get('/product');
+      const response = await axiosInstance.get('/product', { params: queryParams });
       setGames(response.data.data); // 假设服务器返回的游戏数据是一个数组
       setLoading(false);
     } catch (err) {
@@ -124,34 +124,35 @@ const Games = () => {
   };
 
   const applyFilters = () => {
-    // 过滤游戏数据
-    let filteredGames = games;
+    const queryParams = {};
 
     if (filters.name) {
-      filteredGames = filteredGames.filter(game => game.name.includes(filters.name));
+      queryParams.name = filters.name;
     }
 
     if (filters.categories) {
-      filteredGames = filteredGames.filter(game => game.categories.includes(filters.categories));
+      queryParams.categories = filters.categories;
     }
 
     if (filters.tags) {
       if (filters.tags === 'free') {
-        filteredGames = filteredGames.filter(game => game.price === 0);
+        queryParams.minPrice = 0;
+        queryParams.maxPrice = 0;
       } else if (filters.tags === 'paid') {
-        filteredGames = filteredGames.filter(game => game.price > 0);
+        queryParams.minPrice = 1;
+        queryParams.maxPrice = 99999;
       }
     }
 
-    if (filters.priceMin) {
-      filteredGames = filteredGames.filter(game => game.price >= parseFloat(filters.priceMin));
+    if (filters.minPrice) {
+      queryParams.minPrice = filters.minPrice;
     }
 
-    if (filters.priceMax) {
-      filteredGames = filteredGames.filter(game => game.price <= parseFloat(filters.priceMax));
+    if (filters.maxPrice) {
+      queryParams.maxPrice = filters.maxPrice;
     }
 
-    setGames(filteredGames);
+    fetchGames(queryParams); // 重新获取游戏列表并应用过滤器
   };
 
   // 分页逻辑
@@ -206,8 +207,8 @@ const Games = () => {
         <label>
           Price:
           <div>
-            <input type="number" name="priceMin" placeholder="Min" value={filters.priceMin} onChange={handleFilterChange} />
-            <input type="number" name="priceMax" placeholder="Max" value={filters.priceMax} onChange={handleFilterChange} />
+            <input type="number" name="minPrice" placeholder="Min" value={filters.minPrice} onChange={handleFilterChange} />
+            <input type="number" name="maxPrice" placeholder="Max" value={filters.maxPrice} onChange={handleFilterChange} />
           </div>
         </label>
         <button onClick={applyFilters}>Apply Filters</button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../axios/Axios';
+import axiosInstance from '../../axios/Axios';
 import styles from '../CSS/Employees.module.css';
 import EditEmployees from './EditEmployees';
 
