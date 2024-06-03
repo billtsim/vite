@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '../../axios/Axios';
-import styles from '../CSS/AddGame.module.css';
+import styles from '../../CSS/managementPageCSS/AddGame.module.css';
 import TagSelector from './TagSelector'; // 引入 TagSelector 组件
 
 const AddGame = ({ show, onClose, onSave }) => {

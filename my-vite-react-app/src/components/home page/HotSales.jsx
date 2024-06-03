@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../CSS/HotSales.module.css';
+import styles from '../../CSS/homePageCSS/HotSales.module.css';
 
 const HotSales = ({ onProductClick }) => {
   // const [hotSalesProducts, setHotSalesProducts] = useState([]);

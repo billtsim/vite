@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axios/Axios';
-import styles from '../CSS/Employees.module.css';
+import styles from '../../CSS/managementPageCSS/Employees.module.css';
 import EditEmployees from './EditEmployees';
 
 const Employees = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../CSS/FeaturedGames.module.css';
+import styles from '../../CSS/homePageCSS/FeaturedGames.module.css';
 
 const FeaturedGames = () => {
   const games = [

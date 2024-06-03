@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../axios/Axios';
-import styles from '../CSS/UpcomingDiscount.module.css';
+import axiosInstance from '../../axios/Axios'
+import styles from '../../CSS/homePageCSS/UpcomingDiscount.module.css';
 
 const UpcomingDiscount = () => {
   const [imageUrl, setImageUrl] = useState('');

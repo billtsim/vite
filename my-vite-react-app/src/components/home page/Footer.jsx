@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../CSS/Footer.module.css';
+import styles from '../../CSS/homePageCSS/Footer.module.css';
 
 const Footer = () => {
   const footerLinks = [

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../CSS/EditEmployees.module.css';
+import styles from '../../CSS/managementPageCSS/EditEmployees.module.css';
 
 const EditEmployees = ({ show, onClose, employee, onSave }) => {
   const [formData, setFormData] = useState(employee);

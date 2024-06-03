@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axios/Axios';
-import styles from '../CSS/Games.module.css';
+import styles from '../../CSS/managementPageCSS/Games.module.css';
 import EditGames from './EditGames';
 import AddGame from './AddGame'; // 新增这个组件
 

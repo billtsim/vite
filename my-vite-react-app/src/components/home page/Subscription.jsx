@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../CSS/Subscription.module.css';
+import styles from '../../CSS/homePageCSS/Subscription.module.css';
 
 const Subscription = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import styles from '../CSS/Products.module.css';
+import styles from '../../CSS/homePageCSS/Products.module.css';
 
 const Products = () => {
   const products = [

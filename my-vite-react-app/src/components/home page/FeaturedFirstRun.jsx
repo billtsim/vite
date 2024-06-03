@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../axios/Axios'; // 确保你有 axiosInstance 配置文件
-import styles from '../CSS/FeaturedFirstRun.module.css';
+import axiosInstance from '../../axios/Axios' // 确保你有 axiosInstance 配置文件
+import styles from '../../CSS/homePageCSS/FeaturedFirstRun.module.css';
 
 const FeaturedFirstRun = ({ onProductClick }) => {
 //   const [featuredProducts, setFeaturedProducts] = useState([]);

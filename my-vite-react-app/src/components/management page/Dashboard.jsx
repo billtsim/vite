@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from '../CSS/Dashboard.module.css'; // 引入 CSS Module 文件
+import styles from '../../CSS/managementPageCSS/Dashboard.module.css'; // 引入 CSS Module 文件
 import Employees from './Employees';
 import { retry } from '@reduxjs/toolkit/query';
 import Games from './Games';

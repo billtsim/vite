@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../axios/Axios';
-import styles from '../CSS/EditGames.module.css';
+import axiosInstance from '../../axios/Axios'
+import styles from '../../CSS/managementPageCSS/EditGames.module.css';
 import TagSelector from './TagSelector'; // 引入 TagSelector 组件
 
 const EditGames = ({ show, onClose, game, onSave }) => {

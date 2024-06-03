@@ -4,9 +4,9 @@ import Carousel from './components/home page/Carousel';
 import FeaturedGames from './components/home page/FeaturedGames'; /* 引入 FeaturedGames 组件 */
 import Products from './components/home page/Products';
 import ProductDetail from './components/ProductDetail';
-import UpcomingDiscount from './components/UpcomingDiscount';
+import UpcomingDiscount from './components/home page/UpcomingDiscount';
 import HotSales from './components/home page/HotSales';
-import FeaturedFirstRun from './components/FeaturedFirstRun'; /* 引入 FeaturedFirstRun 组件 */
+import FeaturedFirstRun from './components/home page/FeaturedFirstRun'; /* 引入 FeaturedFirstRun 组件 */
 import Subscription from './components/home page/Subscription';
 import Footer from './components/home page/Footer';
 

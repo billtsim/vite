@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../CSS/TagSelector.module.css';
+import styles from '../../CSS/managementPageCSS/TagSelector.module.css';
 
 const TagSelector = ({ label, options, selectedOptions, onChange }) => {
   const [inputValue, setInputValue] = useState('');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from '../CSS/Navigation.module.css';
+import styles from '../../CSS/homePageCSS/Navigation.module.css';
 
 const Navigation = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
