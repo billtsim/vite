@@ -10,7 +10,7 @@ const AddGame = ({ show, onClose, onSave }) => {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [discount, setDiscount] = useState(0);
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
 
   const allCategories = [
     'Action Game', 'Action Role-Playing Game', 'Adventure Game', 'Action Adventure Game', 
@@ -24,7 +24,8 @@ const AddGame = ({ show, onClose, onSave }) => {
   const allTags = ['new game', 'hot sale', 'popular game', 'up coming discount', 'recommended', 'free game'];
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    const files = Array.from(e.target.files);
+    setImages(prevImages => [...prevImages, ...files]);
   };
 
   const handleSubmit = async (e) => {
@@ -36,7 +37,9 @@ const AddGame = ({ show, onClose, onSave }) => {
     formData.append('categories', categories);
     formData.append('tags', tags);
     formData.append('discount', discount);
-    formData.append('image', image); // 必填字段
+    images.forEach((image, index) => {
+      formData.append('image', image);
+    });
 
     try {
       await axiosInstance.post('/product', formData, {
@@ -89,9 +92,26 @@ const AddGame = ({ show, onClose, onSave }) => {
             onChange={setTags}
           />
           <label>
-            Image:
-            <input type="file" onChange={handleImageChange} required />
+            New Images:
+            <input type="file" onChange={handleImageChange} multiple />
           </label>
+          <div className={styles.imageNamesContainer}>
+            {images.map((image, index) => (
+              <div key={index} className={styles.imageName}>
+                {image.name}
+              </div>
+            ))}
+          </div>
+          <div className={styles.imagePreviewContainer}>
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(image)}
+                alt={`Preview ${index}`}
+                className={styles.imagePreview}
+              />
+            ))}
+          </div>
           <button type="submit">Save</button>
         </form>
       </div>
