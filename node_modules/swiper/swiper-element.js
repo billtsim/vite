@@ -1,5 +1,5 @@
 /**
- * Swiper Custom Element 11.1.3
+ * Swiper Custom Element 11.1.4
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: May 13, 2024
+ * Released on: May 30, 2024
  */
 
 (function () {
@@ -3216,6 +3216,7 @@
     const capture = !!params.nested;
     const domMethod = method === 'on' ? 'addEventListener' : 'removeEventListener';
     const swiperMethod = method;
+    if (!el || typeof el === 'string') return;
 
     // Touch Events
     document[domMethod]('touchstart', swiper.onDocumentTouchStart, {
@@ -3492,6 +3493,7 @@
       el,
       classNames
     } = swiper;
+    if (!el || typeof el === 'string') return;
     el.classList.remove(...classNames);
     swiper.emitContainerClasses();
   }
@@ -4256,8 +4258,12 @@
       // Cleanup styles
       if (cleanStyles) {
         swiper.removeClasses();
-        el.removeAttribute('style');
-        wrapperEl.removeAttribute('style');
+        if (el && typeof el !== 'string') {
+          el.removeAttribute('style');
+        }
+        if (wrapperEl) {
+          wrapperEl.removeAttribute('style');
+        }
         if (slides && slides.length) {
           slides.forEach(slideEl => {
             slideEl.classList.remove(params.slideVisibleClass, params.slideFullyVisibleClass, params.slideActiveClass, params.slideNextClass, params.slidePrevClass);
@@ -4273,7 +4279,9 @@
         swiper.off(eventName);
       });
       if (deleteInstance !== false) {
-        swiper.el.swiper = null;
+        if (swiper.el && typeof swiper.el !== 'string') {
+          swiper.el.swiper = null;
+        }
         deleteProps(swiper);
       }
       swiper.destroyed = true;
@@ -4630,7 +4638,7 @@
   }
 
   /**
-   * Swiper Custom Element 11.1.3
+   * Swiper Custom Element 11.1.4
    * Most modern mobile touch slider and framework with hardware accelerated transitions
    * https://swiperjs.com
    *
@@ -4638,7 +4646,7 @@
    *
    * Released under the MIT License
    *
-   * Released on: May 13, 2024
+   * Released on: May 30, 2024
    */
 
 

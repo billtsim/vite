@@ -1,45 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../axios/Axios';
 import styles from '../../CSS/homePageCSS/HotSales.module.css';
 
 const HotSales = ({ onProductClick }) => {
-  const hotSalesProducts = [
-    {
-      id: 1,
-      name: '絕區零',
-      description: '男子運動鞋',
-      price: 1199,
-      imageUrl: 'https://via.placeholder.com/300x300'
-    },
-    {
-      id: 2,
-      name: 'fun game',
-      description: '女子運動鞋',
-      price: 799,
-      imageUrl: 'https://via.placeholder.com/300x300'
-    },
-    {
-      id: 3,
-      name: 'Nike Sportswear Club',
-      description: '男子長褲',
-      price: 319,
-      originalPrice: 399,
-      imageUrl: 'https://via.placeholder.com/300x300'
-    },
-    {
-      id: 4,
-      name: 'Nike Air Max 270',
-      description: '男子運動鞋',
-      price: 999,
-      imageUrl: 'https://via.placeholder.com/300x300'
-    },
-    {
-      id: 5,
-      name: 'Nike Air Zoom Pegasus',
-      description: '女子運動鞋',
-      price: 899,
-      imageUrl: 'https://via.placeholder.com/300x300'
-    }
-  ];
+  const [hotSalesProducts, setHotSalesProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchHotSalesProducts = async () => {
+      try {
+        const response = await axiosInstance.get('/product', { params: { tags: 'hot sale' } });
+        setHotSalesProducts(response.data.data); // 假设 API 返回的数据在 `data.data` 中
+      } catch (error) {
+        console.error('Failed to fetch hot sales products:', error);
+      }
+    };
+
+    fetchHotSalesProducts();
+  }, []);
 
   return (
     <div className={styles.hotSalesContainer}>

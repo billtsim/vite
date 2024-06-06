@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../axios/Axios'
+import axiosInstance from '../../axios/Axios';
 import styles from '../../CSS/managementPageCSS/EditGames.module.css';
 import TagSelector from './TagSelector'; // 引入 TagSelector 组件
 
@@ -29,7 +29,7 @@ const EditGames = ({ show, onClose, game, onSave }) => {
     if (game) {
       setName(game.name || '');
       setDescription(game.description || '');
-      setOriginalPrice(game.originalPrice || '');
+      setOriginalPrice(game.originalPrice !== null && game.originalPrice !== undefined ? game.originalPrice : '');
       setCategories(game.categories ? game.categories.split(',').map(cat => cat.trim()) : []);
       setTags(game.tags ? game.tags.split(',').map(tag => tag.trim()) : []);
       setDiscount(game.discount || 0);

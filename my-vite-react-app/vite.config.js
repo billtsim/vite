@@ -1,12 +1,21 @@
-// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'node_modules/slick-carousel/slick/fonts/*',
+          dest: 'fonts'
+        }
+      ]
+    })
+  ],
   css: {
     modules: {
-      // 可以在这里配置 CSS Modules 的选项
       localsConvention: 'camelCase', // 使用 camelCase 格式的类名
     },
   },

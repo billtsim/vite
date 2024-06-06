@@ -1,5 +1,5 @@
 /**
- * Swiper Vue 11.1.3
+ * Swiper Vue 11.1.4
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: May 13, 2024
+ * Released on: May 30, 2024
  */
 
 import { h, ref, onUpdated, provide, watch, nextTick, onMounted, onBeforeUnmount, onBeforeUpdate, computed, inject } from 'vue';
@@ -80,7 +80,7 @@ function renderVirtual(swiperRef, slides, virtualData) {
   const loopTo = swiperRef.value.params.loop ? slides.length * 2 : slides.length;
   const slidesToRender = [];
   for (let i = loopFrom; i < loopTo; i += 1) {
-    if (i >= from && i <= to) {
+    if (i >= from && i <= to && slidesToRender.length < slides.length) {
       slidesToRender.push(slides[getSlideIndex(i)]);
     }
   }

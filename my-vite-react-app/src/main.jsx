@@ -9,10 +9,11 @@ import GlobalStyle from './globalStyles.js';
 import Logined from './router/logined.jsx';
 import ProductDetail from './components/product detail page/ProductDetail.jsx';
 
+
 let token = localStorage.getItem('token');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <>
     <GlobalStyle />
     <Router>
       <Routes>
@@ -23,5 +24,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="product-detail/:name" element={<ProductDetail />} /> {/* 用游戏名字作为路径参数 */}
       </Routes>
     </Router>
-  </React.StrictMode>
+    </>
+  
 );

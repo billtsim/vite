@@ -1,169 +1,3 @@
-/* .productDetailContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 20px;
-  background-color: #1e1e1e;
-  color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
-  margin: 80px auto 40px auto;
-}
-
-.productLeft {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-}
-
-.productRight {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.productImageContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.productImage {
-  width: 100%;
-  max-width: 700px;
-  height: auto;
-  border-radius: 8px;
-}
-
-.productDescriptionContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.productName {
-  font-size: 2.5em;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.productDescription {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  line-height: 1.6;
-  color: #ccc;
-}
-
-.productCategories {
-  font-size: 1em;
-  color: #aaa;
-}
-
-.productPrice {
-  font-size: 2em;
-  font-weight: bold;
-  color: #007bff;
-  margin-bottom: 20px;
-}
-
-.addToCartButton, .purchaseButton {
-  background-color: #007bff;
-  border: none;
-  color: #fff;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  font-size: 1em;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.addToCartButton:hover, .purchaseButton:hover {
-  background-color: #0056b3;
-}
-
-.footer {
-  background-color: #1e1e1e;
-  color: #ccc;
-  padding: 20px;
-  text-align: center;
-}
-
-.footerContent {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footerLinks {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.footerLinks a {
-  color: #ccc;
-  margin: 0 10px;
-  text-decoration: none;
-}
-
-.footerLinks a:hover {
-  color: #007bff;
-}
-
-.footerGames {
-  margin-bottom: 20px;
-}
-
-.footerGames a {
-  color: #ccc;
-  margin: 0 10px;
-  text-decoration: none;
-}
-
-.footerGames a:hover {
-  color: #007bff;
-}
-
-.footerLegal {
-  font-size: 0.9em;
-}
-
-/* 响应式设计 
-@media (max-width: 768px) {
-  .productDetailContainer {
-    flex-direction: column;
-    padding: 10px;
-  }
-
-  .productLeft {
-    margin-bottom: 20px;
-  }
-
-  .productName {
-    font-size: 2em;
-  }
-
-  .productDescription {
-    font-size: 1em;
-  }
-
-  .productPrice {
-    font-size: 1.5em;
-  }
-
-  .footerLinks {
-    flex-direction: column;
-  }
-
-  .footerLinks a {
-    margin-bottom: 10px;
-  }
-} */
-
-
 .productDetailContainer {
   display: flex;
   flex-direction: row;
@@ -182,6 +16,7 @@
   flex: 2;
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
 }
 
 .productRight {
@@ -192,17 +27,17 @@
 }
 
 .productImageContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   margin-bottom: 20px;
+  max-width: 100%;
+  overflow: hidden; /* 确保图片不会超出容器 */
 }
 
 .productImage {
   width: 100%;
-  max-width: 700px;
   height: auto;
   border-radius: 8px;
+  object-fit: contain; /* 确保图片保持其比例 */
 }
 
 .productDescriptionContainer {

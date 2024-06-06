@@ -19,6 +19,10 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+
+
+
 `;
 
 export default GlobalStyle;

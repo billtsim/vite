@@ -28,14 +28,22 @@ const AddGame = ({ show, onClose, onSave }) => {
     setImages(prevImages => [...prevImages, ...files]);
   };
 
+  const handleImageRemove = (index) => {
+    setImages(prevImages => prevImages.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 去除 tags 中的空格并合并成字符串
+    const trimmedTags = tags.map(tag => tag.trim()).join(',');
+
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
     formData.append('originalPrice', originalPrice);
-    formData.append('categories', categories);
-    formData.append('tags', tags);
+    formData.append('categories', categories.join(',')); // 将 categories 也处理成字符串
+    formData.append('tags', trimmedTags);
     formData.append('discount', discount);
     images.forEach((image, index) => {
       formData.append('image', image);
@@ -99,6 +107,13 @@ const AddGame = ({ show, onClose, onSave }) => {
             {images.map((image, index) => (
               <div key={index} className={styles.imageName}>
                 {image.name}
+                <button
+                  type="button"
+                  className={styles.removeButton}
+                  onClick={() => handleImageRemove(index)}
+                >
+                  &times;
+                </button>
               </div>
             ))}
           </div>
