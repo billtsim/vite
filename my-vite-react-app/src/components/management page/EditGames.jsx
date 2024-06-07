@@ -10,9 +10,8 @@ const EditGames = ({ show, onClose, game, onSave }) => {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [discount, setDiscount] = useState(0);
-  const [image, setImage] = useState(null);
-  const [price, setPrice] = useState('');
-  const [oldImageUrl, setOldImageUrl] = useState('');
+  const [images, setImages] = useState([]);
+  const [oldImageUrls, setOldImageUrls] = useState([]);
 
   const allCategories = [
     'Action Game', 'Action Role-Playing Game', 'Adventure Game', 'Action Adventure Game', 
@@ -33,13 +32,23 @@ const EditGames = ({ show, onClose, game, onSave }) => {
       setCategories(game.categories ? game.categories.split(',').map(cat => cat.trim()) : []);
       setTags(game.tags ? game.tags.split(',').map(tag => tag.trim()) : []);
       setDiscount(game.discount || 0);
-      setPrice(game.price || '');
-      setOldImageUrl(game.imageUrl ? game.imageUrl.split('/').pop() : '');
+      setOldImageUrls(game.imageUrl 
+        ? game.imageUrl.split(',').map(url => url.trim().split('/').pop()) 
+        : []);
     }
   }, [game]);
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    const files = Array.from(e.target.files);
+    setImages(prevImages => [...prevImages, ...files]);
+  };
+
+  const handleImageRemove = (index) => {
+    setImages(prevImages => prevImages.filter((_, i) => i !== index));
+  };
+
+  const handleOldImageRemove = (index) => {
+    setOldImageUrls(prevUrls => prevUrls.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e) => {
@@ -52,10 +61,12 @@ const EditGames = ({ show, onClose, game, onSave }) => {
     formData.append('categories', categories.join(', ')); // 转换为字符串
     formData.append('tags', tags.join(', ')); // 转换为字符串
     formData.append('discount', discount);
-    if (image) {
+    images.forEach((image, index) => {
       formData.append('image', image);
-      formData.append('oldImageUrl', oldImageUrl); // 传递旧图片URL
-    }
+    });
+    oldImageUrls.forEach((fileName, index) => {
+      formData.append('oldImageUrls[]', fileName); // 传递旧图片文件名
+    });
 
     try {
       await axiosInstance.put('/product', formData, {
@@ -108,9 +119,47 @@ const EditGames = ({ show, onClose, game, onSave }) => {
             onChange={setTags}
           />
           <label>
-            Image:
-            <input type="file" onChange={handleImageChange} />
+            New Images:
+            <input type="file" onChange={handleImageChange} multiple />
           </label>
+          <div className={styles.imageNamesContainer}>
+            {images.map((image, index) => (
+              <div key={index} className={styles.imageName}>
+                {image.name}
+                <button
+                  type="button"
+                  className={styles.removeButton}
+                  onClick={() => handleImageRemove(index)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className={styles.imagePreviewContainer}>
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(image)}
+                alt={`Preview ${index}`}
+                className={styles.imagePreview}
+              />
+            ))}
+          </div>
+          <div className={styles.imageNamesContainer}>
+            {oldImageUrls.map((fileName, index) => (
+              <div key={index} className={styles.imageName}>
+                {fileName}
+                <button
+                  type="button"
+                  className={styles.removeButton}
+                  onClick={() => handleOldImageRemove(index)}
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+          </div>
           <button type="submit">Save</button>
         </form>
       </div>
