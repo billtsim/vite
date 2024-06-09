@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axios/Axios';
 import styles from '../../CSS/managementPageCSS/EditGames.module.css';
-import TagSelector from './TagSelector'; // 引入 TagSelector 组件
+import TagSelector from './TagSelector';
 
 const EditGames = ({ show, onClose, game, onSave }) => {
   const [name, setName] = useState('');
@@ -11,14 +11,35 @@ const EditGames = ({ show, onClose, game, onSave }) => {
   const [tags, setTags] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [images, setImages] = useState([]);
+  const [mainImage, setMainImage] = useState(null);
   const [oldImageUrls, setOldImageUrls] = useState([]);
+  const [deletedOldImageUrls, setDeletedOldImageUrls] = useState([]);
+  const [existingMainImage, setExistingMainImage] = useState('');
+  const [minRequirements, setMinRequirements] = useState({
+    os: '',
+    processor: '',
+    memory: '',
+    graphics: '',
+    directX: '',
+    network: '',
+    storage: ''
+  });
+  const [recRequirements, setRecRequirements] = useState({
+    os: '',
+    processor: '',
+    memory: '',
+    graphics: '',
+    directX: '',
+    network: '',
+    storage: ''
+  });
 
   const allCategories = [
-    'Action Game', 'Action Role-Playing Game', 'Adventure Game', 'Action Adventure Game', 
-    'Card Game', 'Fighting Game', 'Role-Playing Game', 'Real-Time Strategy', 
-    'Turn-Based Strategy', 'Massively Multiplayer Online Role-Playing Game', 
-    'Multi-User Dungeon/Dimension/Domain', 'Simulation Game', 'Simulation Role-Playing Game', 
-    'Shooting Game', 'First-Person Shooter', 'Interactive Fiction', 'Third-Person Shooter', 
+    'Action Game', 'Action Role-Playing Game', 'Adventure Game', 'Action Adventure Game',
+    'Card Game', 'Fighting Game', 'Role-Playing Game', 'Real-Time Strategy',
+    'Turn-Based Strategy', 'Massively Multiplayer Online Role-Playing Game',
+    'Multi-User Dungeon/Dimension/Domain', 'Simulation Game', 'Simulation Role-Playing Game',
+    'Shooting Game', 'First-Person Shooter', 'Interactive Fiction', 'Third-Person Shooter',
     'Sports Game', 'Tabletop Board Game', 'Puzzle Game', 'Racing Game'
   ];
 
@@ -32,9 +53,29 @@ const EditGames = ({ show, onClose, game, onSave }) => {
       setCategories(game.categories ? game.categories.split(',').map(cat => cat.trim()) : []);
       setTags(game.tags ? game.tags.split(',').map(tag => tag.trim()) : []);
       setDiscount(game.discount || 0);
-      setOldImageUrls(game.imageUrl 
-        ? game.imageUrl.split(',').map(url => url.trim().split('/').pop()) 
+      setOldImageUrls(game.imageUrl
+        ? game.imageUrl.split(',').map(url => url.trim()).filter(Boolean)
         : []);
+      setMainImage(game.mainImage || null);
+      setExistingMainImage(game.mainImage || '');
+      setMinRequirements(typeof game.minRequirements === 'string' ? JSON.parse(game.minRequirements) : game.minRequirements || {
+        os: '',
+        processor: '',
+        memory: '',
+        graphics: '',
+        directX: '',
+        network: '',
+        storage: ''
+      });
+      setRecRequirements(typeof game.recRequirements === 'string' ? JSON.parse(game.recRequirements) : game.recRequirements || {
+        os: '',
+        processor: '',
+        memory: '',
+        graphics: '',
+        directX: '',
+        network: '',
+        storage: ''
+      });
     }
   }, [game]);
 
@@ -43,12 +84,29 @@ const EditGames = ({ show, onClose, game, onSave }) => {
     setImages(prevImages => [...prevImages, ...files]);
   };
 
+  const handleMainImageChange = (e) => {
+    setMainImage(e.target.files[0]);
+  };
+
   const handleImageRemove = (index) => {
     setImages(prevImages => prevImages.filter((_, i) => i !== index));
   };
 
   const handleOldImageRemove = (index) => {
+    const fullUrl = oldImageUrls[index];
+    const fileNameToDelete = fullUrl.substring(fullUrl.lastIndexOf('/') + 1);
+    setDeletedOldImageUrls(prev => [...prev, fileNameToDelete]);
     setOldImageUrls(prevUrls => prevUrls.filter((_, i) => i !== index));
+  };
+
+  const handleMinRequirementsChange = (e) => {
+    const { name, value } = e.target;
+    setMinRequirements(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleRecRequirementsChange = (e) => {
+    const { name, value } = e.target;
+    setRecRequirements(prevState => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -58,15 +116,29 @@ const EditGames = ({ show, onClose, game, onSave }) => {
     formData.append('name', name);
     formData.append('description', description);
     formData.append('originalPrice', originalPrice);
-    formData.append('categories', categories.join(', ')); // 转换为字符串
-    formData.append('tags', tags.join(', ')); // 转换为字符串
+    formData.append('categories', categories.join(', '));
+    formData.append('tags', tags.join(', '));
     formData.append('discount', discount);
-    images.forEach((image, index) => {
-      formData.append('image', image);
+
+    const existingImages = oldImageUrls.filter(url => !deletedOldImageUrls.includes(url));
+    formData.append('existingImages', existingImages.join(','));
+
+    images.forEach((image) => {
+      formData.append('images', image);
     });
-    oldImageUrls.forEach((fileName, index) => {
-      formData.append('oldImageUrls[]', fileName); // 传递旧图片文件名
+
+    deletedOldImageUrls.forEach((fileName) => {
+      formData.append('oldImageUrl', fileName);
     });
+
+    if (mainImage && typeof mainImage !== 'string') {
+      formData.append('mainImage', mainImage);
+    } else if (existingMainImage) {
+      formData.append('existingMainImage', existingMainImage);
+    }
+
+    formData.append('minRequirements', JSON.stringify(minRequirements));
+    formData.append('recRequirements', JSON.stringify(recRequirements));
 
     try {
       await axiosInstance.put('/product', formData, {
@@ -74,7 +146,7 @@ const EditGames = ({ show, onClose, game, onSave }) => {
           'Content-Type': 'multipart/form-data'
         }
       });
-      onSave(); // 只需调用 onSave 以通知父组件
+      onSave();
     } catch (err) {
       console.error('Error updating game:', err);
     }
@@ -90,7 +162,7 @@ const EditGames = ({ show, onClose, game, onSave }) => {
           <span className={styles.close} onClick={onClose}>&times;</span>
         </div>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label className={styles.name}>
             Name:
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
           </label>
@@ -119,6 +191,55 @@ const EditGames = ({ show, onClose, game, onSave }) => {
             onChange={setTags}
           />
           <label>
+            Main Image:
+            <input type="file" onChange={handleMainImageChange} disabled={mainImage} />
+          </label>
+          <div className={styles.imageNamesContainer}>
+            {mainImage && (
+              <div className={styles.imageName}>
+                {typeof mainImage === 'string' ? (
+                  <>
+                    {mainImage}
+                    <button
+                      type="button"
+                      className={styles.removeButton}
+                      onClick={() => {
+                        const fileNameToDelete = mainImage.substring(mainImage.lastIndexOf('/') + 1);
+                        setDeletedOldImageUrls(prev => [...prev, fileNameToDelete]);
+                        setMainImage(null);
+                        setExistingMainImage(null);
+                      }}
+                    >
+                      &times;
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {mainImage.name}
+                    <button
+                      type="button"
+                      className={styles.removeButton}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMainImage(null);
+                      }}
+                    >
+                      &times;
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+          {mainImage && <div className={styles.imagePreviewContainer}>
+            <img
+              key={0}
+              src={typeof mainImage == 'string' ? mainImage: URL.createObjectURL(mainImage)}
+              alt={`url error`}
+              className={styles.imagePreview}
+            />
+          </div>}
+          <label>
             New Images:
             <input type="file" onChange={handleImageChange} multiple />
           </label>
@@ -131,7 +252,7 @@ const EditGames = ({ show, onClose, game, onSave }) => {
                   className={styles.removeButton}
                   onClick={() => handleImageRemove(index)}
                 >
-                  &times;
+                &times;
                 </button>
               </div>
             ))}
@@ -147,7 +268,7 @@ const EditGames = ({ show, onClose, game, onSave }) => {
             ))}
           </div>
           <div className={styles.imageNamesContainer}>
-            {oldImageUrls.map((fileName, index) => (
+            {oldImageUrls.filter(Boolean).map((fileName, index) => (
               <div key={index} className={styles.imageName}>
                 {fileName}
                 <button
@@ -160,6 +281,78 @@ const EditGames = ({ show, onClose, game, onSave }) => {
               </div>
             ))}
           </div>
+          <div className={styles.imagePreviewContainer}>
+            {oldImageUrls.map((image, index) => (
+              <img
+                key={index}
+                src={`${image}`}
+                alt={`Preview ${index}`}
+                className={styles.imagePreview}
+              />
+            ))}
+          </div>
+          <fieldset>
+            <legend>Minimum Requirements</legend>
+            <label>
+              Operating System:
+              <input type="text" name="os" value={minRequirements.os} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Processor:
+              <input type="text" name="processor" value={minRequirements.processor} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Memory:
+              <input type="text" name="memory" value={minRequirements.memory} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Graphics:
+              <input type="text" name="graphics" value={minRequirements.graphics} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              DirectX:
+              <input type="text" name="directX" value={minRequirements.directX} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Network:
+              <input type="text" name="network" value={minRequirements.network} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Storage:
+              <input type="text" name="storage" value={minRequirements.storage} onChange={handleMinRequirementsChange} />
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Recommended Requirements</legend>
+            <label>
+              Operating System:
+              <input type="text" name="os" value={recRequirements.os} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Processor:
+              <input type="text" name="processor" value={recRequirements.processor} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Memory:
+              <input type="text" name="memory" value={recRequirements.memory} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Graphics:
+              <input type="text" name="graphics" value={recRequirements.graphics} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              DirectX:
+              <input type="text" name="directX" value={recRequirements.directX} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Network:
+              <input type="text" name="network" value={recRequirements.network} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Storage:
+              <input type="text" name="storage" value={recRequirements.storage} onChange={handleRecRequirementsChange} />
+            </label>
+          </fieldset>
           <button type="submit">Save</button>
         </form>
       </div>
@@ -167,4 +360,4 @@ const EditGames = ({ show, onClose, game, onSave }) => {
   );
 };
 
-export default EditGames;
+export default EditGames

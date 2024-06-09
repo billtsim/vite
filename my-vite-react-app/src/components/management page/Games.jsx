@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axios/Axios';
 import styles from '../../CSS/managementPageCSS/Games.module.css';
 import EditGames from './EditGames';
-import AddGame from './AddGame'; // 新增这个组件
+import AddGame from './AddGame';
 
 const allCategories = [
   'Action Game', 'Action Role-Playing Game', 'Adventure Game', 'Action Adventure Game', 
@@ -19,9 +19,9 @@ const Games = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [showAddModal, setShowAddModal] = useState(false); // 控制显示添加游戏的模态框
+  const [showAddModal, setShowAddModal] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
-  const [selectedGames, setSelectedGames] = useState([]); // 用于存储选中的游戏ID
+  const [selectedGames, setSelectedGames] = useState([]);
   const [filters, setFilters] = useState({
     name: '',
     categories: '',
@@ -34,7 +34,7 @@ const Games = () => {
   const fetchGames = async (queryParams = {}) => {
     try {
       const response = await axiosInstance.get('/product', { params: queryParams });
-      setGames(response.data.data); // 假设服务器返回的游戏数据是一个数组
+      setGames(response.data.data);
       setLoading(false);
     } catch (err) {
       setError(err);
@@ -46,7 +46,6 @@ const Games = () => {
     fetchGames();
   }, []);
 
-  // 格式化日期时间字符串
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     return new Date(dateString).toLocaleString(undefined, options);
@@ -56,7 +55,7 @@ const Games = () => {
     if (window.confirm('确定要删除这个游戏吗？')) {
       axiosInstance.delete(`/product/${id}`, { params: { imageFileName } })
         .then(response => {
-          fetchGames(); // 删除后重新获取游戏列表
+          fetchGames();
         })
         .catch(err => {
           setError(err);
@@ -68,11 +67,11 @@ const Games = () => {
     if (window.confirm('确定要删除选中的游戏吗？')) {
       Promise.all(selectedGames.map(gameId => {
         const game = games.find(g => g.id === gameId);
-        return axiosInstance.delete(`/product/${gameId}`, { params: { imageFileName: game.imageUrl.split('/').pop() } });
+        return axiosInstance.delete(`/product/${gameId}`, { params: { imageFileName: game.imageUrl ? game.imageUrl.split('/').pop() : '' } });
       }))
         .then(() => {
-          fetchGames(); // 删除后重新获取游戏列表
-          setSelectedGames([]); // 清空已选中的游戏
+          fetchGames();
+          setSelectedGames([]);
         })
         .catch(err => {
           setError(err);
@@ -94,7 +93,7 @@ const Games = () => {
   };
 
   const handleSave = async () => {
-    await fetchGames(); // 保存后重新获取游戏列表
+    await fetchGames();
     setShowModal(false);
     setShowAddModal(false);
   };
@@ -152,10 +151,9 @@ const Games = () => {
       queryParams.maxPrice = filters.maxPrice;
     }
 
-    fetchGames(queryParams); // 重新获取游戏列表并应用过滤器
+    fetchGames(queryParams);
   };
 
-  // 分页逻辑
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = games.slice(indexOfFirstGame, indexOfLastGame);
@@ -223,6 +221,7 @@ const Games = () => {
             <tr>
               <th><input type="checkbox" onChange={handleSelectAll} /></th>
               <th>Image</th>
+              <th>Main Image</th>
               <th>Name</th>
               <th>Description</th>
               <th>Price</th>
@@ -232,6 +231,8 @@ const Games = () => {
               <th>Tags</th>
               <th>Create Time</th>
               <th>Update Time</th>
+              <th>Min Requirements</th>
+              <th>Rec Requirements</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -245,7 +246,18 @@ const Games = () => {
                     onChange={() => handleSelectGame(game.id)}
                   />
                 </td>
-                <td><img src={game.imageUrl} alt={game.name} className={styles.gameImage} /></td>
+                <td>
+                  {game.imageUrl ? (
+                    <div className={styles.imageContainer}>
+                      {game.imageUrl.split(',').map((url, index) => (
+                        <img key={index} src={url} alt={`${game.name} ${index}`} className={styles.gameImage} />
+                      ))}
+                    </div>
+                  ) : null}
+                </td>
+                <td>
+                  {game.mainImage && <img src={game.mainImage} alt={`${game.name} main`} className={styles.gameImage} />}
+                </td>
                 <td>{game.name}</td>
                 <td>
                   <div className={styles.descriptionContainer}>
@@ -255,14 +267,44 @@ const Games = () => {
                 <td>{game.price}</td>
                 <td>{game.originalPrice}</td>
                 <td>{`${game.discount * 100}%`}</td>
-                <td>{game.categories}</td>
-                <td>{Array.isArray(game.tags) ? game.tags.join(', ') : game.tags}</td>
+                <td>
+                  <div className={styles.categoriesContainer}>
+                    <span>{game.categories}</span>
+                  </div>
+                </td>
+                <td>
+                  <div className={styles.tagsContainer}>
+                    <span>{Array.isArray(game.tags) ? game.tags.join(', ') : game.tags}</span>
+                  </div>
+                </td>
                 <td>{formatDate(game.createTime)}</td>
                 <td>{formatDate(game.updateTime)}</td>
                 <td>
+                  <div className={styles.requirementsContainer}>
+                    <p>OS: {game.minRequirements.os}</p>
+                    <p>Processor: {game.minRequirements.processor}</p>
+                    <p>Memory: {game.minRequirements.memory}</p>
+                    <p>Graphics: {game.minRequirements.graphics}</p>
+                    <p>DirectX: {game.minRequirements.directX}</p>
+                    <p>Network: {game.minRequirements.network}</p>
+                    <p>Storage: {game.minRequirements.storage}</p>
+                  </div>
+                </td>
+                <td>
+                  <div className={styles.requirementsContainer}>
+                    <p>OS: {game.recRequirements.os}</p>
+                    <p>Processor: {game.recRequirements.processor}</p>
+                    <p>Memory: {game.recRequirements.memory}</p>
+                    <p>Graphics: {game.recRequirements.graphics}</p>
+                    <p>DirectX: {game.recRequirements.directX}</p>
+                    <p>Network: {game.recRequirements.network}</p>
+                    <p>Storage: {game.recRequirements.storage}</p>
+                  </div>
+                </td>
+                <td>
                   <div className={styles.actions}>
                     <button onClick={() => handleEdit(game)} className={styles.editButton}>Edit</button>
-                    <button onClick={() => handleDelete(game.id, game.imageUrl.split('/').pop())} className={styles.deleteButton}>Delete</button>
+                    <button onClick={() => handleDelete(game.id, game.imageUrl ? game.imageUrl.split('/').pop() : '')} className={styles.deleteButton}>Delete</button>
                   </div>
                 </td>
               </tr>

@@ -11,6 +11,25 @@ const AddGame = ({ show, onClose, onSave }) => {
   const [tags, setTags] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [images, setImages] = useState([]);
+  const [mainImage, setMainImage] = useState(null); // 新增状态变量
+  const [minRequirements, setMinRequirements] = useState({
+    os: '',
+    processor: '',
+    memory: '',
+    graphics: '',
+    directX: '',
+    network: '',
+    storage: ''
+  });
+  const [recRequirements, setRecRequirements] = useState({
+    os: '',
+    processor: '',
+    memory: '',
+    graphics: '',
+    directX: '',
+    network: '',
+    storage: ''
+  });
 
   const allCategories = [
     'Action Game', 'Action Role-Playing Game', 'Adventure Game', 'Action Adventure Game', 
@@ -28,8 +47,22 @@ const AddGame = ({ show, onClose, onSave }) => {
     setImages(prevImages => [...prevImages, ...files]);
   };
 
+  const handleMainImageChange = (e) => {
+    setMainImage(e.target.files[0]);
+  };
+
   const handleImageRemove = (index) => {
     setImages(prevImages => prevImages.filter((_, i) => i !== index));
+  };
+
+  const handleMinRequirementsChange = (e) => {
+    const { name, value } = e.target;
+    setMinRequirements(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleRecRequirementsChange = (e) => {
+    const { name, value } = e.target;
+    setRecRequirements(prevState => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -45,6 +78,11 @@ const AddGame = ({ show, onClose, onSave }) => {
     formData.append('categories', categories.join(',')); // 将 categories 也处理成字符串
     formData.append('tags', trimmedTags);
     formData.append('discount', discount);
+    if (mainImage) {
+      formData.append('mainImage', mainImage);
+    }
+    formData.append('minRequirements', JSON.stringify(minRequirements));
+    formData.append('recRequirements', JSON.stringify(recRequirements));
     images.forEach((image, index) => {
       formData.append('image', image);
     });
@@ -100,6 +138,10 @@ const AddGame = ({ show, onClose, onSave }) => {
             onChange={setTags}
           />
           <label>
+            Main Image:
+            <input type="file" onChange={handleMainImageChange} />
+          </label>
+          <label>
             New Images:
             <input type="file" onChange={handleImageChange} multiple />
           </label>
@@ -127,6 +169,68 @@ const AddGame = ({ show, onClose, onSave }) => {
               />
             ))}
           </div>
+          <fieldset>
+            <legend>Minimum Requirements</legend>
+            <label>
+              Operating System:
+              <input type="text" name="os" value={minRequirements.os} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Processor:
+              <input type="text" name="processor" value={minRequirements.processor} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Memory:
+              <input type="text" name="memory" value={minRequirements.memory} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Graphics:
+              <input type="text" name="graphics" value={minRequirements.graphics} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              DirectX:
+              <input type="text" name="directX" value={minRequirements.directX} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Network:
+              <input type="text" name="network" value={minRequirements.network} onChange={handleMinRequirementsChange} />
+            </label>
+            <label>
+              Storage:
+              <input type="text" name="storage" value={minRequirements.storage} onChange={handleMinRequirementsChange} />
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Recommended Requirements</legend>
+            <label>
+              Operating System:
+              <input type="text" name="os" value={recRequirements.os} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Processor:
+              <input type="text" name="processor" value={recRequirements.processor} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Memory:
+              <input type="text" name="memory" value={recRequirements.memory} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Graphics:
+              <input type="text" name="graphics" value={recRequirements.graphics} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              DirectX:
+              <input type="text" name="directX" value={recRequirements.directX} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Network:
+              <input type="text" name="network" value={recRequirements.network} onChange={handleRecRequirementsChange} />
+            </label>
+            <label>
+              Storage:
+              <input type="text" name="storage" value={recRequirements.storage} onChange={handleRecRequirementsChange} />
+            </label>
+          </fieldset>
           <button type="submit">Save</button>
         </form>
       </div>

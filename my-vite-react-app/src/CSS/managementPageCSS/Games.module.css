@@ -1,15 +1,14 @@
-/* Games.module.css */
-
 .gamesContainer {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  overflow: hidden; /* 防止内容溢出 */
+  overflow: hidden;
+  overflow-x: auto;
 }
 
 .TopButton {
   display: flex;
-  flex-wrap: wrap; /* 使按钮在小屏幕上换行 */
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
 }
@@ -21,9 +20,9 @@
 
 .filterContainer {
   display: flex;
-  flex-wrap: wrap; /* 在小屏幕上换行 */
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px; /* 添加间距 */
+  gap: 10px;
   width: 100%;
 }
 
@@ -31,8 +30,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex: 1; /* 使标签占据可用空间 */
-  min-width: 150px; /* 设置最小宽度 */
+  flex: 1;
+  min-width: 150px;
 }
 
 .gamesContainer button {
@@ -41,8 +40,8 @@
 }
 
 .tableContainer {
-  overflow-x: auto;
-  width: 100%;
+  overflow-x: auto; /* 添加水平滚动条 */
+  width: 130%;
 }
 
 .gamesTable {
@@ -54,7 +53,7 @@
   vertical-align: middle;
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center; /* 确保单元格居中对齐 */
+  text-align: center;
 }
 
 .gamesTable th {
@@ -62,14 +61,37 @@
 }
 
 .gameImage {
-  width: 100%;
+  width: 100px; /* 调整图片宽度 */
   height: auto;
+  margin: 2px; /* 添加间距 */
   object-fit: cover;
 }
 
+.imageContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .descriptionContainer {
-  max-height: 100px; /* 限制描述字段的最大高度 */
+  max-width: 3000px;
+  max-height: 100px;
   overflow-y: auto; /* 添加垂直滚动条 */
+}
+
+.categoriesContainer, .tagsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoriesContainer span, .tagsContainer span {
+  display: block;
+  white-space: pre-wrap;
+}
+
+.requirementsContainer {
+  max-height: 100px; /* 限制最大高度 */
+  overflow-y: auto; /* 添加垂直滚动条 */
+  white-space: pre-wrap; /* 保持换行 */
 }
 
 .editButton, .deleteButton {
@@ -88,6 +110,7 @@
 
 .actions {
   display: flex;
+  flex-direction: column;
   gap: 5px;
 }
 
@@ -133,12 +156,12 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .filterContainer {
-    flex-direction: column; /* 在小屏幕上垂直排列 */
-    align-items: stretch; /* 让标签宽度适应容器 */
+    flex-direction: column; 
+    align-items: stretch;
   }
 
   .TopButton {
-    flex-direction: column; /* 在小屏幕上垂直排列 */
-    align-items: stretch; /* 让按钮宽度适应容器 */
+    flex-direction: column;
+    align-items: stretch;
   }
 }
