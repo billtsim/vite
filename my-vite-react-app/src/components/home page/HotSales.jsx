@@ -20,21 +20,27 @@ const HotSales = ({ onProductClick }) => {
 
   return (
     <div className={styles.hotSalesContainer}>
-      <h2>Trending</h2>
+      <div className={styles.header}>
+        <h2>Trending</h2>
+      </div>
       <div className={styles.productsGrid}>
         {hotSalesProducts.map(product => (
           <div key={product.id} className={styles.productCard} onClick={() => onProductClick(product)}>
-            <img src={product.imageUrl} alt={product.name} className={styles.productImage} />
+            <img src={product.mainImage} alt={product.name} className={styles.productImage} />
             <div className={styles.productInfo}>
               <p className={styles.productCategory}>BASE GAME</p>
               <h3 className={styles.productName}>{product.name}</h3>
-              <p className={styles.productDescription}>{product.description}</p>
               <div className={styles.priceSection}>
-                {product.discount && <span className={styles.discountBadge}>{product.discount}</span>}
-                <span className={styles.productPrice}>HK${product.price}</span>
-                {product.originalPrice && <span className={styles.originalPrice}>HK${product.originalPrice}</span>}
+                {product.price === 0 ? (
+                  <span className={styles.freeBadge}>Free</span>
+                ) : (
+                  <>
+                    {product.discount && <span className={styles.discountBadge}>{(product.discount * 100).toFixed(0)}%</span>}
+                    <span className={styles.productPrice}>HK${product.price}</span>
+                    {product.originalPrice && <span className={styles.originalPrice}>HK${product.originalPrice}</span>}
+                  </>
+                )}
               </div>
-              {product.isFree && <p className={styles.freeBadge}>Free</p>}
             </div>
           </div>
         ))}

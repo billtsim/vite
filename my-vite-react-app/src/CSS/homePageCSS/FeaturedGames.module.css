@@ -1,29 +1,37 @@
 .featuredGamesContainer {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   gap: 20px;
   max-width: 80%;
   color: white; /* 字体颜色为白色 */
+  height: 100%;
+  overflow-x: auto;
 }
 
 .gameCard {
-  overflow: hidden;
-  width: 100%; /* 调整最小宽度以适应小屏幕 */
+  height: 90%;
+  max-width: 100%; /* 调整最小宽度以适应小屏幕 */
   flex: 1;
   border-radius: 8px; /* 添加圆角 */
   box-sizing: border-box; /* 确保内边距包含在总宽度内 */
+  cursor: pointer; /* 添加鼠标指针 */
+  transition: transform 0.2s, box-shadow 0.2s; /* 添加过渡效果 */
+}
+
+.gameCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* 添加悬停效果的阴影 */
 }
 
 .gameImage {
   width: 100%;
-  height: auto;
+  height: 270px;
   border-top-left-radius: 8px; /* 确保图片的圆角与卡片一致 */
   border-top-right-radius: 8px;
 }
 
 .gameInfo {
+  height: 30%;
   padding: 20px;
   box-sizing: border-box; /* 确保内边距包含在总宽度内 */
 }
@@ -79,7 +87,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 700px) {
   .gameCard {
     width: 100%; /* 在超小屏幕上每行显示一个卡片 */
     min-width: 100%; /* 确保卡片占满宽度 */

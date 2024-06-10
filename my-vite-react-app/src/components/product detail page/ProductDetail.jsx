@@ -28,7 +28,10 @@ const ProductDetail = () => {
 
   // 用 filter 过滤掉空字符串
   const images = product.imageUrl.split(',').filter(img => img.trim() !== '');
-  console.log(images);
+
+  // 检查并解析系统需求数据
+  const minRequirements = typeof product.minRequirements === 'string' ? JSON.parse(product.minRequirements) : product.minRequirements;
+  const recRequirements = typeof product.recRequirements === 'string' ? JSON.parse(product.recRequirements) : product.recRequirements;
 
   return (
     <div style={{ backgroundColor: 'black', color: 'white', width: 'auto', display: 'flex', flexDirection: 'column' }}>
@@ -49,6 +52,31 @@ const ProductDetail = () => {
             <p className={styles.productDescription}>{product.description}</p>
             <div className={styles.productCategories}>
               <strong>Categories: </strong>{product.categories}
+            </div>
+            <div className={styles.requirements}>
+              <h3>系统需求</h3>
+              <div className={styles.requirementsSection}>
+                <div className={styles.requirementsColumn}>
+                  <h4>最低</h4>
+                  <p><strong>作業系統:</strong> {minRequirements.os}</p>
+                  <p><strong>作業系統:</strong> {minRequirements.processor}</p>
+                  <p><strong>處理器:</strong> {minRequirements.memory}</p>
+                  <p><strong>儲存空間:</strong> {minRequirements.storage}</p>
+                  <p><strong>DirectX:</strong> {minRequirements.directX}</p>
+                  <p><strong>顯示卡:</strong> {minRequirements.graphics}</p>
+                  <p><strong>網路:</strong> {minRequirements.network}</p>
+                </div>
+                <div className={styles.requirementsColumn}>
+                  <h4>建議</h4>
+                  <p><strong>作業系統:</strong> {recRequirements.os}</p>
+                  <p><strong>處理器:</strong> {recRequirements.processor}</p>
+                  <p><strong>記憶體:</strong> {recRequirements.memory}</p>
+                  <p><strong>儲存空間:</strong> {recRequirements.storage}</p>
+                  <p><strong>DirectX:</strong> {recRequirements.directX}</p>
+                  <p><strong>顯示卡:</strong> {recRequirements.graphics}</p>
+                  <p><strong>網路:</strong> {recRequirements.network}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

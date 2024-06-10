@@ -40,7 +40,7 @@ const AddGame = ({ show, onClose, onSave }) => {
     'Sports Game', 'Tabletop Board Game', 'Puzzle Game', 'Racing Game'
   ];
 
-  const allTags = ['new game', 'hot sale', 'popular game', 'up coming discount', 'recommended', 'free game'];
+  const allTags = ['new game', 'hot sale', 'popular game', 'up coming discount', 'recommended', 'free game', 'Carousel', 'featuredGame'];
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -139,8 +139,32 @@ const AddGame = ({ show, onClose, onSave }) => {
           />
           <label>
             Main Image:
-            <input type="file" onChange={handleMainImageChange} />
+            <input type="file" onChange={handleMainImageChange} disabled={mainImage}/>
           </label>
+          {mainImage && (
+          <div className={styles.imageName}>
+            {mainImage.name}
+              <button
+                type="button"
+                className={styles.removeButton}
+                onClick={() => {
+                  setMainImage(null);
+                }}
+              >
+                &times;
+              </button>
+              </div>
+            )}
+        {mainImage && (
+          <div className={styles.imagePreviewContainer}>
+              <img
+                key={0}
+                src={URL.createObjectURL(mainImage)}
+                alt={`Preview ${0}`}
+                className={styles.imagePreview}
+              />
+          </div>
+        )}
           <label>
             New Images:
             <input type="file" onChange={handleImageChange} multiple />

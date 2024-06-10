@@ -61,6 +61,32 @@
 .productCategories {
   font-size: 1em;
   color: #aaa;
+  margin-bottom: 20px;
+}
+
+.requirements {
+  margin-top: 20px;
+}
+
+.requirementsSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.requirementsColumn {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.requirementsColumn h4 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.requirementsColumn p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #ccc;
 }
 
 .productPrice {

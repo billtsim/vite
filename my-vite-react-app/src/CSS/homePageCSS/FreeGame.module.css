@@ -1,12 +1,13 @@
-.productsContainer {
-  color: white;
+.freeGamesContainer {
   width: 100%;
   max-width: 80%;
+  color: white;
+  text-align: center;
   box-sizing: border-box; /* 确保内边距包含在总宽度内 */
   margin: 0 auto; /* 居中容器 */
-  padding: 20px; /* 添加内边距 */
+  padding: 20px; 
+  padding-bottom: 80px;
   height: 100%;
-  
 }
 
 .header {
@@ -43,12 +44,13 @@
 }
 
 .productCard { 
-  height: 100%;
+  height: 300px;
   padding: 0px; /* 移除内边距 */
   text-align: left;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  flex: 0 0 200px; /*确保每个产品卡片的宽度一致 */
+  flex: 0 0 200px; /* 确保每个产品卡片的宽度一致 */
+  margin-bottom: 30px;
 }
 
 .productCard:hover {
@@ -64,7 +66,6 @@
 
 .productInfo {
   height: 35%;
-  padding: 10px;
   margin-top: 10px;
 }
 
@@ -81,7 +82,7 @@
 .priceSection {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  
 }
 
 .discountBadge {
@@ -116,7 +117,7 @@
 @media (min-width: 768px) {
   .productsGrid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 设置5列的网格布局 */
+    grid-template-columns: repeat(4, 1fr); /* 设置4列的网格布局 */
   }
 
   .navigationButtons {
@@ -145,7 +146,11 @@
     width: 100%;
     max-width: 100%; /* 确保图片不会超出容器宽度 */
     max-height: 300px; /* 设置图片的最大高度 */
-    object-fit: cover; /* 确保图片按比例缩放 */
-    overflow: hidden;
+  }
+
+  .navigationButtons {
+    display: flex; /* 小屏幕上显示导航按钮 */
+    justify-content: center;
+    margin-top: 10px;
   }
 }

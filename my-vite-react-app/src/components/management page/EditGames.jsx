@@ -43,7 +43,7 @@ const EditGames = ({ show, onClose, game, onSave }) => {
     'Sports Game', 'Tabletop Board Game', 'Puzzle Game', 'Racing Game'
   ];
 
-  const allTags = ['new game', 'hot sale', 'popular game', 'up coming discount', 'recommended', 'free game'];
+  const allTags = ['new game', 'hot sale', 'popular game', 'up coming discount', 'recommended', 'free game', 'Carousel', 'featuredGame'];
 
   useEffect(() => {
     if (game) {

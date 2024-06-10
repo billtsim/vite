@@ -74,7 +74,7 @@
 
 .descriptionContainer {
   max-width: 3000px;
-  max-height: 100px;
+  max-height: 200px;
   overflow-y: auto; /* 添加垂直滚动条 */
 }
 
@@ -89,7 +89,8 @@
 }
 
 .requirementsContainer {
-  max-height: 100px; /* 限制最大高度 */
+  max-height: 200px;
+   /* 限制最大高度 */
   overflow-y: auto; /* 添加垂直滚动条 */
   white-space: pre-wrap; /* 保持换行 */
 }

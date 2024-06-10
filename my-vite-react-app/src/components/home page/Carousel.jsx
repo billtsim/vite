@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axiosInstance from '../../axios/Axios'; // 引入自定义的 axios 实例
 import styles from '../../CSS/homePageCSS/Carousel.module.css';
 
 const Carousel = () => {
@@ -8,24 +9,20 @@ const Carousel = () => {
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    // 假设从 API 获取数据
-    setCarouselData([
-      {
-        "name": "Wuthering Waves",
-        "description": "Download for free now to explore the open world with casual but deep battle and claim your free Echo Starter Pack!",
-        "imageUrl": "https://cdn2.unrealengine.com/egs-wuthering-waves-carousel-desktop-1248x702-ad7dee8b3a34.png?h=480&quality=medium&resize=1&w=854",
-        "discount": "-50%",
-        "category": "Free"
-      },
-      {
-        "name": "Grand Theft Auto V",
-        "description": "Experience the critically acclaimed open world game with new features and content.",
-        "imageUrl": "https://storage.cloud.google.com/fileupload-java/feb55d80-370c-434f-8221-f8ceb52e51e0.jpg",
-        "discount": "-50%",
-        "category": "Paid"
-      },
-      // more items...
-    ]);
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get('/product', {
+          params: {
+            tags: 'Carousel'
+          }
+        });
+        setCarouselData(response.data.data);
+      } catch (error) {
+        console.error('Error fetching carousel data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -64,10 +61,16 @@ const Carousel = () => {
     <div className={styles.carouselContainer}>
       <div className={styles.carouselMain}>
         <div className={styles.carouselContent}>
-          <img src={carouselData[activeIndex].imageUrl} alt={carouselData[activeIndex].name} className={styles.carouselImage} />
+          <img 
+            src={carouselData[activeIndex].mainImage} 
+            srcSet={`${carouselData[activeIndex].mainImage} 1x, ${carouselData[activeIndex].mainImage_2x} 2x`} 
+            sizes="(max-width: 600px) 480px, 800px" 
+            alt={carouselData[activeIndex].name} 
+            className={styles.carouselImage} 
+          />
           <div className={styles.carouselInfo}>
             <h2>{carouselData[activeIndex].name}</h2>
-            <p>{carouselData[activeIndex].description}</p>
+            {/* 移除 Description */}
             <button className={styles.playButton}>Play Now</button>
             <button className={styles.wishlistButton}>Add to Wishlist</button>
           </div>

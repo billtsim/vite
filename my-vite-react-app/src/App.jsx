@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Navigation from './components/home page/Navigation';
 import Carousel from './components/home page/Carousel';
 import FeaturedGames from './components/home page/FeaturedGames';
-import Products from './components/home page/Products';
+import NewProducts from './components/home page/NewProducts';
 import UpcomingDiscount from './components/home page/UpcomingDiscount';
 import HotSales from './components/home page/HotSales';
-import FeaturedFirstRun from './components/home page/FeaturedFirstRun';
+import FreeGame from './components/home page/FreeGame';
 import Subscription from './components/home page/Subscription';
 import Footer from './components/home page/Footer';
 
@@ -22,11 +22,11 @@ const App = () => {
       <Navigation />
       <div style={{ paddingTop: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Carousel />
-        <FeaturedGames />
+        <FeaturedGames onProductClick={handleProductClick}/>
         <UpcomingDiscount />
         <HotSales onProductClick={handleProductClick} />
-        <Products onProductClick={handleProductClick} />
-        <FeaturedFirstRun onProductClick={handleProductClick} />
+        <NewProducts onProductClick={handleProductClick} />
+        <FreeGame onProductClick={handleProductClick} />
       </div>
       <Subscription />
       <Footer />

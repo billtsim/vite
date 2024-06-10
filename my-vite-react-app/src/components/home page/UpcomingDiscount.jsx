@@ -17,7 +17,7 @@ const UpcomingDiscount = () => {
         // 提取第一个产品的图片URL
         const products = response.data.data;
         if (products.length > 0) {
-          setImageUrl(products[0].imageUrl);
+          setImageUrl(products[0].mainImage);
         }
       } catch (error) {
         console.error('Error fetching discount data:', error);
