@@ -9,6 +9,9 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [thumbnailIndex, setThumbnailIndex] = useState(0);
+  const carouselRef = useRef(null);
+  const prevArrowRef = useRef(null);
+  const nextArrowRef = useRef(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -44,6 +47,22 @@ const ProductDetail = () => {
     setThumbnailIndex((prevIndex) => Math.min(prevIndex + 1, Math.floor(product.imageUrl.split(',').length / 4)));
   };
 
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.style.transform = `translateX(-${activeIndex * 100}%)`;
+    }
+  }, [activeIndex]);
+
+  const handleMouseEnter = () => {
+    if (prevArrowRef.current) prevArrowRef.current.style.display = 'block';
+    if (nextArrowRef.current) nextArrowRef.current.style.display = 'block';
+  };
+
+  const handleMouseLeave = () => {
+    if (prevArrowRef.current) prevArrowRef.current.style.display = 'none';
+    if (nextArrowRef.current) nextArrowRef.current.style.display = 'none';
+  };
+
   if (!product) return <div>Loading...</div>;
 
   const images = product.imageUrl.split(',').filter(img => img.trim() !== '');
@@ -54,21 +73,17 @@ const ProductDetail = () => {
       <Navigation />
       <div className={styles.productDetailContainer}>
         <div className={styles.productLeft}>
-          <div className={styles.carouselContainer}>
-            <div className={styles.carouselMain} onMouseEnter={() => {
-              document.getElementById('prevArrow').style.display = 'block';
-              document.getElementById('nextArrow').style.display = 'block';
-            }} onMouseLeave={() => {
-              document.getElementById('prevArrow').style.display = 'none';
-              document.getElementById('nextArrow').style.display = 'none';
-            }}>
-              <img 
-                src={images[activeIndex]} 
-                alt={`Product ${activeIndex}`} 
-                className={styles.carouselImage} 
-              />
-              <div id="prevArrow" className={styles.arrow} onClick={handlePrevClick}>&#10094;</div>
-              <div id="nextArrow" className={styles.arrow2} onClick={handleNextClick}>&#10095;</div>
+          <div className={styles.carouselContainer} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <div className={styles.carouselMain} ref={carouselRef} >
+              {images.map((img, index) => (
+                <img 
+                  key={index}
+                  src={img} 
+                  alt={`Product ${index}`} 
+                  className={styles.carouselImage} 
+                />
+              ))}
+              
             </div>
             <div className={styles.carouselThumbnails}>
               <div className={styles.thumbnailArrow} onClick={handleThumbnailPrevClick}>&#10094;</div>
@@ -83,6 +98,8 @@ const ProductDetail = () => {
               ))}
               <div className={styles.thumbnailArrow} onClick={handleThumbnailNextClick}>&#10095;</div>
             </div>
+            <div id="prevArrow" ref={prevArrowRef} className={styles.arrow} onClick={handlePrevClick}>&#10094;</div>
+              <div id="nextArrow" ref={nextArrowRef} className={styles.arrow2} onClick={handleNextClick}>&#10095;</div>
           </div>
           <div className={styles.productDescriptionContainer}>
             <h2 className={styles.productName}>{product.name}</h2>
