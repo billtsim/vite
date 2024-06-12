@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axiosInstance from '../../axios/Axios';
 import Navigation from '../home page/Navigation';
 import styles from '../../CSS/productDetailPageCSS/ProductDetail.module.css';
-import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // 导入样式
 
 const ProductDetail = () => {
   const { name } = useParams();
   const [product, setProduct] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [thumbnailIndex, setThumbnailIndex] = useState(0);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -24,28 +24,65 @@ const ProductDetail = () => {
     fetchProduct();
   }, [name]);
 
+  const handleThumbnailClick = (index) => {
+    setActiveIndex(index);
+  };
+
+  const handlePrevClick = () => {
+    setActiveIndex((prevIndex) => (prevIndex - 1 + product.imageUrl.split(',').length) % product.imageUrl.split(',').length);
+  };
+
+  const handleNextClick = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % product.imageUrl.split(',').length);
+  };
+
+  const handleThumbnailPrevClick = () => {
+    setThumbnailIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const handleThumbnailNextClick = () => {
+    setThumbnailIndex((prevIndex) => Math.min(prevIndex + 1, Math.floor(product.imageUrl.split(',').length / 4)));
+  };
+
   if (!product) return <div>Loading...</div>;
 
-  // 用 filter 过滤掉空字符串
   const images = product.imageUrl.split(',').filter(img => img.trim() !== '');
-
-  // 检查并解析系统需求数据
-  const minRequirements = typeof product.minRequirements === 'string' ? JSON.parse(product.minRequirements) : product.minRequirements;
-  const recRequirements = typeof product.recRequirements === 'string' ? JSON.parse(product.recRequirements) : product.recRequirements;
+  const displayedThumbnails = images.slice(thumbnailIndex * 4, (thumbnailIndex + 1) * 4);
 
   return (
     <div style={{ backgroundColor: 'black', color: 'white', width: 'auto', display: 'flex', flexDirection: 'column' }}>
       <Navigation />
       <div className={styles.productDetailContainer}>
         <div className={styles.productLeft}>
-          <div className={styles.productImageContainer}>
-            <Carousel showThumbs={false} autoPlay infiniteLoop>
-              {images.map((img, index) => (
-                <div key={index}>
-                  <img src={img} alt={`Product ${index}`} className={styles.productImage} />
+          <div className={styles.carouselContainer}>
+            <div className={styles.carouselMain} onMouseEnter={() => {
+              document.getElementById('prevArrow').style.display = 'block';
+              document.getElementById('nextArrow').style.display = 'block';
+            }} onMouseLeave={() => {
+              document.getElementById('prevArrow').style.display = 'none';
+              document.getElementById('nextArrow').style.display = 'none';
+            }}>
+              <img 
+                src={images[activeIndex]} 
+                alt={`Product ${activeIndex}`} 
+                className={styles.carouselImage} 
+              />
+              <div id="prevArrow" className={styles.arrow} onClick={handlePrevClick}>&#10094;</div>
+              <div id="nextArrow" className={styles.arrow2} onClick={handleNextClick}>&#10095;</div>
+            </div>
+            <div className={styles.carouselThumbnails}>
+              <div className={styles.thumbnailArrow} onClick={handleThumbnailPrevClick}>&#10094;</div>
+              {displayedThumbnails.map((img, index) => (
+                <div
+                  key={index}
+                  className={`${styles.thumbnailItem} ${thumbnailIndex * 4 + index === activeIndex ? styles.active : ''}`}
+                  onClick={() => handleThumbnailClick(thumbnailIndex * 4 + index)}
+                >
+                  <img src={img} alt={`Thumbnail ${thumbnailIndex * 4 + index}`} className={styles.thumbnailImage} />
                 </div>
               ))}
-            </Carousel>
+              <div className={styles.thumbnailArrow} onClick={handleThumbnailNextClick}>&#10095;</div>
+            </div>
           </div>
           <div className={styles.productDescriptionContainer}>
             <h2 className={styles.productName}>{product.name}</h2>
@@ -58,23 +95,23 @@ const ProductDetail = () => {
               <div className={styles.requirementsSection}>
                 <div className={styles.requirementsColumn}>
                   <h4>最低</h4>
-                  <p><strong>作業系統:</strong> {minRequirements.os}</p>
-                  <p><strong>作業系統:</strong> {minRequirements.processor}</p>
-                  <p><strong>處理器:</strong> {minRequirements.memory}</p>
-                  <p><strong>儲存空間:</strong> {minRequirements.storage}</p>
-                  <p><strong>DirectX:</strong> {minRequirements.directX}</p>
-                  <p><strong>顯示卡:</strong> {minRequirements.graphics}</p>
-                  <p><strong>網路:</strong> {minRequirements.network}</p>
+                  <p><strong>作業系統:</strong> {product.minRequirements.os}</p>
+                  <p><strong>處理器:</strong> {product.minRequirements.processor}</p>
+                  <p><strong>記憶體:</strong> {product.minRequirements.memory}</p>
+                  <p><strong>儲存空間:</strong> {product.minRequirements.storage}</p>
+                  <p><strong>DirectX:</strong> {product.minRequirements.directX}</p>
+                  <p><strong>顯示卡:</strong> {product.minRequirements.graphics}</p>
+                  <p><strong>網路:</strong> {product.minRequirements.network}</p>
                 </div>
                 <div className={styles.requirementsColumn}>
                   <h4>建議</h4>
-                  <p><strong>作業系統:</strong> {recRequirements.os}</p>
-                  <p><strong>處理器:</strong> {recRequirements.processor}</p>
-                  <p><strong>記憶體:</strong> {recRequirements.memory}</p>
-                  <p><strong>儲存空間:</strong> {recRequirements.storage}</p>
-                  <p><strong>DirectX:</strong> {recRequirements.directX}</p>
-                  <p><strong>顯示卡:</strong> {recRequirements.graphics}</p>
-                  <p><strong>網路:</strong> {recRequirements.network}</p>
+                  <p><strong>作業系統:</strong> {product.recRequirements.os}</p>
+                  <p><strong>處理器:</strong> {product.recRequirements.processor}</p>
+                  <p><strong>記憶體:</strong> {product.recRequirements.memory}</p>
+                  <p><strong>儲存空間:</strong> {product.recRequirements.storage}</p>
+                  <p><strong>DirectX:</strong> {product.recRequirements.directX}</p>
+                  <p><strong>顯示卡:</strong> {product.recRequirements.graphics}</p>
+                  <p><strong>網路:</strong> {product.recRequirements.network}</p>
                 </div>
               </div>
             </div>

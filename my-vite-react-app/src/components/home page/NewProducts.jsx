@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axiosInstance from '../../axios/Axios'; // 引入自定义的 axios 实例
 import styles from '../../CSS/homePageCSS/NewProducts.module.css';
 
-const NewProducts = () => {
+const NewProducts = ({ onProductClick }) => {
   const [products, setProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 4;
@@ -65,7 +65,7 @@ const NewProducts = () => {
         onMouseDown={handleMouseDown}
       >
         {products.slice(currentIndex, currentIndex + itemsPerPage).map((product) => (
-          <div key={product.id} className={styles.productCard}>
+          <div key={product.id} className={styles.productCard} onClick={() => onProductClick(product)}>
             <img src={product.mainImage} alt={product.name} className={styles.productImage} />
             <div className={styles.productInfo}>
               <div className={styles.productCategory}>{product.category}</div>
