@@ -87,7 +87,14 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 480px) {
+
+  .featuredGamesContainer {
+    
+    max-width: 96%;
+    
+  }
+
   .gameCard {
     width: 100%; /* 在超小屏幕上每行显示一个卡片 */
     min-width: 100%; /* 确保卡片占满宽度 */

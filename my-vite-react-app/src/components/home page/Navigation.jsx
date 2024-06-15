@@ -4,6 +4,7 @@ import styles from '../../CSS/homePageCSS/Navigation.module.css';
 
 const Navigation = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleAuthClick = () => {
@@ -23,22 +24,35 @@ const Navigation = () => {
     setToken(localStorage.getItem('token'));
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logo}>
-        <Link to="/">LOGO</Link>
+      <div className={styles.leftSection}>
+        <div className={styles.logo}>
+          <Link to="/">LOGO</Link>
+        </div>
       </div>
-      <ul className={styles.navbarList}>
-        <li className={styles.navbarItem}><Link to="/" className={styles.navbarLink}>Discover</Link></li>
-        <li className={styles.navbarItem}><Link to="/browse" className={styles.navbarLink}>Browse</Link></li>
-        <li className={styles.navbarItem}><Link to="/news" className={styles.navbarLink}>News</Link></li>
-        <li className={styles.navbarItem}><Link to="/logined" className={styles.navbarLink}>admin</Link></li>
-
+      <ul className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
+        <li className={styles.navItem}><Link to="/" className={styles.navbarLink}>STORE</Link></li>
+        <li className={styles.navItem}><Link to="/support" className={styles.navbarLink}>支援</Link></li>
+        <li className={styles.navItem}><Link to="/Logined" className={styles.navbarLink}>經銷</Link></li>
+        <li className={`${styles.navItem} ${styles.authButtonMobile}`}>
+          <Link to="/login" onClick={handleAuthClick} className={styles.navbarLink}>
+            {token ? 'Logout' : 'Login'}
+          </Link>
+        </li>
       </ul>
-      <div className={styles.searchAndAuth}>
-        <input type="text" className={styles.searchInput} placeholder="Search store" />
-        <button onClick={handleAuthClick} className={styles.authButton}>
+      <div className={styles.rightSection}>
+        <button className={styles.iconButton}>🌐</button>
+        <button className={styles.iconButton}>👤</button>
+        <button style={{paddingRight: '30px'}} onClick={handleAuthClick} className={styles.authButton}>
           {token ? 'Logout' : 'Login'}
+        </button>
+        <button style={{paddingRight: '30px'}} className={`${styles.menuToggle} ${isMenuOpen ? styles.isActive : ''}`} onClick={toggleMenu}>
+          {isMenuOpen ? '✖' : '☰'}
         </button>
       </div>
     </nav>

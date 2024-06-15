@@ -67,3 +67,9 @@
 .subscribeButton:hover {
   background-color: #ff7878; /* 按钮悬停颜色 */
 }
+
+@media (max-width: 480px) {
+  .upcomingDiscountContainer {
+     max-width: 96%;
+  }
+}

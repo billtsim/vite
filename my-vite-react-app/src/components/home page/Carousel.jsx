@@ -63,8 +63,6 @@ const Carousel = () => {
         <div className={styles.carouselContent}>
           <img 
             src={carouselData[activeIndex].mainImage} 
-            srcSet={`${carouselData[activeIndex].mainImage} 1x, ${carouselData[activeIndex].mainImage_2x} 2x`} 
-            sizes="(max-width: 600px) 480px, 800px" 
             alt={carouselData[activeIndex].name} 
             className={styles.carouselImage} 
           />

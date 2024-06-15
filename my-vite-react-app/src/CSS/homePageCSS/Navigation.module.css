@@ -1,127 +1,179 @@
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
+body {
   padding: 0;
   margin: 0;
-  width: 100%;
+}
+
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
+  background-color: #1a1a1a;
   padding: 10px 20px;
-  border-bottom: 1px solid #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
   z-index: 1000;
-  
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
+  color: white;
   font-size: 24px;
   font-weight: bold;
-  color: white;
+  margin-right: 20px;
+  text-decoration: none;
 }
 
-.navbarList {
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.navLinks {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.navbarItem {
-  margin-left: 20px;
+.navItem {
+  margin: 0 15px;
 }
 
 .navbarLink {
-  text-decoration: none;
   color: white;
+  text-decoration: none;
   font-size: 16px;
+  display: block;
+  padding: 10px 0;
 }
 
 .navbarLink:hover {
   color: #1e90ff;
 }
 
-.searchAndAuth {
+.rightSection {
   display: flex;
   align-items: center;
 }
 
-.searchInput {
-  padding: 5px;
-  font-size: 16px;
-  
-  background-color: #333;
-  border: 1px solid #444;
-  color: white;
-}
-
-.authButton {
+.iconButton {
   background: none;
   border: none;
   color: white;
+  font-size: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  color: #1e90ff;
+}
+
+.authButton {
+  background-color:#1a1a1a;
+  border: none;
+  color: white;
+  padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  padding-right: 20px;
 }
 
 .authButton:hover {
-  color: #1e90ff;
+  background-color: #1c7ed6;
+}
+
+.authButtonMobile {
+  display: none;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
-
-  .logo {
-    margin-bottom: 10px;
-  }
-
-  .navbarList {
-    flex-direction: column;
-    
-  }
-
-  .navbarItem {
-    margin-left: 0;
-    margin-bottom: 10px;
-  }
-
-  .searchAndAuth {
-    
-    margin-top: 10px;
     justify-content: space-between;
   }
 
-  .searchInput {
-    flex-grow: 1;
-    margin-right: 0px;
+  .menuToggle {
+    display: block;
   }
 
-  .authButton {
-    padding-right: 0;
+  .menuToggle:hover {
+    background-color: #1a1a1a;
+  }
+
+  .navLinks {
+    display: flex;
+    flex-direction: column;
+    background-color: #1a1a1a;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .navLinks.showMenu {
+    max-height: 300px; /* Adjust this value according to the content height */
+  }
+
+  .navItem {
+    margin: 10px 0;
+  }
+
+  .rightSection {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .rightSection .iconButton,
+  .rightSection .authButton {
+    display: none;
+  }
+
+  .leftSection {
+    flex: 1;
+  }
+
+  .rightSection .menuToggle {
+    margin-right: 0;
+  }
+
+  .authButtonMobile {
+    display: block;
   }
 }
 
-@media (max-width: 480px) {
-  .logo {
-    font-size: 20px;
+@media (min-width: 769px) {
+  .menuToggle {
+    display: none;
   }
 
-  .navbarLink {
-    font-size: 14px;
+  .navLinks {
+    display: flex;
   }
 
-  .searchInput {
-    font-size: 14px;
-    padding: 3px;
+  .rightSection .iconButton,
+  .rightSection .authButton {
+    display: flex;
   }
 
-  .authButton {
-    font-size: 14px;
+  .rightSection {
+    display: flex;
+  }
+
+  .authButtonMobile {
+    display: none;
   }
 }

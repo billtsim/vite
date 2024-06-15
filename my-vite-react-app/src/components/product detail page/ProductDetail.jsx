@@ -12,6 +12,8 @@ const ProductDetail = () => {
   const carouselRef = useRef(null);
   const prevArrowRef = useRef(null);
   const nextArrowRef = useRef(null);
+  const thumbnailPrevArrowRef = useRef(null);
+  const thumbnailNextArrowRef = useRef(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -26,6 +28,29 @@ const ProductDetail = () => {
 
     fetchProduct();
   }, [name]);
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.style.transform = `translateX(-${activeIndex * 100}%)`;
+    }
+  }, [activeIndex]);
+
+  useEffect(() => {
+    const imagesLength = product ? product.imageUrl.split(',').filter(img => img.trim() !== '').length : 0;
+    if (thumbnailPrevArrowRef.current && thumbnailNextArrowRef.current) {
+      if (thumbnailIndex === 0) {
+        thumbnailPrevArrowRef.current.style.display = 'none';
+      } else {
+        thumbnailPrevArrowRef.current.style.display = 'flex';
+      }
+
+      if ((thumbnailIndex + 1) * 4 >= imagesLength) {
+        thumbnailNextArrowRef.current.style.display = 'none';
+      } else {
+        thumbnailNextArrowRef.current.style.display = 'flex';
+      }
+    }
+  }, [product, thumbnailIndex]);
 
   const handleThumbnailClick = (index) => {
     setActiveIndex(index);
@@ -46,12 +71,6 @@ const ProductDetail = () => {
   const handleThumbnailNextClick = () => {
     setThumbnailIndex((prevIndex) => Math.min(prevIndex + 1, Math.floor(product.imageUrl.split(',').length / 4)));
   };
-
-  useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.style.transform = `translateX(-${activeIndex * 100}%)`;
-    }
-  }, [activeIndex]);
 
   const handleMouseEnter = () => {
     if (prevArrowRef.current) prevArrowRef.current.style.display = 'block';
@@ -74,7 +93,7 @@ const ProductDetail = () => {
       <div className={styles.productDetailContainer}>
         <div className={styles.productLeft}>
           <div className={styles.carouselContainer} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <div className={styles.carouselMain} ref={carouselRef} >
+            <div className={styles.carouselMain} ref={carouselRef}>
               {images.map((img, index) => (
                 <img 
                   key={index}
@@ -83,10 +102,11 @@ const ProductDetail = () => {
                   className={styles.carouselImage} 
                 />
               ))}
-              
             </div>
+            <div id="prevArrow" ref={prevArrowRef} className={styles.arrow} onClick={handlePrevClick}>&#10094;</div>
+            <div id="nextArrow" ref={nextArrowRef} className={styles.arrow2} onClick={handleNextClick}>&#10095;</div>
             <div className={styles.carouselThumbnails}>
-              <div className={styles.thumbnailArrow} onClick={handleThumbnailPrevClick}>&#10094;</div>
+              <div ref={thumbnailPrevArrowRef} className={styles.thumbnailArrow} onClick={handleThumbnailPrevClick}>&#10094;</div>
               {displayedThumbnails.map((img, index) => (
                 <div
                   key={index}
@@ -96,10 +116,8 @@ const ProductDetail = () => {
                   <img src={img} alt={`Thumbnail ${thumbnailIndex * 4 + index}`} className={styles.thumbnailImage} />
                 </div>
               ))}
-              <div className={styles.thumbnailArrow} onClick={handleThumbnailNextClick}>&#10095;</div>
+              <div ref={thumbnailNextArrowRef} className={styles.thumbnailArrow} onClick={handleThumbnailNextClick}>&#10095;</div>
             </div>
-            <div id="prevArrow" ref={prevArrowRef} className={styles.arrow} onClick={handlePrevClick}>&#10094;</div>
-              <div id="nextArrow" ref={nextArrowRef} className={styles.arrow2} onClick={handleNextClick}>&#10095;</div>
           </div>
           <div className={styles.productDescriptionContainer}>
             <h2 className={styles.productName}>{product.name}</h2>
@@ -164,15 +182,14 @@ const ProductDetail = () => {
               <a href="#">《Robo Recall》</a>
               <a href="#">《Shadow Complex》</a>
               <a href="#">《Unreal Tournament》</a>
-            </div>
-          </div>
-          <div className={styles.footerLegal}>
-            <p>© 2024, Epic Games, Inc. 保留所有权利。</p>
-          </div>
         </div>
-      </footer>
+      </div>
+    <div className={styles.footerLegal}>
+      <p>© 2024, Epic Games, Inc. 保留所有权利。</p>
     </div>
-  );
-};
+  </div>
+</footer>
+</div>
+);};
 
 export default ProductDetail;

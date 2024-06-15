@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080', // 替换为你的 API 基础 URL
+  baseURL: 'http://192.168.1.83:8080', // 替换为你的 API 基础 URL
 });
 
 // 添加请求拦截器

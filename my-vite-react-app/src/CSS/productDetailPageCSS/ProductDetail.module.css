@@ -260,6 +260,7 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .productDetailContainer {
+    margin-top: 100px;
     flex-direction: column;
     padding: 10px;
   }
@@ -287,4 +288,12 @@
   .footerLinks a {
     margin-bottom: 10px;
   }
+}
+
+@media (max-width: 480px) {
+  .productDetailContainer {
+    margin-top: 80px;
+  }
+
+
 }
