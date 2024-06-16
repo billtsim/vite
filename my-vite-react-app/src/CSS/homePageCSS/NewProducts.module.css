@@ -111,6 +111,51 @@
   margin-top: 10px;
 }
 
+.searchContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.filterInput {
+  flex-grow: 1;
+  border: 1px solid #005580;
+  padding: 10px;
+  border-radius: 4px 0 0 4px; /* 左上和左下圆角 */
+  outline: none;
+  background-color: #005580;
+  color: white;
+}
+
+.searchButton {
+  background-color: #007bff;
+  border: 1px solid #005580;
+  color: white;
+  padding: 10px;
+  border-radius: 0 4px 4px 0; /* 右上和右下圆角 */
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchButton:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.searchButton .searchIcon {
+  font-size: 16px;
+}
+
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
 /* 响应式设计 */
 @media (min-width: 768px) {
   .productsGrid {
@@ -155,8 +200,14 @@
 
 @media (max-width: 480px) {
   .productsContainer {
-    
     max-width: 96%;
-    
+  }
+
+  .filterContainer {
+    flex-direction: column;
+  }
+
+  .searchContainer, .filterSelect, .priceFilter {
+    width: 100%;
   }
 }

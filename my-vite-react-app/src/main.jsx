@@ -8,6 +8,7 @@ import { Navigate } from 'react-router-dom';
 import GlobalStyle from './globalStyles.js';
 import Logined from './router/logined.jsx';
 import ProductDetail from './components/product detail page/ProductDetail.jsx';
+import AllProduct from './components/all product page/AllProduct.jsx';
 
 
 let token = localStorage.getItem('token');
@@ -18,10 +19,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} /> {/* 主页显示 App 组件 */}
-        <Route path="about" element={<About />} />
+        <Route path="about" element={<About />} />s
         <Route path="login" element={!token ? <Login /> : <Navigate to="/logined" />} />
         <Route path="logined" element={token ? <Logined /> : <Navigate to="/login" />} />
         <Route path="product-detail/:name" element={<ProductDetail />} /> {/* 用游戏名字作为路径参数 */}
+        <Route path="all-product" element={<AllProduct />} />
       </Routes>
     </Router>
     </>

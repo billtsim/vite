@@ -54,14 +54,23 @@ const ProductDetail = () => {
 
   const handleThumbnailClick = (index) => {
     setActiveIndex(index);
+    setThumbnailIndex(Math.floor(index / 4));
   };
 
   const handlePrevClick = () => {
-    setActiveIndex((prevIndex) => (prevIndex - 1 + product.imageUrl.split(',').length) % product.imageUrl.split(',').length);
+    setActiveIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + product.imageUrl.split(',').length) % product.imageUrl.split(',').length;
+      setThumbnailIndex(Math.floor(newIndex / 4));
+      return newIndex;
+    });
   };
 
   const handleNextClick = () => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % product.imageUrl.split(',').length);
+    setActiveIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % product.imageUrl.split(',').length;
+      setThumbnailIndex(Math.floor(newIndex / 4));
+      return newIndex;
+    });
   };
 
   const handleThumbnailPrevClick = () => {
@@ -182,14 +191,15 @@ const ProductDetail = () => {
               <a href="#">《Robo Recall》</a>
               <a href="#">《Shadow Complex》</a>
               <a href="#">《Unreal Tournament》</a>
+            </div>
+          </div>
+          <div className={styles.footerLegal}>
+            <p>© 2024, Epic Games, Inc. 保留所有权利。</p>
+          </div>
         </div>
-      </div>
-    <div className={styles.footerLegal}>
-      <p>© 2024, Epic Games, Inc. 保留所有权利。</p>
+      </footer>
     </div>
-  </div>
-</footer>
-</div>
-);};
+  );
+};
 
 export default ProductDetail;

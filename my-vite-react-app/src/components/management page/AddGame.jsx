@@ -111,20 +111,20 @@ const AddGame = ({ show, onClose, onSave }) => {
         <form onSubmit={handleSubmit}>
           <label className={styles.name}>
             Name:
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className={styles.inputField} required />
           </label>
           <label>
             Description:
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} className={styles.textareaField} required />
           </label>
           <label>
             Original Price:
-            <input type="number" value={originalPrice} onChange={(e) => setOriginalPrice(e.target.value)} required />
+            <input type="number" value={originalPrice} onChange={(e) => setOriginalPrice(e.target.value)} className={styles.inputField} required />
           </label>
           <label>
             Discount:
-            <input type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} required />
-          </label>
+            <input type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} className={styles.inputField} required />
+            </label>
           <TagSelector
             label="Categories"
             options={allCategories}
@@ -167,7 +167,7 @@ const AddGame = ({ show, onClose, onSave }) => {
         )}
           <label>
             New Images:
-            <input type="file" onChange={handleImageChange} multiple />
+            <input type="file" onChange={handleImageChange} multiple className={styles.inputField} />
           </label>
           <div className={styles.imageNamesContainer}>
             {images.map((image, index) => (
@@ -197,62 +197,62 @@ const AddGame = ({ show, onClose, onSave }) => {
             <legend>Minimum Requirements</legend>
             <label>
               Operating System:
-              <input type="text" name="os" value={minRequirements.os} onChange={handleMinRequirementsChange} />
+              <input type="text" name="os" value={minRequirements.os} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Processor:
-              <input type="text" name="processor" value={minRequirements.processor} onChange={handleMinRequirementsChange} />
+              <input type="text" name="processor" value={minRequirements.processor} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Memory:
-              <input type="text" name="memory" value={minRequirements.memory} onChange={handleMinRequirementsChange} />
+              <input type="text" name="memory" value={minRequirements.memory} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Graphics:
-              <input type="text" name="graphics" value={minRequirements.graphics} onChange={handleMinRequirementsChange} />
+              <input type="text" name="graphics" value={minRequirements.graphics} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               DirectX:
-              <input type="text" name="directX" value={minRequirements.directX} onChange={handleMinRequirementsChange} />
+              <input type="text" name="directX" value={minRequirements.directX} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Network:
-              <input type="text" name="network" value={minRequirements.network} onChange={handleMinRequirementsChange} />
+              <input type="text" name="network" value={minRequirements.network} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Storage:
-              <input type="text" name="storage" value={minRequirements.storage} onChange={handleMinRequirementsChange} />
+              <input type="text" name="storage" value={minRequirements.storage} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
           </fieldset>
           <fieldset>
             <legend>Recommended Requirements</legend>
             <label>
               Operating System:
-              <input type="text" name="os" value={recRequirements.os} onChange={handleRecRequirementsChange} />
+              <input type="text" name="os" value={recRequirements.os} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Processor:
-              <input type="text" name="processor" value={recRequirements.processor} onChange={handleRecRequirementsChange} />
+              <input type="text" name="processor" value={recRequirements.processor} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Memory:
-              <input type="text" name="memory" value={recRequirements.memory} onChange={handleRecRequirementsChange} />
+              <input type="text" name="memory" value={recRequirements.memory} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Graphics:
-              <input type="text" name="graphics" value={recRequirements.graphics} onChange={handleRecRequirementsChange} />
+              <input type="text" name="graphics" value={recRequirements.graphics} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               DirectX:
-              <input type="text" name="directX" value={recRequirements.directX} onChange={handleRecRequirementsChange} />
+              <input type="text" name="directX" value={recRequirements.directX} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Network:
-              <input type="text" name="network" value={recRequirements.network} onChange={handleRecRequirementsChange} />
+              <input type="text" name="network" value={recRequirements.network} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
             <label>
               Storage:
-              <input type="text" name="storage" value={recRequirements.storage} onChange={handleRecRequirementsChange} />
+              <input type="text" name="storage" value={recRequirements.storage} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
           </fieldset>
           <button type="submit">Save</button>

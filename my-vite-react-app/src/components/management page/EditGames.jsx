@@ -130,16 +130,16 @@ const EditGames = ({ show, onClose, game, onSave }) => {
     deletedOldImageUrls.forEach((fileName) => {
       formData.append('oldImageUrl', fileName);
     });
-
+    
     if (mainImage && typeof mainImage !== 'string') {
       formData.append('mainImage', mainImage);
     } else if (existingMainImage) {
       formData.append('existingMainImage', existingMainImage);
     }
-
+    
     formData.append('minRequirements', JSON.stringify(minRequirements));
     formData.append('recRequirements', JSON.stringify(recRequirements));
-
+    
     try {
       await axiosInstance.put('/product', formData, {
         headers: {
@@ -150,33 +150,33 @@ const EditGames = ({ show, onClose, game, onSave }) => {
     } catch (err) {
       console.error('Error updating game:', err);
     }
-  };
-
-  if (!show) return null;
-
-  return (
+    };
+    
+    if (!show) return null;
+    
+    return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h2>Edit Game</h2>
-          <span className={styles.close} onClick={onClose}>&times;</span>
+          <h2 className={styles.modalTitle}>Edit Game</h2>
+          <span className={styles.closeButton} onClick={onClose}>&times;</span>
         </div>
-        <form onSubmit={handleSubmit}>
-          <label className={styles.name}>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <label className={styles.label}>
             Name:
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className={styles.inputField} required />
           </label>
-          <label>
+          <label className={styles.label}>
             Description:
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} className={styles.textareaField} required />
           </label>
-          <label>
+          <label className={styles.label}>
             Original Price:
-            <input type="number" value={originalPrice} onChange={(e) => setOriginalPrice(e.target.value)} required />
+            <input type="number" value={originalPrice} onChange={(e) => setOriginalPrice(e.target.value)} className={styles.inputField} required />
           </label>
-          <label>
+          <label className={styles.label}>
             Discount:
-            <input type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} required />
+            <input type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} className={styles.inputField} required />
           </label>
           <TagSelector
             label="Categories"
@@ -190,9 +190,9 @@ const EditGames = ({ show, onClose, game, onSave }) => {
             selectedOptions={tags}
             onChange={setTags}
           />
-          <label>
+          <label className={styles.label}>
             Main Image:
-            <input type="file" onChange={handleMainImageChange} disabled={mainImage} />
+            <input type="file" onChange={handleMainImageChange} disabled={mainImage} className={styles.inputField} />
           </label>
           <div className={styles.imageNamesContainer}>
             {mainImage && (
@@ -234,14 +234,14 @@ const EditGames = ({ show, onClose, game, onSave }) => {
           {mainImage && <div className={styles.imagePreviewContainer}>
             <img
               key={0}
-              src={typeof mainImage == 'string' ? mainImage: URL.createObjectURL(mainImage)}
+              src={typeof mainImage == 'string' ? mainImage : URL.createObjectURL(mainImage)}
               alt={`url error`}
               className={styles.imagePreview}
             />
           </div>}
-          <label>
+          <label className={styles.label}>
             New Images:
-            <input type="file" onChange={handleImageChange} multiple />
+            <input type="file" onChange={handleImageChange} multiple className={styles.inputField} />
           </label>
           <div className={styles.imageNamesContainer}>
             {images.map((image, index) => (
@@ -252,7 +252,7 @@ const EditGames = ({ show, onClose, game, onSave }) => {
                   className={styles.removeButton}
                   onClick={() => handleImageRemove(index)}
                 >
-                &times;
+                  &times;
                 </button>
               </div>
             ))}
@@ -291,73 +291,73 @@ const EditGames = ({ show, onClose, game, onSave }) => {
               />
             ))}
           </div>
-          <fieldset>
-            <legend>Minimum Requirements</legend>
-            <label>
+          <fieldset className={styles.fieldset}>
+            <legend className={styles.legend}>Minimum Requirements</legend>
+            <label className={styles.label}>
               Operating System:
-              <input type="text" name="os" value={minRequirements.os} onChange={handleMinRequirementsChange} />
+              <input type="text" name="os" value={minRequirements.os} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Processor:
-              <input type="text" name="processor" value={minRequirements.processor} onChange={handleMinRequirementsChange} />
+              <input type="text" name="processor" value={minRequirements.processor} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Memory:
-              <input type="text" name="memory" value={minRequirements.memory} onChange={handleMinRequirementsChange} />
+              <input type="text" name="memory" value={minRequirements.memory} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Graphics:
-              <input type="text" name="graphics" value={minRequirements.graphics} onChange={handleMinRequirementsChange} />
+              <input type="text" name="graphics" value={minRequirements.graphics} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               DirectX:
-              <input type="text" name="directX" value={minRequirements.directX} onChange={handleMinRequirementsChange} />
+              <input type="text" name="directX" value={minRequirements.directX} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Network:
-              <input type="text" name="network" value={minRequirements.network} onChange={handleMinRequirementsChange} />
+              <input type="text" name="network" value={minRequirements.network} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Storage:
-              <input type="text" name="storage" value={minRequirements.storage} onChange={handleMinRequirementsChange} />
+              <input type="text" name="storage" value={minRequirements.storage} onChange={handleMinRequirementsChange} className={styles.inputField} />
             </label>
           </fieldset>
-          <fieldset>
-            <legend>Recommended Requirements</legend>
-            <label>
+          <fieldset className={styles.fieldset}>
+            <legend className={styles.legend}>Recommended Requirements</legend>
+            <label className={styles.label}>
               Operating System:
-              <input type="text" name="os" value={recRequirements.os} onChange={handleRecRequirementsChange} />
+              <input type="text" name="os" value={recRequirements.os} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Processor:
-              <input type="text" name="processor" value={recRequirements.processor} onChange={handleRecRequirementsChange} />
+              <input type="text" name="processor" value={recRequirements.processor} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Memory:
-              <input type="text" name="memory" value={recRequirements.memory} onChange={handleRecRequirementsChange} />
+              <input type="text" name="memory" value={recRequirements.memory} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Graphics:
-              <input type="text" name="graphics" value={recRequirements.graphics} onChange={handleRecRequirementsChange} />
+              <input type="text" name="graphics" value={recRequirements.graphics} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               DirectX:
-              <input type="text" name="directX" value={recRequirements.directX} onChange={handleRecRequirementsChange} />
+              <input type="text" name="directX" value={recRequirements.directX} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Network:
-              <input type="text" name="network" value={recRequirements.network} onChange={handleRecRequirementsChange} />
+              <input type="text" name="network" value={recRequirements.network} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
-            <label>
+            <label className={styles.label}>
               Storage:
-              <input type="text" name="storage" value={recRequirements.storage} onChange={handleRecRequirementsChange} />
+              <input type="text" name="storage" value={recRequirements.storage} onChange={handleRecRequirementsChange} className={styles.inputField} />
             </label>
           </fieldset>
-          <button type="submit">Save</button>
+          <button type="submit" className={styles.saveButton}>Save</button>
         </form>
       </div>
     </div>
-  );
-};
-
-export default EditGames
+    );
+    };
+    
+    export default EditGames;

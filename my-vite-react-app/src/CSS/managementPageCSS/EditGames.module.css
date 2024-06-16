@@ -1,3 +1,21 @@
+.inputField {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.textareaField {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -32,37 +50,25 @@
   margin-bottom: 20px;
 }
 
-.modalHeader h2 {
+.modalTitle {
   margin: 0;
 }
 
-.close {
+.closeButton {
   cursor: pointer;
   font-size: 24px;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
 }
 
-label {
+.label {
   margin-bottom: 10px;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="file"],
-textarea {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
+.saveButton {
   padding: 10px;
   background-color: #007bff;
   color: white;
@@ -71,7 +77,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.saveButton:hover {
   background-color: #0056b3;
 }
 
@@ -115,14 +121,14 @@ button:hover {
   margin-left: 10px;
 }
 
-fieldset {
+.fieldset {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 20px;
 }
 
-legend {
+.legend {
   padding: 0 10px;
 }
 

@@ -37,8 +37,8 @@ const Navigation = () => {
       </div>
       <ul className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
         <li className={styles.navItem}><Link to="/" className={styles.navbarLink}>STORE</Link></li>
-        <li className={styles.navItem}><Link to="/support" className={styles.navbarLink}>支援</Link></li>
-        <li className={styles.navItem}><Link to="/Logined" className={styles.navbarLink}>經銷</Link></li>
+        <li className={styles.navItem}><Link to="/all-product" className={styles.navbarLink}>all game</Link></li>
+        <li className={styles.navItem}><Link to="/Logined" className={styles.navbarLink}>managements</Link></li>
         <li className={`${styles.navItem} ${styles.authButtonMobile}`}>
           <Link to="/login" onClick={handleAuthClick} className={styles.navbarLink}>
             {token ? 'Logout' : 'Login'}
