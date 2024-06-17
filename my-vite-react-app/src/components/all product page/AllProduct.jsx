@@ -29,6 +29,20 @@ const AllProduct = () => {
     fetchTotalProducts(filters);
   }, 300)).current;
 
+  // 从后端获取所有类别和标签
+  const fetchCategoriesAndTags = async () => {
+    try {
+      const [categoriesResponse, tagsResponse] = await Promise.all([
+        axiosInstance.get('/product/categories'),
+        axiosInstance.get('/product/tags')
+      ]);
+      setCategories(categoriesResponse.data.data);
+      setTags(tagsResponse.data.data);
+    } catch (error) {
+      console.error('Failed to fetch categories and tags:', error);
+    }
+  };
+
   const fetchProducts = async (filters, page) => {
     setLoading(true);
     try {
@@ -47,12 +61,6 @@ const AllProduct = () => {
       const response = await axiosInstance.get(`/product?${params.toString()}`);
       const productList = response.data.data;
       setProducts(productList);
-
-      // Extract unique categories and tags
-      const uniqueCategories = [...new Set(productList.flatMap(product => product.categories.split(',')))];
-      const uniqueTags = [...new Set(productList.flatMap(product => product.tags.split(',')))];
-      setCategories(uniqueCategories);
-      setTags(uniqueTags);
     } catch (error) {
       console.error('Failed to fetch products:', error);
     } finally {
@@ -77,6 +85,10 @@ const AllProduct = () => {
       console.error('Failed to fetch total products:', error);
     }
   };
+
+  useEffect(() => {
+    fetchCategoriesAndTags(); // 获取所有类别和标签，只在组件挂载时调用一次
+  }, []);
 
   useEffect(() => {
     debounceFetch(filters, currentPage);
@@ -235,8 +247,8 @@ const AllProduct = () => {
         <div className={styles.pagination}>
           {renderPageNumbers()}
         </div>
-      </div>
     </div>
+  </div>
   );
 };
 

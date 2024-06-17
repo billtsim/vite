@@ -5,9 +5,9 @@
   color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 90%;
+  max-width: 100%;
   padding: 20px;
-  width: 100%;
+  width: 90%;
   margin: 80px auto 40px auto;
 }
 
@@ -16,7 +16,7 @@
   flex-wrap: wrap; /* 添加 flex-wrap 以确保内容不会超出容器 */
   justify-content: space-between; /* 确保均匀分布 */
   margin-bottom: 20px;
-  width: 100%; /* 确保容器占满父容器的宽度 */
+  width: 95%; /* 确保容器占满父容器的宽度 */
 }
 
 .filterItem {
@@ -58,7 +58,7 @@
 .searchContainer {
   display: flex;
   flex: 1;
-  min-width: 200px; /* 确保搜索容器不会太小 */
+  
 }
 
 .priceFilter {
@@ -137,11 +137,27 @@
   background-color: #0056b3;
 }
 
+.searchContainer {
+  flex-wrap: wrap;
+}
+
+.filterInput {
+  flex: 5;
+}
+
+.searchButton{
+  flex: 0.3;
+}
+
 /* 响应式设计 */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .filterContainer {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .filterItem {
+    margin-bottom: 10px;
   }
 
   .productCard {
@@ -150,6 +166,20 @@
 }
 
 @media (max-width: 480px) {
+
+  .allProductContainer {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  
+  .filterItem {
+    margin-bottom: 10px;
+  }
+
+  .searchContainer{
+    width: 100%;
+  }
+
   .productCard {
     width: calc(100% - 20px);
   }
