@@ -24,17 +24,17 @@ const AllProduct = () => {
   const [gamesPerPage] = useState(12);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const debounceFetch = useRef(_.debounce((filters) => {
-    fetchProducts(filters);
+  const debounceFetch = useRef(_.debounce((filters, page) => {
+    fetchProducts(filters, page);
     fetchTotalProducts(filters);
   }, 300)).current;
 
-  const fetchProducts = async (filters) => {
+  const fetchProducts = async (filters, page) => {
     setLoading(true);
     try {
       const { name, categories, tags, minPrice, maxPrice, sortBy } = filters;
       const params = new URLSearchParams({
-        page: currentPage,
+        page: page,
         limit: gamesPerPage,
         name,
         categories,
@@ -79,7 +79,7 @@ const AllProduct = () => {
   };
 
   useEffect(() => {
-    debounceFetch(filters);
+    debounceFetch(filters, currentPage);
   }, [filters, currentPage]);
 
   const handleFilterChange = useCallback(
@@ -124,7 +124,7 @@ const AllProduct = () => {
   };
 
   const handlePriceChangeEnd = (e) => {
-    debounceFetch(filters);
+    debounceFetch(filters, currentPage);
   };
 
   const handlePageChange = (pageNumber) => {
@@ -166,8 +166,8 @@ const AllProduct = () => {
     <div style={{ backgroundColor: 'black', color: 'white', width: 'auto', display: 'flex', flexDirection: 'column' }}>
       <Navigation />
       <div className={styles.allProductContainer}>
-        <div className={styles.filterContainer} style={{display: 'flex'}}>
-          <div style={{display: 'flex', flex: '1.5', margin: '0 10px', padding: '0'}} className={styles.searchContainer}>
+        <div className={styles.filterContainer}>
+          <div className={`${styles.searchContainer} ${styles.filterItem}`}>
             <input
               type="text"
               name="name"
@@ -175,25 +175,25 @@ const AllProduct = () => {
               value={inputValue} // 使用 inputValue 作为输入框的值
               onChange={handleInputChange}
               className={styles.filterInput}
-              style={{margin: '0', padding: '0', borderTopRightRadius: '0', borderBottomRightRadius: '0'}}
+              style={{ borderTopRightRadius: '0', borderBottomRightRadius: '0' }}
             />
-            <button style={{ borderTopLeftRadius: '0', borderBottomLeftRadius: '0'}} onClick={handleSearch} className={styles.searchButton}>
+            <button style={{ borderTopLeftRadius: '0', borderBottomLeftRadius: '0' }} onClick={handleSearch} className={styles.searchButton}>
               <FaSearch className={styles.searchIcon} /> {/* 使用搜索图标 */}
             </button>
           </div>
-          <select style={{flex: '1'}} name="categories" value={filters.categories} onChange={handleCategoryChange} className={styles.filterSelect}>
+          <select name="categories" value={filters.categories} onChange={handleCategoryChange} className={`${styles.filterSelect} ${styles.filterItem}`}>
             <option value="">所有类别</option>
             {categories.map((category, index) => (
               <option key={index} value={category}>{category}</option>
             ))}
           </select>
-          <select style={{flex: '1'}} name="tags" value={filters.tags} onChange={handleTagChange} className={styles.filterSelect}>
+          <select name="tags" value={filters.tags} onChange={handleTagChange} className={`${styles.filterSelect} ${styles.filterItem}`}>
             <option value="">所有标签</option>
             {tags.map((tag, index) => (
               <option key={index} value={tag}>{tag}</option>
             ))}
           </select>
-          <div style={{flex: '1'}} className={styles.priceFilter}>
+          <div className={`${styles.priceFilter} ${styles.filterItem}`}>
             <span>价格: 低于 HK${filters.maxPrice}</span>
             <input
               type="range"
@@ -207,7 +207,7 @@ const AllProduct = () => {
               className={styles.priceRange}
             />
           </div>
-          <select style={{flex: '1'}} name="sortBy" value={filters.sortBy} onChange={handleSortChange} className={styles.filterSelect}>
+          <select name="sortBy" value={filters.sortBy} onChange={handleSortChange} className={`${styles.filterSelect} ${styles.filterItem}`}>
             <option value="">排序方式</option>
             <option value="priceAsc">价格：低至高</option>
             <option value="priceDesc">价格：高至低</option>

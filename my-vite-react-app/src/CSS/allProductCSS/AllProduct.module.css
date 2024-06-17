@@ -1,123 +1,156 @@
 .allProductContainer {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #1e1e1e;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
-    width: 90%;
-    margin: 80px auto 40px auto;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  padding: 20px;
+  width: 100%;
+  margin: 80px auto 40px auto;
+}
+
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap; /* 添加 flex-wrap 以确保内容不会超出容器 */
+  justify-content: space-between; /* 确保均匀分布 */
+  margin-bottom: 20px;
+  width: 100%; /* 确保容器占满父容器的宽度 */
+}
+
+.filterItem {
+  flex: 1; /* 每个过滤组件占据相等的空间 */
+  margin: 0 5px; /* 为每个组件添加左右间距 */
+  min-width: 120px; /* 可选：设置最小宽度以确保组件不太小 */
+}
+
+.filterInput, .filterSelect {
+  background-color: #2e2e2e;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box; /* 确保填充不会增加元素的总宽度 */
+}
+
+.filterInput:focus, .filterSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* 添加一个蓝色的阴影效果 */
+}
+
+.searchButton {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.searchButton .searchIcon {
+  font-size: 16px;
+}
+
+.searchContainer {
+  display: flex;
+  flex: 1;
+  min-width: 200px; /* 确保搜索容器不会太小 */
+}
+
+.priceFilter {
+  flex: 1;
+  color: #fff;
+}
+
+.priceRange {
+  width: 100%;
+}
+
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.productCard {
+  background-color: #2e2e2e;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: calc(25% - 20px);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.productCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.productImage {
+  width: 100%;
+  height: 220px;
+}
+
+.productInfo {
+  padding: 10px;
+  color: #fff;
+}
+
+.productInfo h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.productInfo p {
+  margin: 5px 0 0 0;
+  font-size: 1em;
+  color: #007bff;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pageButton, .activePage {
+  background-color: #2e2e2e;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  margin: 0 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.activePage {
+  background-color: #007bff;
+}
+
+.pageButton:hover, .activePage:hover {
+  background-color: #0056b3;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
   .filterContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .filterInput, .filterSelect {
-    background-color: #2e2e2e;
-    border: none;
-    color: #fff;
-    padding: 10px;
-    margin-right: 10px;
-    border-radius: 4px;
-  }
-  
-  .priceFilter {
-    display: flex;
     flex-direction: column;
-    color: #fff;
+    align-items: flex-start;
   }
-  
-  .priceRange {
-    width: 200px;
-  }
-  
-  .productList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
+
   .productCard {
-    background-color: #2e2e2e;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: calc(25% - 20px);
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+    width: calc(50% - 20px);
   }
-  
-  .productCard:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 480px) {
+  .productCard {
+    width: calc(100% - 20px);
   }
-  
-  .productImage {
-    width: 100%;
-    height: 220px;
-  }
-  
-  .productInfo {
-    padding: 10px;
-    color: #fff;
-  }
-  
-  .productInfo h3 {
-    margin: 0;
-    font-size: 1.2em;
-  }
-  
-  .productInfo p {
-    margin: 5px 0 0 0;
-    font-size: 1em;
-    color: #007bff;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .pageButton, .activePage {
-    background-color: #2e2e2e;
-    border: none;
-    color: #fff;
-    padding: 10px;
-    margin: 0 5px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .activePage {
-    background-color: #007bff;
-  }
-  
-  .pageButton:hover, .activePage:hover {
-    background-color: #0056b3;
-  }
-  
-  /* 响应式设计 */
-  @media (max-width: 768px) {
-    .filterContainer {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .productCard {
-      width: calc(50% - 20px);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .productCard {
-      width: calc(100% - 20px);
-    }
-  }
+}
