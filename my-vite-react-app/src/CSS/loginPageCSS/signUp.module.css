@@ -1,76 +1,93 @@
 .signupBody {
-    margin: 0;
-    padding: 0;
-    height: 100vh; /* 覆盖整个视口高度 */
-    width: 100%;
-    background: linear-gradient(to right, #4a90e2, #9013fe);
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* 覆盖整个视口高度 */
+  width: 100%;
+  background: #1b1b1b;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageContainer {
+  flex: 1;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: 15%;
+}
+
+.signupForm { 
+              
+  flex: 1;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
   
+}
+
+.title {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background: #3b3b3b;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.button {
+  width: 25%;
+  padding: 10px;
+  background: linear-gradient(to right, #3CA2F1, #2460D0);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: linear-gradient( #4a90e2, #357ab8);
+  
+}
+
+.error {
+  margin-top: -15px;
+  margin-bottom: 15px;
+  color: #e74c3c;
+  font-size: 14px;
+  text-align: center;
+}
+
+.success {
+  margin-top: -15px;
+  margin-bottom: 15px;
+  color: #2ecc71;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
   .pageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 5%;
   }
-  
-  .title {
-    text-align: center;
-    color: #000;
-    margin-bottom: 20px;
-  }
-  
-  .label {
-    display: block;
-    margin-bottom: 5px;
-    color: #000;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  .button {
-    width: 100%;
-    padding: 10px;
-    background: #000;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .button:hover {
-    background: #333;
-  }
-  
-  .error {
-    margin-top: -15px;
-    margin-bottom: 15px;
-    color: #e74c3c;
-    font-size: 14px;
-    text-align: center;
-  }
-  
-  .success {
-    margin-top: -15px;
-    margin-bottom: 15px;
-    color: #2ecc71;
-    font-size: 14px;
-    text-align: center;
-  }
+}
