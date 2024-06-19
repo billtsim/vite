@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../CSS/loginPageCSS/login.module.css';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -12,23 +12,37 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post('/login', { username, password });
-      // 假设响应中包含 token
+      const response = await axiosInstance.post('/login', {
+        usernameOrEmail,
+        password
+      });
       const token = response.data.data;
       if (token) {
         localStorage.setItem('token', token);
-        navigate('/logined');
+        await showAlert('Login success');
+        navigate('/');
         window.location.reload(); // 自动刷新页面
       } else {
-        alert('your username or password is not correct');
+        alert('Your username or password is not correct');
       }
     } catch (err) {
       setError(err.response?.data?.msg || 'Login failed');
     }
   };
 
+  const showAlert = (message) => {
+    return new Promise((resolve) => {
+      alert(message);
+      resolve();
+    });
+  };
+
   const handleSignUpClick = () => {
     navigate('/signup');
+  };
+
+  const handleForgotPasswordClick = () => {
+    navigate('/forgot-password');
   };
 
   return (
@@ -36,17 +50,14 @@ function Login() {
       <div className={styles.pageContainer}>
         <div className={styles.loginForm}>
           <h2 className={styles.title}>Welcome</h2>
-          <div className={styles.logo}>
-            <span>A</span>
-          </div>
           <form onSubmit={handleLogin}>
             <div>
-              <label className={styles.label}>Username:</label>
+              <label className={styles.label}>Username or Email:</label>
               <input
                 type="text"
                 className={styles.input}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={usernameOrEmail}
+                onChange={(e) => setUsernameOrEmail(e.target.value)}
                 required
               />
             </div>
@@ -65,6 +76,9 @@ function Login() {
           {error && <p className={styles.error}>{error}</p>}
           <p className={styles.signup}>
             Don't have an account? <a href="#" onClick={handleSignUpClick}>Sign Up</a>
+          </p>
+          <p className={styles.forgotPassword}>
+            <a href="#" onClick={handleForgotPasswordClick}>Forgot Password?</a>
           </p>
         </div>
       </div>

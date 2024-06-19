@@ -1,71 +1,61 @@
- /* src/Login.module.css */
+/* src/Login.module.css */
 .loginBody {
   margin: 0;
   padding: 0;
   height: 100vh; /* 覆盖整个视口高度 */
   width: 100%;
-  background: linear-gradient(to right, #4a90e2, #9013fe);
+  background: #1b1b1b;
   font-family: Arial, sans-serif;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
 .pageContainer {
+  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+  margin-left: 15%;
+}
+
+.loginForm {
+  flex: 1;
   width: 100%;
   max-width: 400px;
   padding: 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
   text-align: center;
-  color: #000;
-  margin-bottom: 20px;
-}
-
-.logo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.logo span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60px;
-  height: 60px;
-  background-color: #000;
   color: #fff;
-  font-size: 30px;
-  border-radius: 50%;
+  margin-bottom: 20px;
 }
 
 .label {
   display: block;
   margin-bottom: 5px;
-  color: #000;
+  color: #fff;
 }
 
 .input {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
+  background: #3b3b3b;
+  border: none;
   border-radius: 5px;
+  color: #fff;
   box-sizing: border-box;
 }
 
+.input::placeholder {
+  color: #aaa;
+}
+
 .button {
-  width: 100%;
+  width: 25%;
   padding: 10px;
-  background: #000;
+  background: linear-gradient(to right, #3CA2F1, #2460D0);
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -75,7 +65,7 @@
 }
 
 .button:hover {
-  background: #333;
+  background: linear-gradient(#4a90e2, #357ab8);
 }
 
 .error {
@@ -84,6 +74,20 @@
   color: #e74c3c;
   font-size: 14px;
   text-align: center;
+}
+
+.success {
+  margin-top: -15px;
+  margin-bottom: 15px;
+  color: #2ecc71;
+  font-size: 14px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    margin-left: 5%;
+  }
 }
 
 .signup {
@@ -100,5 +104,3 @@
 .signup a:hover {
   color: #357ab8;
 }
-
-
