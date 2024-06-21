@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../axios/Axios';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../CSS/loginPageCSS/login.module.css';
+import Navigation from '../home page/Navigation';
 
 function Login() {
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (token) {
+      navigate('/logined', { replace: true });
+    }
+  }, [token, navigate]);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -46,6 +55,8 @@ function Login() {
   };
 
   return (
+    <div style={{ backgroundColor: 'black', color: 'white', width: 'auto', display: 'flex', flexDirection: 'column' }}>
+  <Navigation />
     <div className={styles.loginBody}>
       <div className={styles.pageContainer}>
         <div className={styles.loginForm}>
@@ -82,6 +93,7 @@ function Login() {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

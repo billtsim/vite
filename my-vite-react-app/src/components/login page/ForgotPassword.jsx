@@ -13,7 +13,7 @@ function ForgotPassword() {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post('/forgot-password', {
+      const response = await axiosInstance.post('/reset-password/forgot', {
         email
       });
       if (response.data.data) {
