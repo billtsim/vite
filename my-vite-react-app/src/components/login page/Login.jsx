@@ -30,7 +30,7 @@ function Login() {
         localStorage.setItem('token', token);
         await showAlert('Login success');
         navigate('/');
-        window.location.reload(); // 自动刷新页面
+        
       } else {
         alert('Your username or password is not correct');
       }
