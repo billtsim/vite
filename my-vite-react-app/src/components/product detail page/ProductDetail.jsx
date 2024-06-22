@@ -15,11 +15,15 @@ const ProductDetail = () => {
   const thumbnailPrevArrowRef = useRef(null);
   const thumbnailNextArrowRef = useRef(null);
 
+  // Touch event state
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await axiosInstance.get(`/product?name=${encodeURIComponent(name)}`);
-        const productData = response.data.data.length ? response.data.data[0] : null; // 获取数组中的第一个产品
+        const productData = response.data.data.length ? response.data.data[0] : null;
         setProduct(productData);
       } catch (error) {
         console.error('Failed to fetch product details:', error);
@@ -81,14 +85,22 @@ const ProductDetail = () => {
     setThumbnailIndex((prevIndex) => Math.min(prevIndex + 1, Math.floor(product.imageUrl.split(',').length / 4)));
   };
 
-  const handleMouseEnter = () => {
-    if (prevArrowRef.current) prevArrowRef.current.style.display = 'block';
-    if (nextArrowRef.current) nextArrowRef.current.style.display = 'block';
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
   };
 
-  const handleMouseLeave = () => {
-    if (prevArrowRef.current) prevArrowRef.current.style.display = 'none';
-    if (nextArrowRef.current) nextArrowRef.current.style.display = 'none';
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current - touchEndX.current > 50) {
+      handleNextClick();
+    }
+
+    if (touchStartX.current - touchEndX.current < -50) {
+      handlePrevClick();
+    }
   };
 
   if (!product) return <div>Loading...</div>;
@@ -101,7 +113,12 @@ const ProductDetail = () => {
       <Navigation />
       <div className={styles.productDetailContainer}>
         <div className={styles.productLeft}>
-          <div className={styles.carouselContainer} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <div
+            className={styles.carouselContainer}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div className={styles.carouselMain} ref={carouselRef}>
               {images.map((img, index) => (
                 <img 
@@ -116,15 +133,17 @@ const ProductDetail = () => {
             <div id="nextArrow" ref={nextArrowRef} className={styles.arrow2} onClick={handleNextClick}>&#10095;</div>
             <div className={styles.carouselThumbnails}>
               <div ref={thumbnailPrevArrowRef} className={styles.thumbnailArrow} onClick={handleThumbnailPrevClick}>&#10094;</div>
-              {displayedThumbnails.map((img, index) => (
-                <div
-                  key={index}
-                  className={`${styles.thumbnailItem} ${thumbnailIndex * 4 + index === activeIndex ? styles.active : ''}`}
-                  onClick={() => handleThumbnailClick(thumbnailIndex * 4 + index)}
-                >
-                  <img src={img} alt={`Thumbnail ${thumbnailIndex * 4 + index}`} className={styles.thumbnailImage} />
-                </div>
-              ))}
+              
+                {displayedThumbnails.map((img, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.thumbnailItem} ${thumbnailIndex * 4 + index === activeIndex ? styles.active : ''}`}
+                    onClick={() => handleThumbnailClick(thumbnailIndex * 4 + index)}
+                  >
+                    <img src={img} alt={`Thumbnail ${thumbnailIndex * 4 + index}`} className={styles.thumbnailImage} />
+                  </div>
+                ))}
+              
               <div ref={thumbnailNextArrowRef} className={styles.thumbnailArrow} onClick={handleThumbnailNextClick}>&#10095;</div>
             </div>
           </div>
@@ -163,7 +182,7 @@ const ProductDetail = () => {
         </div>
         <div className={styles.productRight}>
           <div className={styles.productInfoContainer}>
-            <p className={styles.productPrice}>HK${product.price}</p>
+          <p className={styles.productPrice}>HK${product.price}</p>
             <button className={styles.purchaseButton}>立即购买</button>
             <button className={styles.addToCartButton}>加入购物车</button>
           </div>

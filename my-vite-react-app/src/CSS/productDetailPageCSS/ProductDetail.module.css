@@ -46,7 +46,7 @@
 
 .arrow {
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
   font-size: 2em;
   color: white;
@@ -61,7 +61,7 @@
 
 .arrow2 {
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
   font-size: 2em;
   color: white;
@@ -87,6 +87,7 @@
   background-color: #2e2e2e;
   border-radius: 8px;
   position: relative;
+  width: 100%;
 }
 
 .thumbnailArrow {
@@ -133,7 +134,7 @@
 }
 
 .thumbnailImage {
-  width: 80px;
+  width: 100px;
   height: auto;
   border-radius: 4px;
   object-fit: cover;
@@ -292,8 +293,32 @@
 
 @media (max-width: 480px) {
   .productDetailContainer {
+    width: 90%;
     margin-top: 80px;
   }
+
+  .arrow {
+    display: none;
+  }
+
+  .arrow2 {
+    display: none;
+  }
+
+.carouselContainer:hover .arrow,
+.carouselContainer:hover .arrow2 {
+  display: none;
+}
+
+.thumbnailImage {
+  width: 62px;
+}
+
+.thumbnailArrow {
+  font-size: 1em;
+}
+
+
 
 
 }
