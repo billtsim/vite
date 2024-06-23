@@ -66,7 +66,7 @@ const Navigation = () => {
                 {user[0].username} <span className={styles.arrowDown}>▼</span>
               </button>
               <div className={`${styles.dropdownContent} ${isDropdownOpen ? styles.showDropdown : ''}`}>
-                <Link to="/profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
+                <Link to="/user-profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
                 <Link to="/cart" className={styles.dropdownItem}>購物車</Link>
                 <Link to="/orders" className={styles.dropdownItem}>我的訂單</Link>
                 <div onClick={handleAuthClick} className={styles.dropdownItem}>登出</div>
@@ -88,7 +88,7 @@ const Navigation = () => {
               {user[0].username} <span className={styles.arrowDown}>▼</span>
             </button>
             <div className={`${styles.dropdownContent} ${isDropdownOpen ? styles.showDropdown : ''}`}>
-              <Link to="/profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
+              <Link to="/user-profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
               <Link to="/cart" className={styles.dropdownItem}>購物車</Link>
               <Link to="/orders" className={styles.dropdownItem}>我的訂單</Link>
               <div onClick={handleAuthClick} className={styles.dropdownItem}>登出</div>

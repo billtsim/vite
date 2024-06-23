@@ -11,12 +11,11 @@ import AllProduct from './components/all product page/AllProduct.jsx';
 import SignUp from './components/login page/SignUp.jsx';
 import ForgotPassword from './components/login page/ForgotPassword.jsx';
 import ResetPassword from './components/login page/ResetPassword.jsx';
-import { UserProvider } from './context/UserContext'; // 导入 UserProvider
+import UserProfile from './components/user management page/UserProfile.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <GlobalStyle />
-    <UserProvider>
     <Router>
       <Routes>
         <Route path="/" element={<App />} /> {/* 主页显示 App 组件 */}
@@ -28,9 +27,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="signup" element={<SignUp />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="reset-password" element={<ResetPassword />} />
+        <Route path="user-profile" element={<UserProfile />} />
       </Routes>
     </Router>
-    </UserProvider>
     </>
   
 );
