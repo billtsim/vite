@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import About from './router/About.jsx';
 import Login from './components/login page/Login.jsx';
 import App from './App.jsx';
-import { Navigate } from 'react-router-dom';
 import GlobalStyle from './globalStyles.js';
 import Logined from './router/logined.jsx';
 import ProductDetail from './components/product detail page/ProductDetail.jsx';
@@ -12,12 +11,12 @@ import AllProduct from './components/all product page/AllProduct.jsx';
 import SignUp from './components/login page/SignUp.jsx';
 import ForgotPassword from './components/login page/ForgotPassword.jsx';
 import ResetPassword from './components/login page/ResetPassword.jsx';
-
-let token = localStorage.getItem('token');
+import { UserProvider } from './context/UserContext'; // 导入 UserProvider
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <GlobalStyle />
+    <UserProvider>
     <Router>
       <Routes>
         <Route path="/" element={<App />} /> {/* 主页显示 App 组件 */}
@@ -31,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="reset-password" element={<ResetPassword />} />
       </Routes>
     </Router>
+    </UserProvider>
     </>
   
 );

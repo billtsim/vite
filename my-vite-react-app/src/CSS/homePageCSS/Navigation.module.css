@@ -58,6 +58,7 @@ body {
 
 .navbarLink:hover {
   color: #1e90ff;
+  cursor: pointer; /* 鼠标悬停时的指针形状 */
 }
 
 .rightSection {
@@ -71,7 +72,7 @@ body {
   color: white;
   font-size: 20px;
   margin-right: 20px;
-  cursor: pointer;
+  cursor: pointer; /* 鼠标悬停时的指针形状 */
 }
 
 .iconButton:hover {
@@ -79,12 +80,12 @@ body {
 }
 
 .authButton {
-  background-color:#1a1a1a;
+  background-color: #1a1a1a;
   border: none;
   color: white;
   padding: 10px 20px;
   font-size: 16px;
-  cursor: pointer;
+  cursor: pointer; /* 鼠标悬停时的指针形状 */
 }
 
 .authButton:hover {
@@ -93,6 +94,76 @@ body {
 
 .authButtonMobile {
   display: none;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: border-radius 0.3s ease;
+}
+
+.avatar:hover {
+  border-radius: 10%;
+  cursor: pointer; /* 鼠标悬停时的指针形状 */
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdownButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer; /* 鼠标悬停时的指针形状 */
+  display: flex;
+  align-items: center;
+}
+
+.arrowDown {
+  margin-left: 5px;
+}
+
+.dropdownContent {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 100%;
+  transition: max-height 0.3s ease-out;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.showDropdown {
+  max-height: 500px; /* 适当调整以适应内容 */
+  overflow-y: auto; /* 允许垂直滚动 */
+}
+
+.dropdownItem {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  display: block;
+  transition: border-radius 0.3s ease;
+}
+
+.dropdownItem:hover {
+  background-color: #1c7ed6;
+  cursor: pointer; /* 鼠标悬停时的指针形状 */
+  text-decoration: underline;
 }
 
 /* 响应式设计 */
@@ -125,10 +196,12 @@ body {
 
   .navLinks.showMenu {
     max-height: 300px; /* Adjust this value according to the content height */
+    overflow-y: auto; /* 允许垂直滚动 */
   }
 
   .navItem {
-    margin: 10px 0;
+    margin: 10px ;
+    margin-left: 10px;
   }
 
   .rightSection {
@@ -152,6 +225,50 @@ body {
 
   .authButtonMobile {
     display: block;
+  }
+
+  .userSection {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .authButtonMobile .userSection .dropdownButton {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer; /* 鼠标悬停时的指针形状 */
+    display: flex;
+    align-items: center;
+  }
+
+  .authButtonMobile .userSection .dropdownContent {
+    position: relative;
+    top: auto;
+    right: auto;
+    background-color: #1a1a1a;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 100%;
+  }
+
+  .authButtonMobile .userSection .dropdownItem {
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: border-radius 0.3s ease;
+  }
+
+  .authButtonMobile .userSection .dropdownItem:hover {
+    background-color: #1c7ed6;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  #userSection {
+    display: none;
   }
 }
 
