@@ -22,7 +22,7 @@ function SignUp() {
       return;
     }
     try {
-      await axiosInstance.post('/signup/send-code', { email });
+      await axiosInstance.post('/signup/send-code', { params : { email: email } });
       setStep(2); // 进入验证码输入步骤
     } catch (err) {
       setError(err.response?.data?.msg || 'Failed to send verification code');

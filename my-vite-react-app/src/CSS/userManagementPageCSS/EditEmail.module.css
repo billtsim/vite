@@ -80,3 +80,7 @@
 .saveButton:hover, .cancelButton:hover {
   opacity: 0.8;
 }
+
+.errorMessage {
+  color: red;
+}

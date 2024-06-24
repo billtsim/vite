@@ -14,6 +14,7 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username');
+  const [userDataForEmail, setUserDataForEmail] = useState(null);
 
   useEffect(() => {
     if (!token) {
@@ -27,10 +28,18 @@ const UserProfile = () => {
     try {
       const response = await axiosInstance.get(`/get-user?username=${username}`);
       const userData = response.data.data[0];
+      setUserDataForEmail(userData);
       setUser(userData);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
+  };
+
+  const handleEmailUpdate = (newEmail) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      email: newEmail,
+    }));
   };
 
   const handlePasswordChange = async () => {
@@ -123,7 +132,8 @@ const UserProfile = () => {
           show={showModal}
           onClose={() => setShowModal(false)}
           username={username}
-          currentEmail={user.email}
+          currentEmail={userDataForEmail.email}
+          onEmailUpdate={handleEmailUpdate}
         />
       )}
     </div>

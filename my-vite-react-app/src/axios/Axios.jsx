@@ -9,7 +9,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token'); // 从 localStorage 获取 token
     if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`; // 直接将 token 添加到请求头中
+      config.headers['Authorization'] = token; // 直接将 token 添加到请求头中
     }
     return config;
   },
