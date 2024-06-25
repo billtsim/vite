@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../CSS/userManagementPageCSS/UserProfile.module.css';
 import Navigation from '../home page/Navigation';
 import EditEmail from './EditEmail';
+import PasswordInput from './PasswordInput'; // 导入自定义的 PasswordInput 组件
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -67,25 +68,8 @@ const UserProfile = () => {
     <div style={{ backgroundColor: 'white', color: 'black', width: '100%', display: 'flex', flexDirection: 'column' }}>
       <Navigation />
       <div className={styles.profileContainer}>
-        <div className={styles.sidebar}>
-          <ul>
-            <li>帳號設定</li>
-            <li>電子郵件偏好</li>
-            <li>付款方式管理</li>
-            <li>交易</li>
-            <li>EPIC 美動</li>
-            <li>訂閱</li>
-            <li>密碼和安全</li>
-            <li>遊戲內容警</li>
-            <li>家長控制</li>
-            <li>使用者授權協議 (EULA) 紀錄</li>
-            <li>應用程式與帳號</li>
-            <li>創作者計劃</li>
-            <li>市場賣家</li>
-            <li>兌換碼</li>
-          </ul>
-        </div>
         <div className={styles.profileContent}>
+          
           <h2>帳號設定</h2>
           <div className={styles.section}>
             <h3>帳號資訊</h3>
@@ -108,21 +92,43 @@ const UserProfile = () => {
               </div>
             </div>
           </div>
-          <div className={styles.section}>
+          <div className={`${styles.section} ${styles.passwordSection}`}>
             <h3>修改密碼</h3>
-            <div className={styles.field}>
-              <label>當前密碼</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <p>為了您的安全，我們強烈建議您選擇一個不用於其他線上帳戶的唯一密碼。</p>
+
+            <div className={styles.passwordField}>
+              <div className={styles.passwordShow}>
+                <label>當前密碼</label>
+                <PasswordInput
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="輸入當前密碼"
+                />
+              </div>
             </div>
-            <div className={styles.field}>
-              <label>新密碼</label>
-              <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+
+            <div className={styles.passwordField}>
+              <div className={styles.passwordShow}>
+                <label>新密碼</label>
+                <PasswordInput
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="輸入新密碼"
+                />
+              </div>
             </div>
-            <div className={styles.field}>
-              <label>確認新密碼</label>
-              <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+
+            <div className={styles.passwordField}>
+              <div className={styles.passwordShow}>
+                <label>確認新密碼</label>
+                <PasswordInput
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="確認新密碼"
+                />
+              </div>
             </div>
-            <button className={styles.saveButton} onClick={handlePasswordChange}>修改密碼</button>
+            <button className={styles.saveButton} onClick={handlePasswordChange}>保存變更</button>
           </div>
         </div>
       </div>

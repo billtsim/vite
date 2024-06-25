@@ -1,111 +1,115 @@
 .profileContainer {
-    display: flex;
-    justify-content: start;
-    padding: 20px;
-  }
-  
-  .sidebar {
-    width: 200px;
-    margin-right: 20px;
-    border-right: 1px solid #ccc;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    padding: 10px 0;
-    cursor: pointer;
-  }
-  
-  .profileContent {
-    flex: 1;
-  }
-  
-  .section {
-    margin-bottom: 20px;
-  }
-  
-  .fieldGroup {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  
-  .field {
-    display: flex;
-    align-items: center;
-    background-color: #f5f5f5;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    position: relative;
-  }
-  
-  .field label {
-    margin-right: 10px;
-    font-weight: bold;
-    width: 150px;
-  }
-  
-  .field .value {
-    flex: 1;
-    padding: 5px;
-    font-size: 16px;
-    color: #666;
-  }
-  
-  .field input {
-    border: none;
-    background-color: transparent;
-    flex: 1;
-    padding: 5px;
-    font-size: 16px;
-  }
-  
-  .editButton {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 5px;
-  }
-  
-  .saveButton {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 5px;
-  }
-  
-  .cancelButton {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 5px;
-  }
-  
-  .editButton:hover, .saveButton:hover, .cancelButton:hover {
-    opacity: 0.8;
-  }
-  
-  .modalField {
-    margin: 20px 0;
-  }
-  
-  .modalActions {
-    display: flex;
-    justify-content: space-between;
-  }
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  width: 100%;
+}
 
-  
+.profileContent {
+  width: 80%; /* 占据页面 80% 的宽度 */
+  padding: 20px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.inputField {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box; /* 确保 padding 不会影响宽度 */
+}
+
+.fieldGroup {
+  margin-bottom: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.field label {
+  margin-bottom: 5px;
+}
+
+.field input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1;
+}
+
+.saveButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.saveButton:hover {
+  background-color: #0056b3;
+}
+
+.passwordSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.passwordShow {
+  display: flex;
+  flex-direction: column;
+}
+
+.passwordButton {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  color: rgb(20, 20, 20);
+  box-sizing: border-box;
+  cursor: text;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  letter-spacing: 0.014em;
+  line-height: 1.43;
+  position: relative;
+  border-radius: 4px;
+  padding: 0px;
+}
+
+.passwordField {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.passwordField input {
+  flex-grow: 1;
+}
+
+.passwordField .togglePassword {
+  flex-basis: 10%; /* 占据输入框宽度的10% */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.passwordGuidelines {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px;
+  width: 100%;
+  font-size: 14px;
+  color: #555;
+}
+

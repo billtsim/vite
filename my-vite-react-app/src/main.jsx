@@ -12,6 +12,7 @@ import SignUp from './components/login page/SignUp.jsx';
 import ForgotPassword from './components/login page/ForgotPassword.jsx';
 import ResetPassword from './components/login page/ResetPassword.jsx';
 import UserProfile from './components/user management page/UserProfile.jsx';
+import ExceptionPage from './components/exception handler page/exception.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="reset-password" element={<ResetPassword />} />
         <Route path="user-profile" element={<UserProfile />} />
+        <Route path="/exception" element={<ExceptionPage />} />
       </Routes>
     </Router>
     </>

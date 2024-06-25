@@ -18,7 +18,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ backgroundColor: 'black', color: 'white', width: 'auto' }}>
+    <div style={{ backgroundColor: 'black', color: 'white', width: 'auto'}}>
       <Navigation />
       <div style={{ paddingTop: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Carousel />
