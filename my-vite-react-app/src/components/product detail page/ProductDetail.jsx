@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axiosInstance from '../../axios/Axios';
 import Navigation from '../home page/Navigation';
 import styles from '../../CSS/productDetailPageCSS/ProductDetail.module.css';
@@ -7,6 +7,7 @@ import styles from '../../CSS/productDetailPageCSS/ProductDetail.module.css';
 const ProductDetail = () => {
   const { name } = useParams();
   const [product, setProduct] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [thumbnailIndex, setThumbnailIndex] = useState(0);
   const carouselRef = useRef(null);
@@ -14,6 +15,8 @@ const ProductDetail = () => {
   const nextArrowRef = useRef(null);
   const thumbnailPrevArrowRef = useRef(null);
   const thumbnailNextArrowRef = useRef(null);
+  const [message, setMessage] = useState('');
+  const userId = localStorage.getItem('id'); // 从 localStorage 获取用户 ID
 
   // Touch event state
   const touchStartX = useRef(0);
@@ -32,6 +35,21 @@ const ProductDetail = () => {
 
     fetchProduct();
   }, [name]);
+
+  useEffect(() => {
+    if (userId) {
+      const fetchCartItems = async () => {
+        try {
+          const response = await axiosInstance.get(`/cart/CarItemsId/${userId}`);
+          setCartItems(response.data.data);
+        } catch (error) {
+          console.error('Failed to fetch cart items:', error);
+        }
+      };
+
+      fetchCartItems();
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (carouselRef.current) {
@@ -103,10 +121,31 @@ const ProductDetail = () => {
     }
   };
 
+  const handleAddToCart = async () => {
+    if (!userId) {
+      setMessage('请先登录');
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post('/cart/add', {
+        userId: userId, // 使用 localStorage 中的 userId
+        productId: product.id
+      });
+      setMessage('成功加入购物车');
+      setCartItems([...cartItems, { productId: product.id }]);
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+      setMessage('加入购物车失败');
+    }
+  };
+
   if (!product) return <div>Loading...</div>;
 
   const images = product.imageUrl.split(',').filter(img => img.trim() !== '');
   const displayedThumbnails = images.slice(thumbnailIndex * 4, (thumbnailIndex + 1) * 4);
+
+  const isProductInCart = cartItems.includes(product.id);
 
   return (
     <div style={{ backgroundColor: 'black', color: 'white', width: 'auto', display: 'flex', flexDirection: 'column' }}>
@@ -182,9 +221,14 @@ const ProductDetail = () => {
         </div>
         <div className={styles.productRight}>
           <div className={styles.productInfoContainer}>
-          <p className={styles.productPrice}>HK${product.price}</p>
+            <p className={styles.productPrice}>HK${product.price}</p>
             <button className={styles.purchaseButton}>立即购买</button>
-            <button className={styles.addToCartButton}>加入购物车</button>
+            {isProductInCart ? (<button className={styles.addToCartButton} >
+                <Link to="/cart" className={styles.viewCartButton} style={{ color: 'white' }}>檢視購物車</Link></button>
+              ) : (
+                <button className={styles.addToCartButton} onClick={handleAddToCart}>加入购物车</button>
+              )}
+            {message && <p className={styles.message}>{message}</p>}
           </div>
         </div>
       </div>

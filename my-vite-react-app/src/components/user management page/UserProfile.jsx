@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axiosInstance from '../../axios/Axios';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../CSS/userManagementPageCSS/UserProfile.module.css';
@@ -50,11 +50,15 @@ const UserProfile = () => {
     }
 
     try {
-      await axiosInstance.put('/update-password', { username, password, newPassword });
-      alert('Password updated successfully');
-      setPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
+      const response = await axiosInstance.put('/reset-password/update-password', { username, password, newPassword });
+      if (response.data.data) {
+        alert('Password updated successfully');
+        setPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else { 
+        alert('Incorrect password');
+      }
     } catch (error) {
       console.error('Error updating password:', error);
     }
@@ -113,7 +117,7 @@ const UserProfile = () => {
                 <PasswordInput
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="輸入新密碼"
+                  placeholder="輸入新密碼" 
                 />
               </div>
             </div>

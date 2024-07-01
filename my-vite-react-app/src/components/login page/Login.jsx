@@ -23,9 +23,11 @@ function Login() {
       const response = await axiosInstance.post('/login', { usernameOrEmail, password });
       const token = response.data.data.token;
       const username = response.data.data.username;
+      const id = response.data.data.id;
       if (token && username) {
         localStorage.setItem("token", token);
         localStorage.setItem("username", username); // 将用户名存储在 localStorage 中
+        localStorage.setItem("id", id); // 将用户 id 存储在 localStorage 中
         await showAlert('Login success');
         navigate('/');
       } else {

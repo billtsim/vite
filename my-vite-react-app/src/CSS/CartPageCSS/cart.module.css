@@ -1,0 +1,241 @@
+.cart {
+  background-color: #121212;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 置中 */
+  min-height: 100vh; /* 占据整个页面高度 */
+  width: 100%; /* 宽度为100% */
+}
+
+.cartPageWrapper {
+  margin-top: 100px;
+  width: 70%; /* 设置宽度 */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cartHeader,
+.cartFooter {
+  background-color: #1c1c1c;
+  padding: 20px;
+  text-align: center;
+}
+
+.cartContent {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between; /* 确保左右均匀分布 */
+  align-items: flex-start;
+}
+
+.cartItems {
+  flex: 1.5;
+  margin-right: 20px;
+  width: 100%;
+}
+
+.cartItem {
+  display: flex;
+  background-color: #1c1c1c;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.cartItemImage {
+  width: 150px;
+  height: 100px;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+
+.cartItemDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cartItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* 改为顶部对齐 */
+}
+
+.cartItemName {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px; /* 添加下边距 */
+}
+
+.cartItemPriceContainer {
+  display: flex;
+  flex-direction: column; /* 改为列方向 */
+  align-items: flex-end;
+  gap: 5px; /* 添加间距 */
+}
+
+.cartItemPrice {
+  font-size: 18px;
+  color: #00aaff;
+}
+
+.cartItemOriginalPrice {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: #888;
+}
+
+.cartItemDiscount {
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #66c02e;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.cartItemPriceGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.cartItemCategories {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.cartItemActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartItemRemoveButton {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 5px 10px; /* 缩小按钮的 padding */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px; /* 调整字体大小 */
+}
+
+.cartItemRemoveButton:hover {
+  background-color: #cc0000;
+}
+
+.cartItemPriceInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 20px;
+}
+
+.cartEmpty {
+  flex: 0.5;
+}
+
+.cartSummary {
+  flex: 0.3;
+  background-color: #1c1c1c;
+  padding: 20px;
+  text-align: right;
+  border-radius: 8px;
+  width: 100%;
+  font-size: xx-small;
+}
+
+.cartSummary h2 {
+  margin-bottom: 20px;
+}
+
+.cartSummary p {
+  font-size: 15px;
+}
+
+.checkoutButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.checkoutButton:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 1000px) {
+  .cartPageWrapper {
+     width: 85%;
+  }
+}
+
+@media (max-width: 768px) {
+  .cartContent {
+    flex-direction: column;
+  }
+
+  .cartSummary {
+    text-align: center;
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .cartContent {
+    flex-direction: column;
+  }
+  
+  .cartItems {
+    margin-right: 0;
+  }
+
+  .cartItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cartItemImage {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .cartItemHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cartItemName {
+    margin-bottom: 10px;
+  }
+
+  .cartItemPriceContainer {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .cartItemDiscount {
+    margin-right: 0;
+  }
+
+  .cartSummary {
+    text-align: left;
+    padding: 0;
+    font-size: xx-small;
+  }
+}
+
+.footer {
+  margin-top: auto; /* 将Footer推到页面底部 */
+  width: 100%;
+}

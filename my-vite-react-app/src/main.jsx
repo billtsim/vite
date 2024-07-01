@@ -13,9 +13,12 @@ import ForgotPassword from './components/login page/ForgotPassword.jsx';
 import ResetPassword from './components/login page/ResetPassword.jsx';
 import UserProfile from './components/user management page/UserProfile.jsx';
 import ExceptionPage from './components/exception handler page/exception.jsx';
+import CartPage from './components/cart page/Cart.jsx';
+import { UserProvider } from './context/UserContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
+    <UserProvider>
     <GlobalStyle />
     <Router>
       <Routes>
@@ -30,8 +33,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="reset-password" element={<ResetPassword />} />
         <Route path="user-profile" element={<UserProfile />} />
         <Route path="/exception" element={<ExceptionPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </Router>
+    </UserProvider>
     </>
   
 );

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axios/Axios';
 import styles from '../../CSS/homePageCSS/Navigation.module.css';
+import { UserContext } from '../../context/UserContext'; // 导入 UserContext
 
 const Navigation = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [user, setUser] = useState(null); // 存储用户信息
+  const { user, setUser } = useContext(UserContext); // 使用 UserContext
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,8 +23,8 @@ const Navigation = () => {
   const fetchUserData = async (username) => {
     try {
       const response = await axiosInstance.get(`/get-user?username=${username}`);
-      setUser(response.data.data); // 假设返回的数据包含用户信息
-      console.log('User data:', response.data.data);
+      setUser(response.data.data[0]); // 假设返回的数据包含用户信息
+      console.log('User data:', response.data.data[0]);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -63,7 +65,7 @@ const Navigation = () => {
           <li className={`${styles.navItem} ${styles.authButtonMobile}`}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', color: 'white' }} className={styles.userSection}>
               <button style={{ padding: "0" }} onClick={toggleDropdown} className={styles.dropdownButton}>
-                {user[0].username} <span className={styles.arrowDown}>▼</span>
+                {user.username} <span className={styles.arrowDown}>▼</span>
               </button>
               <div className={`${styles.dropdownContent} ${isDropdownOpen ? styles.showDropdown : ''}`}>
                 <Link to="/user-profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
@@ -85,7 +87,7 @@ const Navigation = () => {
         {user ? (
           <div id={styles.userSection} className={styles.userSection}>
             <button onClick={toggleDropdown} className={styles.dropdownButton}>
-              {user[0].username} <span className={styles.arrowDown}>▼</span>
+              {user.username} <span className={styles.arrowDown}>▼</span>
             </button>
             <div className={`${styles.dropdownContent} ${isDropdownOpen ? styles.showDropdown : ''}`}>
               <Link to="/user-profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
@@ -98,7 +100,7 @@ const Navigation = () => {
           <button style={{ paddingRight: '30px' }} onClick={handleAuthClick} className={styles.authButton}>
             Login
           </button>
-        )}
+        )}                       
         <button
           style={{ paddingRight: '30px' }}
           className={`${styles.menuToggle} ${isMenuOpen ? styles.isActive : ''}`}
