@@ -15,6 +15,7 @@ import UserProfile from './components/user management page/UserProfile.jsx';
 import ExceptionPage from './components/exception handler page/exception.jsx';
 import CartPage from './components/cart page/Cart.jsx';
 import { UserProvider } from './context/UserContext.jsx';
+import PaymentResult from './components/payment page/PaymentResult.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
@@ -34,6 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="user-profile" element={<UserProfile />} />
         <Route path="/exception" element={<ExceptionPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/payment-result" element={<PaymentResult />} />
       </Routes>
     </Router>
     </UserProvider>

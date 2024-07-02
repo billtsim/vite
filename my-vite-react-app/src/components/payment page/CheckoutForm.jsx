@@ -20,7 +20,7 @@ const CheckoutForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: 'http://123',
+        return_url: 'http://localhost:5173/payment-result', // 确保这个 URL 是有效的，并且您的应用程序可以处理这个路由
       },
     });
 
