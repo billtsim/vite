@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axiosInstance from '../../axios/Axios';
 import Navigation from '../home page/Navigation';
 import styles from '../../CSS/productDetailPageCSS/ProductDetail.module.css';
+import PaymentModal from '../payment page/PaymentModal'; // 导入支付模态窗口组件
 
 const ProductDetail = () => {
   const { name } = useParams();
@@ -16,6 +17,7 @@ const ProductDetail = () => {
   const thumbnailPrevArrowRef = useRef(null);
   const thumbnailNextArrowRef = useRef(null);
   const [message, setMessage] = useState('');
+  const [showCheckout, setShowCheckout] = useState(false); // 添加状态来控制支付模态窗口的显示
   const userId = localStorage.getItem('id'); // 从 localStorage 获取用户 ID
 
   // Touch event state
@@ -140,12 +142,20 @@ const ProductDetail = () => {
     }
   };
 
+  const handleBuyNow = () => {
+    setShowCheckout(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowCheckout(false);
+  };
+
   if (!product) return <div>Loading...</div>;
 
   const images = product.imageUrl.split(',').filter(img => img.trim() !== '');
   const displayedThumbnails = images.slice(thumbnailIndex * 4, (thumbnailIndex + 1) * 4);
 
-  const isProductInCart = cartItems.includes(product.id);
+  const isProductInCart = cartItems.some((item) => item.productId === product.id);
 
   return (
     <div style={{ backgroundColor: 'black', color: 'white', width: 'auto', display: 'flex', flexDirection: 'column' }}>
@@ -222,16 +232,25 @@ const ProductDetail = () => {
         <div className={styles.productRight}>
           <div className={styles.productInfoContainer}>
             <p className={styles.productPrice}>HK${product.price}</p>
-            <button className={styles.purchaseButton}>立即购买</button>
-            {isProductInCart ? (<button className={styles.addToCartButton} >
-                <Link to="/cart" className={styles.viewCartButton} style={{ color: 'white' }}>檢視購物車</Link></button>
-              ) : (
-                <button className={styles.addToCartButton} onClick={handleAddToCart}>加入购物车</button>
-              )}
+            <button className={styles.purchaseButton} onClick={handleBuyNow}>立即购买</button>
+            {isProductInCart ? (
+              <button className={styles.addToCartButton}>
+                <Link to="/cart" className={styles.viewCartButton} style={{ color: 'white' }}>檢視購物車</Link>
+              </button>
+            ) : (
+              <button className={styles.addToCartButton} onClick={handleAddToCart}>加入购物车</button>
+            )}
             {message && <p className={styles.message}>{message}</p>}
           </div>
         </div>
       </div>
+      {showCheckout && (
+        <PaymentModal
+          amount={product.price}
+          isOpen={showCheckout}
+          onClose={handleCloseModal}
+        />
+      )}
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
           <div className={styles.footerLinks}>
