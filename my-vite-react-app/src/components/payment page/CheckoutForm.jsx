@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import styles from '../../CSS/checkoutFormPageCSS/CheckoutForm.module.css';
+import styles from '../../CSS/paymentModalPageCSS/PaymentModal.module.css';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
