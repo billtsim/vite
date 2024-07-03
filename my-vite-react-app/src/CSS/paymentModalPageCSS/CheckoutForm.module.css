@@ -1,0 +1,59 @@
+.checkoutForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%; /* 右侧支付部分占80%宽度 */
+  }
+
+  form {width: 100%;} /* 表单宽度为100% */
+  
+  .emailInput, .nameInput { /* 新增 nameInput 样式 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .paymentMethods {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .paymentMethods label {
+    margin-bottom: 10px;
+  }
+  
+  .cardElement {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .paymentButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6772e5;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* 使按钮占满宽度 */
+  }
+  
+  .paymentButton:hover {
+    background-color: #5469d4;
+  }
+  
+  .message {
+    margin-top: 20px;
+    font-size: 14px;
+    color: red;
+  }

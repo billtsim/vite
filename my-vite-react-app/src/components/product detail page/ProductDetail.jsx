@@ -249,6 +249,7 @@ const ProductDetail = () => {
           amount={product.price}
           isOpen={showCheckout}
           onClose={handleCloseModal}
+          product={{name: product.name, image: product.mainImage}}
         />
       )}
       <footer className={styles.footer}>

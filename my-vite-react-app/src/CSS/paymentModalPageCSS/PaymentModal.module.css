@@ -1,4 +1,3 @@
-/* PaymentModal.module.css */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -10,6 +9,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  color: black;
 }
 
 .modalContent {
@@ -17,8 +17,11 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 600px;
+  width: 70%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
 }
 
 .closeButton {
@@ -27,59 +30,46 @@
   right: 10px;
   background: none;
   border: none;
-  font-size: 16px;
+  font-size: 24px;
   cursor: pointer;
+  color: #000;
 }
 
-.checkoutForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.leftPane {
+  width: 30%; /* 左侧占30%宽度 */
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-
-.paymentMethods {
   display: flex;
   flex-direction: column;
+  justify-content: start;
   align-items: flex-start;
-  width: 100%;
+  border-right: 1px solid #ccc;
+}
+
+.rightPane {
+  width: 70%; /* 右侧占70%宽度 */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.productImage {
+  width: 100%; /* 产品图片最大宽度 */
   margin-bottom: 20px;
 }
 
-.paymentMethods label {
+.productDetails {
+  margin-bottom: 20px;
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
-.cardElement {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.EmbeddedCheckout {
   width: 100%;
-  margin-bottom: 20px;
-}
-
-.paymentButton {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #6772e5;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.paymentButton:hover {
-  background-color: #5469d4;
-}
-
-.message {
-  margin-top: 20px;
-  font-size: 14px;
-  color: red;
+  overflow-y: auto;
 }
