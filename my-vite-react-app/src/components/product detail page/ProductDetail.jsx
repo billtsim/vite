@@ -19,6 +19,7 @@ const ProductDetail = () => {
   const [message, setMessage] = useState('');
   const [showCheckout, setShowCheckout] = useState(false); // 添加状态来控制支付模态窗口的显示
   const userId = localStorage.getItem('id'); // 从 localStorage 获取用户 ID
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   // Touch event state
   const touchStartX = useRef(0);
@@ -136,6 +137,7 @@ const ProductDetail = () => {
       });
       setMessage('成功加入购物车');
       setCartItems([...cartItems, { productId: product.id }]);
+      
     } catch (error) {
       console.error('Error adding product to cart:', error);
       setMessage('加入购物车失败');
@@ -143,6 +145,12 @@ const ProductDetail = () => {
   };
 
   const handleBuyNow = () => {
+    setSelectedProducts([{
+      name: product.name,
+      image: product.mainImage,
+      amount: product.price,
+    }]);
+    console.log(selectedProducts);
     setShowCheckout(true);
   };
 
@@ -249,7 +257,7 @@ const ProductDetail = () => {
           amount={product.price}
           isOpen={showCheckout}
           onClose={handleCloseModal}
-          product={{name: product.name, image: product.mainImage}}
+          products={selectedProducts}
         />
       )}
       <footer className={styles.footer}>

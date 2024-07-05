@@ -20,6 +20,7 @@ const PaymentResult = () => {
           .then((res) => {
             const status = res.data.status;
             setPaymentStatus(status);
+            console.log("Payment status:", status);
 
             if (status === 'complete') {
               setMessage('Payment succeeded!');

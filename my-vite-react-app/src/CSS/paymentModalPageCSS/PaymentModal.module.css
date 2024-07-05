@@ -10,6 +10,7 @@
   align-items: center;
   z-index: 1000;
   color: black;
+  padding: 20px;
 }
 
 .modalContent {
@@ -22,6 +23,7 @@
   position: relative;
   display: flex;
   flex-direction: row;
+  overflow-y: auto;
 }
 
 .closeButton {
@@ -61,6 +63,7 @@
 
 .productDetails {
   margin-bottom: 20px;
+  flex: 1;
 }
 
 .productName {
@@ -71,5 +74,14 @@
 
 .EmbeddedCheckout {
   width: 100%;
-  overflow-y: auto;
+  
 }
+
+.productList {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+

@@ -41,15 +41,20 @@ const PaymentModal = ({ isOpen, onClose, products, amount }) => {
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={onClose}>X</button>
         <div className={styles.leftPane}>
-          <h2>bill shopping</h2> {/* 标题 */}
-          <h2>结账</h2> {/* 标题 */}
-          {products.map((product, index) => (
-            <div key={index} className={styles.productDetails}>
-              <img src={product.image} alt={product.name} className={styles.productImage} /> {/* 产品图片 */}
-              <div className={styles.productName}>{product.name}</div> {/* 产品名称 */}
-            </div>
-          ))}
-          <div>结账金额: ${amount}</div> {/* 显示结账金额 */}
+          <div className={styles.logo} style={{flex: 1}}>
+            <h2>bill shopping</h2> {/* Title */}
+            <h2>Checkout</h2> {/* Title */}
+            <div>Checkout Amount: ${amount}</div>
+          </div>
+          <div className={styles.productList}>
+            {products.map((product, index) => (
+              <div key={index} className={styles.productDetails}>
+                <div className={styles.productName}>{product.name}</div> {/* Product Name */}
+                <img src={product.image} alt={product.name} className={styles.productImage} /> {/* Product Image */}
+              </div>
+            ))}
+          </div>
+           {/* Display Checkout Amount */}
         </div>
         <div className={styles.rightPane}>
           <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
