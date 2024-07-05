@@ -3,9 +3,13 @@ import axiosInstance from '../../axios/Axios';
 import styles from '../../CSS/CartPageCSS/cart.module.css';
 import Navigation from '../home page/Navigation';
 import Footer from '../home page/Footer';
+import PaymentModal from '../payment page/PaymentModal'; // 引入 PaymentModal 组件
 
 const CartPage = () => {
   const [cart, setCart] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
   const userId = localStorage.getItem('id'); // 从 localStorage 获取用户 ID
 
   useEffect(() => {
@@ -14,7 +18,7 @@ const CartPage = () => {
         const response = await axiosInstance.get(`/cart/user/${userId}`); // 使用 userId 获取购物车
         setCart(response.data.data);
       } catch (error) {
-        console.error('Error fetching cart:', error);
+        console.error('获取购物车时出错:', error);
       }
     };
 
@@ -28,7 +32,7 @@ const CartPage = () => {
       await axiosInstance.post('/cart/remove', null, { params: { userId, productId } });
       setCart(cart.filter(item => item.productId !== productId));
     } catch (error) {
-      console.error('Error removing product from cart:', error);
+      console.error('移除购物车中的产品时出错:', error);
     }
   };
 
@@ -36,8 +40,19 @@ const CartPage = () => {
     return cart.reduce((total, item) => total + item.productInfo.price * item.quantity, 0).toFixed(2);
   };
 
+  const handleCheckout = () => {
+    setSelectedProducts(cart.map(item => ({
+      name: item.productInfo.name,
+      image: item.productInfo.mainImage,
+      amount: item.productInfo.price,
+      quantity: item.quantity
+    })));
+    setTotalAmount(parseFloat(getTotalPrice()));
+    setIsModalOpen(true);
+  };
+
   if (cart.length === 0) {
-    return <div>Loading...</div>;
+    return <div>加载中...</div>;
   }
 
   return (
@@ -80,11 +95,19 @@ const CartPage = () => {
             <h2>遊戲及應用程式摘要</h2>
             <p>价格: HK${getTotalPrice()}</p>
             <p>稅金於結帳時計算</p>
-            <button className={styles.checkoutButton}>結帳</button>
+            <button onClick={handleCheckout} className={styles.checkoutButton}>結帳</button>
           </div>
         </div>
       </div>
       <Footer className={styles.footer} />
+      {isModalOpen && (
+        <PaymentModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          products={selectedProducts}
+          amount={totalAmount}
+        />
+      )}
     </div>
   );
 };
