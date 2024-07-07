@@ -52,7 +52,19 @@ const CartPage = () => {
   };
 
   if (cart.length === 0) {
-    return <div>加载中...</div>;
+    return (
+      <div className={styles.cart}>
+      <Navigation />
+      <div className={styles.cartPageWrapper}>
+        <div className={styles.cartContent}>
+          <div className={styles.cartItems}>
+            <h3 style={{textAlign: 'center', fontSize: '2rem'}}>您的購物車是空的</h3>
+          </div>
+        </div>
+      </div>
+      <Footer className={styles.footer} />
+    </div>
+    )
   }
 
   return (
@@ -106,6 +118,7 @@ const CartPage = () => {
           onClose={() => setIsModalOpen(false)}
           products={selectedProducts}
           amount={totalAmount}
+          cart={"cart"}
         />
       )}
     </div>

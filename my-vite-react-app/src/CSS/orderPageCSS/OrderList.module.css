@@ -1,0 +1,130 @@
+.orderListContainer {
+    padding: 20px;
+    background-color: #000;
+    color: #fff;
+    margin-top: 50px;
+  }
+  
+  .orderListContainer h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: red;
+  }
+  
+  .orderGroup {
+    background-color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+  
+  .orderHeader, .orderSubHeader, .orderTotal {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .orderHeader span, .orderSubHeader div, .orderTotal {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .orderSubHeader {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+    align-items: center;
+  }
+  
+  .orderSubHeader div {
+    flex: none;
+    text-align: left;
+  }
+  
+  .toggleButton {
+    background-color: transparent;
+    border: none;
+    color: white; /* Change down-arrow color to white */
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto; /* Pushes the button to the right */
+  }
+  
+  .orderDetailsContainer {
+    border-top: 1px solid white; /* Change top border color to white */
+    padding-top: 10px;
+  }
+  
+  .orderDetails {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .orderItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .productImage {
+    width: 15%;
+    height: auto;
+    margin-right: 2%;
+  }
+  
+  .productName {
+    flex: 1;
+    margin-right: 10%;
+  }
+  
+  .productPrice {
+    white-space: nowrap;
+  }
+  
+  @media (max-width: 768px) {
+    .orderHeader, .orderSubHeader, .orderTotal {
+      flex-direction: column;
+      text-align: left;
+    }
+    
+    .orderHeader span, .orderSubHeader div, .orderTotal {
+      text-align: left;
+      margin-bottom: 5px;
+    }
+    
+    .orderItem {
+      flex-direction: column;
+      text-align: left;
+    }
+  
+    .productImage {
+      width: 80%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  
+    .productName {
+      margin-bottom: 5px;
+    }
+  
+    .productPrice {
+      margin-bottom: 10px;
+    }
+  
+    .orderSubHeader {
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+  
+    .toggleButton {
+      position: relative;
+      top: 0;
+      right: 0;
+      margin-top: 10px;
+    }
+  }

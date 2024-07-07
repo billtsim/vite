@@ -9,10 +9,11 @@ import styles from '../../CSS/paymentModalPageCSS/PaymentModal.module.css';
 
 const stripePromise = loadStripe("pk_test_51PXxoGRtNnaFIl7oxl1gIxpmNzIljtxbVaBwCSbXN5LFJRGOwYmsrx0YSo3tNIksyL9Jve4xvvn9fDrmfO39THtu00CfSV1LYp");
 
-const PaymentModal = ({ isOpen, onClose, products, amount }) => {
+const PaymentModal = ({ isOpen, onClose, products, amount, cart }) => {
+
   // Callback function to fetch the client secret
   const fetchClientSecret = useCallback(() => {
-    return axiosInstance.post("/api/payment/create-checkout-session", {
+    return axiosInstance.post(`/api/payment/create-checkout-session/${cart}`, {
       amount,
       products
     })

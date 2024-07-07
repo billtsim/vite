@@ -9,18 +9,18 @@ const PaymentResult = () => {
   const location = useLocation();
   const [message, setMessage] = useState('Processing payment...');
   const [paymentStatus, setPaymentStatus] = useState(null);
+  const [userId, setUserId] = useState(localStorage.getItem('id'));
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
     const sessionId = query.get('session_id');
-
+    
     if (sessionId) {
       const checkPaymentStatus = () => {
-        axiosInstance.get(`/api/payment/status/${sessionId}`)
+        axiosInstance.post(`/api/payment/status`, { sessionId, userId })
           .then((res) => {
             const status = res.data.status;
             setPaymentStatus(status);
-            console.log("Payment status:", status);
 
             if (status === 'complete') {
               setMessage('Payment succeeded!');
@@ -38,8 +38,7 @@ const PaymentResult = () => {
 
       // Check payment status immediately and then every 5 seconds
       checkPaymentStatus();
-      const intervalId = setInterval(checkPaymentStatus, 5000);
-      return () => clearInterval(intervalId);
+      
     } else {
       setMessage('No session ID found in URL.');
     }

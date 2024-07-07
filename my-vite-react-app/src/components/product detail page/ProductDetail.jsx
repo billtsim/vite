@@ -258,6 +258,7 @@ const ProductDetail = () => {
           isOpen={showCheckout}
           onClose={handleCloseModal}
           products={selectedProducts}
+          cart={"solo"}
         />
       )}
       <footer className={styles.footer}>

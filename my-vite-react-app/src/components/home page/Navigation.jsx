@@ -70,7 +70,8 @@ const Navigation = () => {
               <div className={`${styles.dropdownContent} ${isDropdownOpen ? styles.showDropdown : ''}`}>
                 <Link to="/user-profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
                 <Link to="/cart" className={styles.dropdownItem}>購物車</Link>
-                <Link to="/orders" className={styles.dropdownItem}>我的訂單</Link>
+                <Link to="/order-list" className={styles.dropdownItem}>我的訂單</Link>
+                <Link to="/game-library" className={styles.dropdownItem}>遊戲收藏</Link>
                 <div onClick={handleAuthClick} className={styles.dropdownItem}>登出</div>
               </div>
             </div>
@@ -92,7 +93,8 @@ const Navigation = () => {
             <div className={`${styles.dropdownContent} ${isDropdownOpen ? styles.showDropdown : ''}`}>
               <Link to="/user-profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
               <Link to="/cart" className={styles.dropdownItem}>購物車</Link>
-              <Link to="/orders" className={styles.dropdownItem}>我的訂單</Link>
+              <Link to="/order-list" className={styles.dropdownItem}>我的訂單</Link>
+              <Link to="/game-library" className={styles.dropdownItem}>遊戲收藏</Link>
               <div onClick={handleAuthClick} className={styles.dropdownItem}>登出</div>
             </div>
           </div>

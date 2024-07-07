@@ -16,6 +16,8 @@ import ExceptionPage from './components/exception handler page/exception.jsx';
 import CartPage from './components/cart page/Cart.jsx';
 import { UserProvider } from './context/UserContext.jsx';
 import PaymentResult from './components/payment page/PaymentResult.jsx';
+import OrderList from './components/order page/OrderList.jsx';
+import GameLibrary from './components/game library page/GameLibrary.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
@@ -36,6 +38,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/exception" element={<ExceptionPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/payment-result" element={<PaymentResult />} />
+        <Route path="/order-list" element={<OrderList />} />
+        <Route path="/game-library" element={<GameLibrary />} />
       </Routes>
     </Router>
     </UserProvider>

@@ -1,0 +1,73 @@
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #000;
+  }
+  
+  .gameLibraryContainer {
+    padding: 20px;
+    color: #fff;
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .gameLibraryContainer h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: red;
+  }
+  
+  .libraryGrid {
+    display: flex;
+  }
+  
+  .gameList {
+    width: 25%;
+    background-color: #1c1c1c;
+    border-right: 1px solid #444;
+    padding: 10px;
+  }
+  
+  .gameItem {
+    padding: 10px;
+    cursor: pointer;
+    color: #fff;
+    border-bottom: 1px solid #444;
+  }
+  
+  .gameItem:hover {
+    background-color: #333;
+  }
+  
+  .gameDetails {
+    width: 75%;
+    padding: 20px;
+    color: #fff;
+  }
+  
+  .gameInfo h2 {
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .productImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .downloadButton {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .downloadButton:hover {
+    background-color: #0056b3;
+  }
