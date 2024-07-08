@@ -23,16 +23,18 @@ const PaymentResult = () => {
             setPaymentStatus(status);
 
             if (status === 'complete') {
-              setMessage('Payment succeeded!');
+              setMessage('支付成功！请检查您的订单列表和游戏库。');
             } else if (status === 'failed') {
-              setMessage('Payment failed. Please try again.');
+              setMessage('支付失败。请再试一次。');
+            } else if (status === 'open') {
+              setMessage('支付仍在处理中。请等待或检查您的支付详情。');
             } else {
-              setMessage('Payment status unknown. Please check your payment details.');
+              setMessage('支付状态未知。请检查您的支付详情。');
             }
           })
           .catch((error) => {
             console.error("Failed to check payment status:", error);
-            setMessage('Error checking payment status.');
+            setMessage('检查支付状态时出错。');
           });
       };
 
@@ -40,9 +42,9 @@ const PaymentResult = () => {
       checkPaymentStatus();
       
     } else {
-      setMessage('No session ID found in URL.');
+      setMessage('URL中未找到会话ID。');
     }
-  }, [location]);
+  }, [location, userId]);
 
   return (
     <div className={styles.paymentResultContainer}>
@@ -50,9 +52,9 @@ const PaymentResult = () => {
         <Navigation />
       </div>
       <div className={styles.paymentResultContent}>
-        <h1>Payment Result</h1>
+        <h1>支付结果</h1>
         <p className={styles.paymentMessage}>{message}</p>
-        {paymentStatus && <p className={styles.paymentStatus}>Status: {paymentStatus}</p>}
+        {paymentStatus && <p className={styles.paymentStatus}>状态: {paymentStatus}</p>}
       </div>
       <Footer />
     </div>

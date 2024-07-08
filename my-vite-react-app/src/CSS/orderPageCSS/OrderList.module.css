@@ -3,6 +3,7 @@
     background-color: #000;
     color: #fff;
     margin-top: 50px;
+    min-height: 100vh;
   }
   
   .orderListContainer h1 {

@@ -83,15 +83,13 @@ const Navigation = () => {
         )}
       </ul>
       <div className={styles.rightSection}>
-        <button className={styles.iconButton}>🌐</button>
-        <button className={styles.iconButton}>👤</button>
         {user ? (
           <div id={styles.userSection} className={styles.userSection}>
             <button onClick={toggleDropdown} className={styles.dropdownButton}>
               {user.username} <span className={styles.arrowDown}>▼</span>
             </button>
             <div className={`${styles.dropdownContent} ${isDropdownOpen ? styles.showDropdown : ''}`}>
-              <Link to="/user-profile" className={styles.dropdownItem}>查看我的個人檔案</Link>
+              <Link to="/user-profile" className={styles.dropdownItem}>我的個人檔案</Link>
               <Link to="/cart" className={styles.dropdownItem}>購物車</Link>
               <Link to="/order-list" className={styles.dropdownItem}>我的訂單</Link>
               <Link to="/game-library" className={styles.dropdownItem}>遊戲收藏</Link>

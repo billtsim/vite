@@ -100,6 +100,7 @@ body {
   display: flex;
   align-items: center;
   position: relative;
+  padding: 10px 50px 10px 0px;
 }
 
 .avatar {
@@ -140,7 +141,7 @@ body {
   
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  width: 100%;
+  width: 70%;
   transition: max-height 0.3s ease-out;
   position: absolute;
   top: 100%;

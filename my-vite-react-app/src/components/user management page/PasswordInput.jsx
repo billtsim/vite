@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import styles from '../../CSS/userManagementPageCSS/PasswordInput.module.css'; // 创建一个单独的 CSS 文件来处理样式
+import styles from '../../CSS/userManagementPageCSS/PasswordInput.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const PasswordInput = ({ value, onChange, placeholder }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -12,7 +14,7 @@ const PasswordInput = ({ value, onChange, placeholder }) => {
     <div className={styles.password_input_container}>
       <input
         type={isPasswordVisible ? 'text' : 'password'}
-        inputMode='text'
+        inputMode="text"
         value={value}
         onChange={onChange}
         placeholder={placeholder}
@@ -22,7 +24,7 @@ const PasswordInput = ({ value, onChange, placeholder }) => {
         className={styles.password_toggle_icon}
         onClick={togglePasswordVisibility}
       >
-        {isPasswordVisible ? '🙈' : '👁️'}
+        <FontAwesomeIcon icon={isPasswordVisible ? faEyeSlash : faEye} />
       </span>
     </div>
   );

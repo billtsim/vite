@@ -55,9 +55,7 @@ const GameLibrary = () => {
                   alt={selectedGame.productsDetail.name}
                   className={styles.productImage}
                 />
-                <p><strong>Price:</strong> HK${selectedGame.productsDetail.price.toFixed(2)}</p>
                 <p><strong>Categories:</strong> {selectedGame.productsDetail.categories}</p>
-                <p><strong>Discount:</strong> {selectedGame.productsDetail.discount}%</p>
                 <p><strong>Additional Information:</strong> {selectedGame.additionalInformation}</p>
                 <button className={styles.downloadButton}>Download</button>
               </div>
