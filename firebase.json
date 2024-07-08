@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build",
+    "public": "my-vite-react-app/dist", 
     "ignore": [
       "firebase.json",
       "**/.*",

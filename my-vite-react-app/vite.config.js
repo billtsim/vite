@@ -16,10 +16,13 @@ export default defineConfig({
   ],
   css: {
     modules: {
-      localsConvention: 'camelCase', // 使用 camelCase 格式的类名
+      localsConvention: 'camelCase', // Use camelCase format for class names
     },
   },
   server: {
-    host: true, // 允许通过 IP 地址访问
+    host: true, // Allow access via IP address
+  },
+  build: {
+    outDir: 'dist', // Ensure the build output directory is set to 'dist'
   },
 });
