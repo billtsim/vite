@@ -60,7 +60,9 @@ const Navigation = () => {
       <ul className={`${styles.navLinks} ${isMenuOpen ? styles.showMenu : ''}`}>
         <li className={styles.navItem}><Link to="/" className={styles.navbarLink}>STORE</Link></li>
         <li className={styles.navItem}><Link to="/all-product" className={styles.navbarLink}>ALL GAMES</Link></li>
-        <li className={styles.navItem}><Link to="/logined" className={styles.navbarLink}>MANAGEMENTS</Link></li>
+        {user && user.role === 'ADMIN' && (
+          <li className={styles.navItem}><Link to="/logined" className={styles.navbarLink}>MANAGEMENTS</Link></li>
+        )}
         {user ? (
           <li className={`${styles.navItem} ${styles.authButtonMobile}`}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', color: 'white' }} className={styles.userSection}>

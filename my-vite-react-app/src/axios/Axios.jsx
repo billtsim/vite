@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://34.92.247.71:8082', // 替换为你的 API 基础 URL
+  baseURL: 'https://online-mall-w3gahktqoa-df.a.run.app', // 替换为你的 API 基础 URL
 });
-
+// 
 // 添加请求拦截器
 axiosInstance.interceptors.request.use(
   (config) => {
